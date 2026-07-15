@@ -1,0 +1,15 @@
+# Secrets & identifiants serveur — NE JAMAIS versionner
+**/.private/
+*.secret
+*.env
+# Backups & temporaires
+*.bak
+*.tmp
+*~
+# Python
+__pycache__/
+*.pyc
+.venv/
+# macOS / OS
+.DS_Store
+Thumbs.db
