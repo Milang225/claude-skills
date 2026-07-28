@@ -83,7 +83,30 @@ def md_inline(text):
     text = re.sub(r'\*\*\*(.+?)\*\*\*', r'<b><i>\1</i></b>', text)
     text = re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', text)
     text = re.sub(r'\*(.+?)\*', r'<i>\1</i>', text)
+    # nombres insécables : espace entre chiffres -> espace insécable (évite « 504 072 » coupé)
+    text = re.sub(r'(?<=\d)\s+(?=\d)', ' ', text)
     return text
+
+
+def col_widths(rows, ncol, total):
+    """Largeurs proportionnelles au contenu (bornées par un plancher)."""
+    weights = []
+    for ci in range(ncol):
+        L = max((len(re.sub(r'[*]', '', r[ci])) for r in rows if ci < len(r)), default=4)
+        weights.append(max(4, min(L, 42)))
+    tot = float(sum(weights))
+    w = [total * x / tot for x in weights]
+    floor = 17 * mm
+    small = [k for k in range(ncol) if w[k] < floor]
+    if small:
+        big = [k for k in range(ncol) if w[k] > floor]
+        surplus = sum(w[k] - floor for k in big) or 1.0
+        deficit = sum(floor - w[k] for k in small)
+        for k in small:
+            w[k] = floor
+        for k in big:
+            w[k] -= deficit * ((w[k] - floor) / surplus)
+    return w
 
 
 def looks_amount(s):
@@ -125,8 +148,8 @@ def build(md_path, pdf_path):
                                    spaceBefore=1.5, spaceAfter=6, hAlign='LEFT'))
         elif s.startswith('### '):
             flow.append(Paragraph(md_inline(s[4:]), h3s))
-        elif s == '<br>':
-            flow.append(Spacer(1, 16))
+        elif re.fullmatch(r'(?:<br\s*/?>\s*)+', s):
+            flow.append(Spacer(1, 12 * s.count('<br')))
         elif s.startswith('>'):
             raw = s.lstrip('>').strip()
             mq = re.match(r'^(#+)\s*(.*)$', raw)
@@ -165,20 +188,15 @@ def build(md_path, pdf_path):
                                                 alignment=TA_RIGHT if right else TA_LEFT)
                         cells.append(Paragraph(md_inline(c), st))
                     data.append(cells)
-                if ncol == 2:
-                    colw = [174*mm*0.72, 174*mm*0.28]
-                elif ncol == 3:
-                    colw = [174*mm*0.56, 174*mm*0.22, 174*mm*0.22]
-                else:
-                    colw = [174*mm/ncol]*ncol
+                colw = col_widths(rows, ncol, 174*mm)
                 cmds = [
                     ('BACKGROUND', (0, 0), (-1, 0), NAVY),
                     ('LINEBELOW', (0, 0), (-1, 0), 1.0, GOLD_DARK),
                     ('LINEBELOW', (0, 1), (-1, -1), 0.35, colors.HexColor('#C9C9D2')),
                     ('LINEBELOW', (0, -1), (-1, -1), 0.9, NAVY),
                     ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                    ('LEFTPADDING', (0, 0), (-1, -1), 7),
-                    ('RIGHTPADDING', (0, 0), (-1, -1), 7),
+                    ('LEFTPADDING', (0, 0), (-1, -1), 5),
+                    ('RIGHTPADDING', (0, 0), (-1, -1), 5),
                     ('TOPPADDING', (0, 0), (-1, -1), 5.5),
                     ('BOTTOMPADDING', (0, 0), (-1, -1), 5.5),
                 ]

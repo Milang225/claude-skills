@@ -603,7 +603,7 @@ Créer dossier : `/Users/bilefilsseverin/Documents/DOSSIER CLIENTS/[NOM]/RAPPORT
 Score = présents/total × 20. **Si RBE absent → ALERTE (pénalité 1M FCFA, Loi 2024-388)**
 
 ## ÉTAPE 2 : Audit Fiscal
-Vérifier TEE payée, ITS/FDFP déclarés, Grand Livre/Balance/CR produits, livres d'inventaires, anomalies.
+**Commencer par l'INVENTAIRE DÉCLARATIF (§33)** : identifier le régime d'imposition, en déduire la liste exhaustive des natures d'impôts dues (matrice §33.2 + natures transverses §33.3), puis vérifier période par période le statut (déclaré / non déclaré / taxé d'office). Ensuite : vérifier l'impôt de régime payé (TEE/IME/TVA/IBIC-IMF), ITS/FDFP déclarés, Grand Livre/Balance/CR produits, livres d'inventaires, anomalies.
 
 **RÈGLES ABSOLUES** :
 - **JAMAIS "IS" ou "RME"** — INTERDIT
@@ -1373,6 +1373,12 @@ Les scripts suivants sont sauvegardés dans `~/.claude/skills/mdc-expert/scripts
 >
 > **Conditions de paiement par défaut des propositions : paiement intégral avant le démarrage des travaux** (décision gérant, confirmée sur GLOBAL PRESTIGE juillet 2026) — pas d'acompte fractionné sauf instruction contraire.
 
+> **⛔ RÈGLE D'OR — Décision gérant juillet 2026 (GLOBE CÔTE D'IVOIRE) : AUCUN livrable Word n'est remis sans avoir passé le contrôle qualité automatique. S'il ne passe pas, on ne produit PAS le document.** Tout Word client passe désormais par le pipeline **`publish_livrable_mdc.py`** (générateur soigné **`md2docx_mdc.js`** en docx-js + contrôle bloquant) :
+> ```bash
+> NODE_PATH=$(npm root -g) python3 ~/.claude/skills/mdc-expert/scripts/publish_livrable_mdc.py SOURCE.md DEST.docx "Titre" "Client" "Réf"
+> ```
+> Le script génère en **fichier tampon**, exécute 6 contrôles — (1) génération docx-js sans erreur, (2) structure lisible, (3) **zéro symbole Markdown résiduel** (`**`, `*`, `##`, `](`), (4) tableaux rendus si la source en contient, (5) **logo embarqué**, (6) **rendu QuickLook OK** (`qlmanage -t`) — et **ne copie vers la destination QUE si TOUT passe**. Au moindre échec : **aucun fichier produit** + rapport d'échec, on corrige la source puis on relance. **Volet PDF** : même règle d'or via **`publish_pdf_mdc.py`** (générateur `build_mdc_pdf.py` reportlab, logo + **filigrane CONFIDENTIEL** + tables navy/or ; contrôle : pages, logo, zéro Markdown résiduel, rendu PyMuPDF) — `python3 ~/.claude/skills/mdc-expert/scripts/publish_pdf_mdc.py SOURCE.md DEST.pdf "Titre" "Client" "Réf"`. Le générateur `md2docx_mdc.js` produit le rendu « papier à en-tête cabinet » (en-tête à logo + double filet navy/or, bandeau-titre navy/or, titres à filet or, tableaux navy à lignes alternées, montants à droite, lignes TOTAL sur or pâle, encadrés crème `>`, pied légal + pagination) et gère `**gras**`, `*italique*`, `***gras+italique***`, `> callout`, tableaux, puces, `<br>`. **Prérequis** : Node + module `docx` global (`npm root -g`) ; macOS `qlmanage` pour le rendu. Précédent : dossier GLOBE CÔTE D'IVOIRE (rapport + 2 notes + bordereaux + manuel, tous passés au contrôle).
+
 Deux générateurs produisent les livrables clients (contrats, propositions, notes) avec **tête de lettre à LOGO répétée sur CHAQUE page** (logo à gauche, identité Agence à droite, double filet navy/or), pied de page légal, et des **blocs signature + cachet**. Design « papier à en-tête cabinet » (redesign juillet 2026, validé sur GLOBAL PRESTIGE) : titres centrés à filet or, sous-titres soulignés or, tableaux SANS grille verticale (filets horizontaux fins, en-tête navy, montants alignés à droite, lignes TOTAL détectées automatiquement sur fond or pâle `F5E5A5`) :
 
 ```bash
@@ -1440,6 +1446,18 @@ Pour les rapports d'audit / révision en PDF, utiliser le tool `write_pdf` avec 
 - Score visible en grand corps (42 pt)
 - Pied MDC sur fond gris perle bordure navy
 - Page break : `<div style="page-break-before:always;"></div>`
+
+## 9.5 ⭐ `xlsx_to_pdf_mdc.py` — Conversion Excel → PDF aux couleurs MDC
+
+```bash
+python3 ~/.claude/skills/mdc-expert/scripts/xlsx_to_pdf_mdc.py SOURCE.xlsx [DEST.pdf]
+```
+
+**Pourquoi** : LibreOffice est absent du poste et **Microsoft Excel refuse l'export PDF par AppleScript** (erreur de paramètre −50). Ce convertisseur maison (openpyxl + reportlab) est donc la voie fiable pour livrer un classeur en PDF.
+
+**Ce qu'il fait** : un onglet = une page ; bandeau MDC navy en tête ; nom du classeur et de l'onglet ; valeurs formatées (séparateur de milliers, négatifs entre parenthèses) ; gras conservé ; lignes alternées ; largeurs de colonnes proportionnelles au contenu ; **paysage A4, bascule automatique en A3 au-delà de 12 colonnes** (indispensable pour les grilles déclaratives larges) ; pied de page MDC.
+
+**Batch** : boucler sur `glob.glob(dossier+"/**/*.xlsx", recursive=True)` en excluant les fichiers de verrouillage `~$`. Livrer systématiquement le PDF **à côté** de son classeur.
 
 ---
 
@@ -3301,10 +3319,11 @@ Le **capital social** doit TOUJOURS être identifié, ventilé et tracé sur sa 
 6. ✅ **Toute dette fiscale CONNUE au 31/12 (AMR, avis, rappel d'exercice antérieur) figure au passif d'ouverture reconstitué** — jamais en charge de l'exercice suivant (spécialisation, AUDCIF Art 59 ; capitalisé audit KRA 2025 : rappel ITS 2024 = dette d'ouverture 447, perte 2024 rectifiée) ?
 7. ✅ **La ventilation banque (521) / caisse (571) respecte les pièces** : toute quittance « Espèces » sort de la caisse, tout « Mobile/virement » de la banque — jamais de répartition arbitraire contredite par une quittance (capitalisé audit KRA 2025 : patente payée en espèces → caisse) ?
 8. ✅ **La clôture vire le résultat au 131 (bénéfice) / 139 (perte)** — le 130 « en instance d'affectation » n'intervient qu'après décision d'AGO ; patente en **6412**, taxes patronales sur salaires en **6413** ?
+9. ✅ **RETENUES À LA SOURCE sur les paiements aux FOURNISSEURS/PRESTATAIRES — opérées ?** Dès qu'un redevable **au réel (RSI/RNI)** paie une **prestation de services** à un fournisseur du **secteur informel (TEE / microentreprise / TCE)**, il DOIT opérer la retenue **PPSSI 2 % (CGI Art. 84 bis)** : `D 401[frn] / C 4471`, le prestataire n'encaisse que le net. Vérifier AUSSI, selon la nature : **RIBIC** (loyers, Art. 56 s.), **RIBNC 7,5 %** (honoraires de professions non commerciales au réel, Art. 92), **AIRSI** (uniquement quand le réel *vend* à l'informel — jamais sur un achat de prestations). ⚠️ Piège capitalisé (GLOBE CÔTE D'IVOIRE, juillet 2026) : honoraires de conseil comptabilisés en charge SANS la retenue → chaque facture de prestataire TEE/RME doit générer sa retenue. La **PPSSI est définitive et non imputable** par le prestataire (le caractère d'acompte a été supprimé).
 
 Si une seule réponse est « non » → **reprendre, ne pas livrer**.
 
-Cas de référence : reconstitution FAMILLE KRA SARL 2024 — `Documents/DOSSIER CLIENTS/FAMILLE KRA/ETAT FINANCIER 25/RECONSTITUTION_FAMILLE_KRA_2024_APPROFONDIE.xlsx`.
+Cas de référence : reconstitution FAMILLE KRA SARL 2024 — `Documents/DOSSIER CLIENTS/FAMILLE KRA/ETAT FINANCIER 25/RECONSTITUTION_FAMILLE_KRA_2024_APPROFONDIE.xlsx` ; oubli de retenue à la source PPSSI → GLOBE CÔTE D'IVOIRE SARL 2026 (`Documents/DOSSIER CLIENTS/GLOBE COTE D'IVOIRE/COMPTABILITE_2026/`).
 
 ---
 
@@ -3599,10 +3618,298 @@ Toujours : montants **FCFA**, distinction [S] saisi / [C] calculé, rappel de l'
 
 ## 30.6 Règles absolues
 1. **Taux & barèmes** : `FICHE_SYNOPTIQUE_CALENDRIER_DGI.md` prime sur les templates ; revérifier vs **Annexe Fiscale de la période**.
-2. **Jamais inventer** un chiffre absent → question ciblée (posture §17, constatation §25).
+2. **Jamais inventer NI INFÉRER une donnée absente ou non confirmée** → laisser le champ **vide avec placeholder `[À FOURNIR]`** et poser une **question ciblée** ; ne JAMAIS le remplir d'une valeur devinée/déduite, **même signalée « à confirmer »**. Ne transcrire QUE ce qui figure **explicitement dans les pièces**. Pièges capitalisés (cas **TIM 7 MULTISERVICE**, restauration RSI, juillet 2026 — feedback gérant « n'invente aucune donnée ») : **(a)** la charge « loyers » du **compte de résultat n'est PAS la valeur locative de la patente** → exiger le **bail** (loyer CR 3 000 000 alors que le loyer réel = **720 000** → DVL, patente et complément condition b) tous faux, à refaire) ; **(b)** ne jamais inférer la **date de début d'activité / dates d'exercice** (depuis le RCCM), le **poste comptable / centre**, l'**adresse**, la **licence** (vente d'alcool ?) — les **demander**. Une seule donnée fausse fait basculer tout le calcul en aval (posture §17, constatation §25, règle §30.6-3 bouclage).
 3. **Boucler avec la compta** : chaque base du formulaire doit se retrouver dans les comptes (70x, 44x, 66x…) ; signaler tout écart.
 4. **Spécialisation des exercices/mois** : ne déclarer sur le mois M que les opérations de M (piège de millésime §27.1).
-5. **Annexes obligatoires** rappelées à chaque fois (ITS→État 301 ; TVA→déductions ; retenues→états nominatifs ; patente transport→liste véhicules).
+5. **Annexes obligatoires** rappelées à chaque fois (ITS→**État 301/ITSREGUL** ; **honoraires & rémunérations versés à des tiers NON-salariés→État 302/BNCREGUL** — dès qu'un prestataire est payé, penser État 302, distinct du PPSSIREGUL qui récapitule les retenues ; TVA→état des déductions + détail exonérations/exports ; retenues (PPSSI/RIBIC/RIBNC/AIRSI/RIRL)→états nominatifs `edi-annexe-retenue` ; patente transport→liste véhicules). Capitalisé GLOBE CÔTE D'IVOIRE 2026 : oubli initial de l'État 302 sur l'honoraire de conseil.
 6. Sert **le comptable** (produire) **et le fiscaliste** (contrôler l'exposition, cf. §15, §19, §26).
+7. **RÉFLEXE RETENUES À LA SOURCE côté PAYEUR (ne plus jamais oublier)** — pour tout client **au réel (RSI/RNI)**, balayer les **achats/charges de prestations** et déclencher la retenue due AVANT de livrer compta ou déclarations :
+   - **PPSSI 2 %** (Art. 84 bis) — prestations de services payées à un fournisseur du **secteur informel (TEE / microentreprise / TCE)**. Code e-impôts **`PPSSI`** ; état récap. annuel **`PPSSIREGUL`** au 30/04 ; reversement 15 M+1. **Définitive, non imputable** par le prestataire. Écriture : `D 401[frn] / C 4471`.
+   - **RIBNC 7,5 %** (Art. 92) — honoraires versés à une **personne exerçant une profession non commerciale AU RÉEL** (avocat, notaire, expert-comptable, consultant PP). Ne PAS confondre avec la PPSSI (prestataire TEE/RME) : SARL au régime TEE → **PPSSI 2 %**, PP libérale au réel → **RIBNC 7,5 %**.
+   - **RIBIC** (Art. 56 s.) — loyers commerciaux (retenue sur le bailleur), etc.
+   - **AIRSI** — JAMAIS sur un achat de prestations : ne joue que quand le réel **VEND** des biens à l'informel (exclut expressément les prestations de services).
+   ⚠️ Le piège classique : comptabiliser l'honoraire en **charge 62x/63x** et **oublier la retenue** → le fournisseur est payé brut, l'État lésé, exposition à l'amende (retenue non opérée + intérêt 1 %/mois). Chaque facture de prestataire doit être passée au filtre « quelle retenue à la source ? ».
 
-Cas d'amorçage : dossier RESEAU IVOIRIEN DE MAINTENANCE (NCC 2300433S, comptable Fils Séverin BILE) — profil réel (TVA hors DGE + TSE + RIBIC/RIBNC + patente commerce/transport + État 301). Mémoire projet : `service-declarations-mensuelles-eimpots`.
+8. **ENTREPRISES AU RÉEL (RSI/RNI) — TOUJOURS LE DÉTAIL MOIS PAR MOIS.** Tout travail demandé pour un réel (déclarations, estimation, régularisation, exposition, reconstitution) se présente **période par période, mois par mois** — jamais en agrégat annuel seul : TVA, ITS + CN + FDFP, TSE et retenues à la source sont **mensuelles** (1 ligne = 1 mois). Le total annuel n'apparaît qu'en **récapitulatif APRÈS le détail mensuel**. Seuls l'IMF/BIC et la patente sont annuels. (Feedback gérant — dossier TIM 7, juillet 2026 ; cf. §30.3 carnet mensuel et §1 « 1 ligne = 1 mois ».)
+
+9. **ITS ET FDFP IMBRIQUÉS — UNE SEULE DÉCLARATION.** Sur la fiche e-impôts, la déclaration **ITS ENGLOBE le FDFP (TA + TFPC) et la CN** depuis l'ord. n° 2023-719 : un seul montant, une seule déclaration mensuelle (code `ITS`). Ne JAMAIS présenter le FDFP comme une déclaration/ligne distincte, ni le compter « non déclaré » quand l'ITS est déposé — le FDFP y est inclus (le montant ITS déclaré contient les deux). (Feedback gérant — dossiers TIM 7 / LBTECH, juillet 2026.)
+
+10. **INVENTAIRE DÉCLARATIF — DISTINGUER DÉCLARATION ET PAIEMENT (2 étapes).** Chaque case d'une grille/inventaire porte les DEUX statuts : (a) la déclaration est-elle DÉPOSÉE ? (b) le montant est-il PAYÉ ? Codes : **D+** (déclaré + payé) · **D−** (déclaré, NON payé) · **D\*** (déclaré à zéro/minoré) · **N** (non déclaré) · **TO+ / TO−** (taxé d'office payé/non payé) · **—** (néant) · **~** (à vérifier). Une déclaration déposée mais **non payée** n'est PAS à jour (cas fréquent au TEE : la DTEE annuelle est déposée mais les fractions mensuelles restent impayées ; l'exigible = les paiements manquants). (Feedback gérant — grilles TIM 7/LBTECH/GLOBE, juillet 2026.)
+
+Cas d'amorçage : dossier RESEAU IVOIRIEN DE MAINTENANCE (NCC 2300433S, comptable Fils Séverin BILE) — profil réel (TVA hors DGE + TSE + RIBIC/RIBNC + patente commerce/transport + État 301). Mémoire projet : `service-declarations-mensuelles-eimpots`. Précédent PPSSI oubliée puis régularisée : **GLOBE CÔTE D'IVOIRE SARL** (juillet 2026) — honoraires de conseil TEE 500 000 → PPSSI 2 % = 10 000 (`Documents/DOSSIER CLIENTS/GLOBE COTE D'IVOIRE/COMPTABILITE_2026/`).
+
+---
+
+# 31. ⭐ MISSION-TYPE — RECONSTITUTION MULTI-COMPTES & RÉGULARISATION D'UN CA DISSIMULÉ (capitalisé — cas LERO SARL, juillet 2026)
+
+> Déclenchée quand un client au réel a **plusieurs comptes bancaires**, encaisse **beaucoup d'espèces**, et déclare un CA très inférieur au réel. Cas de référence : **LERO SARL** (négoce de nitrate d'ammonium/explosifs + forage pour carrières, flux tendu sans stock, RSI). Dossier complet : `Documents/DOSSIER CLIENTS/LERO/EXERCICE 2025/` (20 livrables) + versé en **BASE DOCUMENTAIRE LMDC** (`Documents/BASE DOCUMENTAIRE LMDC/`, catalogue MC-BASE-DOC-2026-001).
+
+## 31.1 Le réflexe « le compte fourni n'est pas le bon »
+Le client donne souvent un compte **secondaire** (ici BNI, flux minimes). Toujours **chercher les autres comptes** : les gros flux et les achats de marchandises transitent ailleurs (ici 2 comptes BDU-CI, dont un dédié « NITRATES »). Indices d'un compte caché : le CA déclaré ≫ les flux du compte fourni ; des chèques émis sans provision sur ce compte ; des bénéficiaires récurrents (intermédiaires) qu'on ne retrouve pas en face d'un compte d'achat. → **Réclamer les relevés de TOUS les comptes** (pièce n°1).
+
+## 31.2 La preuve du CA dissimulé par les ACHATS (négoce à flux tendu)
+Argument imparable, à réutiliser : **achats de marchandises constatés + activité sans stock ⇒ tout a été revendu ⇒ les encaissements sont du CA**, même sans factures de vente. Sur LERO : compte « NITRATES » montrant ~75M d'achats + flux tendu → le CA ne peut PAS être celui déclaré (95M) ; le réel cumulé (3 comptes) = **321M TTC / 272M HT** contre 95M déclarés → **~177M HT dissimulés**. Cette preuve tue les montages d'évitement (cf. §31.5).
+
+## 31.3 Cumul du CA réel sur plusieurs comptes (méthode)
+1. Extraire chaque relevé (les BDU-CI sont **texte, séparateur `!`**, totaux imprimés « Total general mouvement » à recouper au franc — parser vérifié).
+2. Par compte et par mois, **encaissements clients = versements espèces (APPRO) + remises de chèques + virements reçus**, hors intérêts créditeurs (I.R.C.D) et rejets de chèques.
+3. **Cumuler les 3 comptes** ; écarter le double compte (retraits d'un compte re-déposés sur un autre — borner par le total des retraits).
+4. Le **cash « APPRO COMPTE »** déposé par les associés = du CA quand il n'est PAS couvert par des retraits (retraits ≪ dépôts ⇒ cash externe = paiements clients). Faire **confirmer par le gérant** le circuit (« les clients paient en espèces, on dépose pour régler les fournisseurs »).
+
+## 31.4 Analyse fiscale des SORTIES (au-delà de la TVA/BIC)
+Le fiscaliste tire de l'exposition supplémentaire des DÉBITS :
+- **Retraits d'espèces au profit des associés = revenus réputés distribués → IRVM** (Art. 180-183) : **15 %** (droit commun) / **17 %** si bénéficiaires personnes physiques. Écriture `D 465/103 / C 4424`.
+- **Virements à des prestataires = base de RIBNC non opérée** (Art. 92, **7,5 %**). Écriture `D 401 / C 4471`.
+- ⚠ **Cohérence exclusive** : IRVM sur retraits (= distributions) SUPPOSE que les entrées sont du CA ; si on les traitait en compte courant d'associé, les retraits seraient un remboursement (pas d'IRVM). Les deux lectures s'excluent — trancher avec le traitement des entrées.
+- Catégoriser aussi : salaires (virements → recoupe l'ITS), loyer (→ 622 + RIBIC bailleur), frais bancaires (631).
+
+## 31.5 Montages d'évitement à réfuter (et pourquoi)
+- **« Déficitaire → seul l'IMF »** : indéfendable si la banque montre des entrées massives.
+- **« Versements espèces = compte courant d'associé (462), on ne déclare que les virements de sociétés »** : **indéfendable** — (a) contredit le gérant (les clients paient cash) ; (b) un compte courant disproportionné (ici 198M pour un capital de 1M) appelle la **preuve de l'origine des fonds** ; (c) les **achats de marchandises revendus** prouvent le CA (§31.2). À ne fournir qu'en **Rapport N°2 « à titre d'option, sous la responsabilité du client »**, accompagné d'une **note de décision à faire signer** par le gérant (traçabilité, protège l'Agence). Position recommandée = **le réel**.
+
+## 31.6 Points de droit capitalisés
+- **IMF au réel = plancher 8 000 000** (condition b réforme PME : « un réel ne paie pas moins qu'une microentreprise » ; RSI = 200M×4% ; RNI = ×1,2 = 9,6M). Prime sur l'IMF de droit commun 3M. Cf. §20, `FICHE_IMPOTS_BENEFICES.md` §5.
+- **TVA — assujetti qui achète sans TVA** : un assujetti (RSI) **facture la TVA sur ses ventes taxables indépendamment de l'amont** ; acheter auprès de non-assujettis/exonérés n'exonère pas de collecter. Preuve pratique de régularité : les **clients ont déduit la TVA et la DGI a accepté** (statut « Acceptée » sur e-impôts « factures déclarées comme fournisseur »). NUANCE : si le PRODUIT lui-même est exonéré (Art. 355), l'aval l'est aussi → facturer serait « TVA facturée à tort » (due mais non déductible par le client). Distinguer exonération **produit** vs **usage** (nitrate engrais exonéré vs nitrate explosif taxable). **Ne jamais présumer** le statut TVA des fournisseurs (de marchandises) sans avoir vu leurs factures → les réclamer : s'ils facturent la TVA, il y a une **TVA déductible** qui réduit l'exposition (chiffrer d'abord SANS déductible = hypothèse maximale prudente, puis réviser).
+
+## 31.7 Levier d'optimisation n°1 du négociant : la TVA amont
+Pour un négociant taxé sur des ventes mais achetant sans TVA, **sourcer auprès de fournisseurs assujettis à la TVA** transforme une TVA amont invisible en **TVA déductible** (ici ~36M/an sur ~200M d'achats) → effondre la TVA nette due. Autres leviers (cf. `LEVIERS_OPTIMISATION_FISCALE`) : statut **commissionnaire** (base = commission, pas le prix total, si intermédiation réelle + mandat écrit + compta séparée) ; **régime réel = tout déduire** (marge mince → IMF plancher domine) ; amortissements ; formalisation paie + crédit d'impôt emploi ; régularisation **volontaire** (remise de pénalités).
+
+## 31.8 Jeu de livrables standard de la mission (gabarits en base documentaire)
+Bancaire (analyse relevé, **CA réel reconstitué**, catégorisation des sorties) → Compta (reconstitution, journal des dépenses) → Fiscal (synthèse exposition, dette par nature, **point des impôts à payer** dédoublonné, note d'exposition, **notes de redressement** avec écritures sourcées, exposition IRVM/RIBNC) → Déclarations prêtes à saisir → Conseil (**demande de pièces**, **note de synthèse exécutive** en page de garde, leviers d'optimisation, note de décision) → **manuel de procédures**. Chaque `.docx` passe par `publish_livrable_mdc.py` (contrôle bloquant, logo + filigrane).
+
+## 31.9 Alimentation de la BASE DOCUMENTAIRE LMDC
+`Documents/BASE DOCUMENTAIRE LMDC/` : 6 domaines (01_ANALYSE_BANCAIRE, 02_COMPTABILITE, 03_FISCAL_EXPOSITION, 04_DECLARATIONS, 05_NOTES_CONSEIL, 06_PROCEDURES) + `07_DOSSIERS_TRAITES/<CLIENT>_<ANNÉE>/` (copie intégrale). **Règle** : à chaque mission, copier le dossier complet dans 07 et verser les modèles réutilisables dans le domaine correspondant, puis mettre à jour le catalogue `00_CATALOGUE_BASE_DOCUMENTAIRE_LMDC.docx`.
+
+## 31.10 Règle ITS — prime de transport exonérée (capitalisé LERO, juillet 2026)
+**La prime de transport est exonérée d'ITS jusqu'à 30 000 FCFA/mois par salarié ; le surplus est réintégré dans l'assiette imposable.** L'ITS ne se calcule donc PAS sur le brut mais sur la **base imposable = brut − prime de transport exonérée (plafond 30 000)**. Réflexe : dans toute reconstitution ou déclaration ITS, isoler la prime de transport avant d'appliquer le barème (Art. 115-120) puis la RICF. Ex. LERO : brut 300 000 → base 270 000 → ITS 21 700 (au lieu de 28 000 sur le brut) ; masse 700 000 → base imposable 550 000 → ITS 36 100/mois (au lieu de 52 000). D'autres primes ont aussi des plafonds d'exonération (à vérifier dans `FICHE_SYNOPTIQUE_CALENDRIER_DGI.md` : indemnités de logement, de fonction, etc.).
+
+---
+
+# 32. ⭐ PROCÉDURE STANDARD DE RÉGULARISATION FISCALE (capitalisé — dossier LERO, juillet 2026)
+
+> À dérouler pour tout client au réel (RSI/RNI) en retard de déclarations, **avec ou sans taxations d'office déjà émises**. Document générique : `Documents/BASE DOCUMENTAIRE LMDC/06_PROCEDURES/PROCEDURE_REGULARISATION_FISCALE_MDC.docx` (MC-PROC-REGUL-2026-001). Exemple appliqué : `STRATEGIE_REGULARISATION_TAXATIONS_OFFICE_LERO.docx`.
+
+## 32.1 Le principe fondateur — trier chaque période AVANT d'agir (3 statuts)
+- **Période NON encore taxée d'office → DÉCLARATION SPONTANÉE en retard** (voie normale, en libre-service e-impôts) : droits réels + pénalités de retard (légères). Déposer AVANT que l'office ne tombe = bonne foi + évite la **majoration d'office 100 %** (200 % si défaut DFE, art. 27/171 bis LPF). **Seule voie propre en ligne — d'où l'urgence de déclarer vite.**
+- **Période taxée d'office mais PAS encore liquidée / mise en ligne** → **réclamation contentieuse** encore pleinement utile pour substituer le réel à l'estimation (compta + vraie déclaration jointes).
+- ⚠ **Période taxée d'office ET LIQUIDÉE / mise en ligne = EXIGIBLE** (retour terrain gérant, juillet 2026) → **on ne re-déclare PLUS en ligne** (la période est « fermée » par la TO) et la réclamation, bien que recevable **jusqu'au 31/12 de l'année suivant la mise en recouvrement** (LPF), **ne suspend PAS le recouvrement** (le montant reste dû sauf **sursis de paiement accordé avec garanties**). La régularisation passe alors par le **guichet du Chef de centre (CDI)**, selon le sens de l'écart :
+  - Office **surestime** (réel < office — ex. TVA à crédit déductible) → **demande de DÉGRÈVEMENT** (déclaration réelle + justificatifs à l'appui) ; l'administration corrige à la baisse.
+  - Office **sous-estime** (réel > office — cas d'un CA dissimulé) → **on ne conteste pas** : **déclaration du COMPLÉMENT** (payer plus, l'administration ne refuse pas) + **transaction** sur les pénalités.
+- **Paiement de l'exigible, dans tous les cas** : **moratoire/échéancier** + **remise gracieuse** des pénalités/intérêts ; **sursis** uniquement si réclamation déposée + garanties.
+
+## 32.2 Les 7 étapes
+1. **Inventaire déclaratif** (établi via la matrice régime × natures d'impôts **§33**) : tableau nature × période à 3 statuts (déclaré / non déclaré / taxé d'office), depuis l'historique e-impôts + avis reçus.
+2. **Reconstitution du réel** (compta + banque) → montant réel par période à opposer à l'office.
+3. **Classement** de chaque période (matrice §32.1).
+4. **Règles de procédure** : charge de la preuve INVERSÉE sur l'office (au contribuable de prouver l'exagération) ; **délai de réclamation** avant le 31/12 de l'année suivant la mise en recouvrement — **mais la réclamation ne suspend pas le recouvrement d'une TO liquidée** (§32.1), d'où la voie guichet (dégrèvement / transaction) ; **sursis de paiement** à demander expressément (garanties si gros montant) ; majoration 100 %/200 %.
+5. **Démarche négociée GLOBALE** (recommandée si plusieurs périodes/impôts) : un dossier unique au Chef du CDI = toutes les vraies déclarations + reconstitution + **prise en compte des déclarations réelles** + **dégrèvement des TO excédentaires (liquidées)** + **établissement des compléments** + **transaction sur les pénalités** + **moratoire** + **remise gracieuse** + **sursis avec garanties**.
+6. **Plan séquencé** : (a) déposer d'abord les périodes non taxées (arrête l'hémorragie) ; (b) dossier de régularisation au CDI + sursis ; (c) **dégrèvement** là où l'office surestime une TO **liquidée** (réclamation contentieuse si TO **pas encore liquidée**) ; (d) DSF réelle + IMF ; (e) déclarations mensuelles à l'échéance.
+7. **Pérennisation** : installer et respecter le calendrier déclaratif (prolonge le manuel de procédures §26.6/§30).
+
+## 32.3 Livrables
+Tableau d'inventaire déclaratif (à 3 statuts : déclaré / non déclaré / taxé d'office — en distinguant TO **liquidée** vs **non liquidée**) · déclarations réelles prêtes à saisir (§30) · **courrier de régularisation au CDI** · **demande de dégrèvement** (TO liquidée surestimée) · **modèle de réclamation contentieuse** (TO non encore liquidée) · demande de transaction / remise gracieuse · échéancier de paiement · note de suivi. Réserve permanente : délais/taux/sursis à confirmer vs Annexe Fiscale en vigueur et instructions du CDI de rattachement.
+
+---
+
+# 33. ⭐ INVENTAIRE DÉCLARATIF FISCAL — MATRICE « RÉGIME D'IMPOSITION × NATURES D'IMPÔTS » (volet fiscal de l'audit)
+
+> Étape systématique du volet fiscal de tout audit (§3 ÉTAPE 2, §14) et point de départ de toute régularisation (§32.2 étape 1). Objectif : établir la liste EXHAUSTIVE des obligations déclaratives d'un client à partir de son régime, puis vérifier période par période ce qui a été déclaré / non déclaré / taxé d'office. Cas de référence : LERO — `POINT_DECLARATIONS_PAR_PERIODE_LERO.xlsx` (MC-INVDECL-FORAGE-2026-014).
+
+## 33.1 Principe : les obligations découlent du RÉGIME + des SITUATIONS
+Les déclarations dues ne se devinent pas, elles se DÉDUISENT. Deux déterminants :
+- **Le régime d'imposition** fixe les impôts « de régime » (impôt sur CA/bénéfice, TVA, patente, TSE).
+- **Les situations de l'entreprise** déclenchent les natures transverses (salariés → ITS ; distributions → IRVM ; prestations payées → retenues à la source ; propriété → foncier).
+Ne jamais auditer « au fil de l'eau » : d'abord la carte complète des obligations, ensuite la conformité période par période.
+
+## 33.2 Matrice de référence — RÉGIME → natures d'impôts (Côte d'Ivoire)
+Sigles : TCE = Taxe Communale de l'Entreprenant ; TEE = Taxe d'État de l'Entreprenant ; RME = Régime des Microentreprises ; IME = Impôt des Microentreprises ; RSI = Réel Simplifié d'Imposition ; RNI = Réel Normal d'Imposition ; IBIC = Impôt sur les Bénéfices Industriels et Commerciaux ; IMF = Impôt Minimum Forfaitaire ; TSE = Taxe Spéciale d'Équipement ; ITS = Impôt sur les Traitements et Salaires ; CN = Contribution Nationale ; FDFP = Fonds de Développement de la Formation Professionnelle ; IRVM = Impôt sur le Revenu des Valeurs Mobilières ; RIBNC = Retenue à la source sur les Bénéfices Non Commerciaux ; AIRSI = Acompte d'Impôt sur le Revenu du Secteur Informel.
+
+| Régime (seuil CA indicatif*) | Impôt CA / bénéfice | TVA | Patente | TSE | Retenues salaires | Autres natures |
+|---|---|---|---|---|---|---|
+| **TCE** (micro, CA ≤ 5 M*) | TCE forfaitaire (barème communal) | Non | incluse | Non | ITS+CN+FDFP si salariés | — |
+| **TEE** (5–50 M*) | TEE, taux sur CA (libératoire) | Non | incluse | Non | ITS+CN+FDFP si salariés | retenues subies (AIRSI…) |
+| **RME** (50–200 M*) | IME 6 % du CA (4 % si CGA), acomptes mensuels + solde annuel | Non (sauf option) | due* | à vérifier* | ITS+CN+FDFP si salariés | DSF allégée |
+| **RSI** (200–500 M*) | IBIC/IS (acomptes + solde) OU **IMF si supérieur** (plancher cond. b = 8 M) | **Oui 18 % (mensuelle)** | Oui (annuelle) | **Oui 0,1 % (annuelle)** | ITS+CN+FDFP (mensuel) | IRVM, retenues à la source, foncier, DSF, FNE |
+| **RNI** (> 500 M*) | IS/IBIC réel (**IMF ×1,2**) | Oui 18 % (mensuelle) | Oui | Oui 0,1 % | ITS+CN+FDFP (mensuel) | idem RSI + obligations renforcées |
+
+*Seuils, taux et périodicités INDICATIFS — À CONFIRMER vs Annexe Fiscale en vigueur (2026). Le régime peut aussi résulter d'une **OPTION** ou être imposé par la **nature réglementée de l'activité** (ex. négoce d'explosifs → réel) indépendamment du CA.
+
+## 33.3 Natures TRANSVERSES (déclenchées par une situation — surtout aux régimes réels)
+- **ITS + CN + FDFP** (mensuel) : dès qu'il y a des salariés. Base ITS = brut − prime de transport exonérée 30 000/mois (§31.10) ; FDFP = TA 0,4 % + TFPC 1,2 %.
+- **Retenues à la source à OPÉRER** (client redevable en tant que payeur, déclaration au fil des paiements) : **RIBNC 7,5 %** (prestations BNC / honoraires), **retenue sur loyers**, **PPSSI / prélèvement 2 %** (prestations, fournisseurs non-immatriculés), retenue BIC des non-résidents.
+- ⭐ **RÈGLE DES PRÉLÈVEMENTS (AIRSI 5 %, PPSSI 2 %) — TOUT DÉPEND DE QUI OPÈRE LE PRÉLÈVEMENT.** Avant de porter un prélèvement au tableau des impôts du client, se demander **qui prélève** :
+  - **CAS A — le CLIENT opère le prélèvement** (il paie un fournisseur non immatriculé, ou vend à des revendeurs) ⇒ **il en est redevable, il doit le reverser** ⇒ **la ligne FIGURE au tableau**. Il n'y échappe que s'il produit une **attestation d'exonération** ; à défaut, il est taxé dessus.
+  - **CAS B — un FOURNISSEUR prélève SUR le client** (ex. AIRSI 5 % retenu par le grossiste sur les achats) ⇒ ce n'est **PAS une nature due par le client** ⇒ **la ligne NE FIGURE PAS au tableau**. Elle se mentionne seulement en note, et n'est récupérable en crédit sur l'IBIC/IMF que **sur présentation des justificatifs**.
+  - **Ne jamais déduire d'office un prélèvement subi** de l'impôt du client : l'impôt reste affiché brut, le crédit se fait valoir séparément.
+  - Cas LERO : **AIRSI = cas B** (ETG a prélevé 5 % sur les achats de nitrate → hors tableau) · **PPSSI 2 % = cas A** (LERO paie des prestataires → il doit l'opérer et le reverser → au tableau). [[reflexe-retenues-source-prestataires]]
+- **IRVM/IRC** : distributions de bénéfices, revenus réputés distribués (retraits d'espèces, comptes courants débiteurs d'associés) — 15 % (17 % si personnes physiques).
+- **Impôt foncier** : propriété d'immeubles.
+- ⭐ **DROITS D'ENREGISTREMENT & TIMBRE — à CHIFFRER, jamais laisser « à vérifier »** :
+  - **Apports / sommes déposées par la direction → droit d'apport 1 %.** L'administration requalifie en **apports d'associés** les sommes versées sur les comptes par la direction ; droit de **1 %** sur la base. À chiffrer dès qu'apparaissent un compte courant d'associé, des versements d'espèces d'origine non justifiée, ou une **recapitalisation** (cas des capitaux propres négatifs). ⚠ **Qualification ALTERNATIVE au chiffre d'affaires** : si les dépôts sont du CA (TVA 18 %), ils ne sont pas des apports — **ne jamais cumuler** les deux ; présenter le droit d'apport en *risque alternatif hors total*.
+  - **Bail commercial → 2,5 % du loyer annuel, avec DROIT FIXE MINIMUM de 25 000 FCFA.** Le bail doit être **enregistré CHAQUE ANNÉE** (ou selon la périodicité du contrat). **À défaut de bail communiqué, retenir le droit fixe de 25 000 par exercice.** Ex. loyer 70 000/mois → 840 000/an → 2,5 % = 21 000 < 25 000 ⇒ **25 000**.
+  - Autres actes : cessions, marchés clients, statuts, procès-verbaux.
+- ⭐ **ÉTATS ANNUELS RÉCAPITULATIFS (à VÉRIFIER dans TOUT audit déclaratif)** : **État 301** = déclaration annuelle récapitulative des traitements et salaires (ITS) ; **État 302** = déclaration annuelle des sommes versées à des tiers (honoraires, commissions, courtages, loyers). Distincts des déclarations mensuelles ; leur absence est une anomalie fréquente et sanctionnée.
+
+## 33.4 Méthode — construire l'inventaire déclaratif (7 pas)
+1. **Identifier le régime réel** (attestation de régime fiscal / e-impôts / seuil de CA / option / activité). ⚠ Vérifier la cohérence **régime ↔ CA réel** : un franchissement de seuil non déclaré (RME resté en TEE, réel dépassant son plafond) est une anomalie majeure — cœur du cas LERO (TEE→RSI mais CA réel ≫ plafond).
+2. **Dériver la liste exhaustive** des natures = impôts de régime (§33.2) + natures transverses (§33.3, **y compris les États 301/302 et les retenues à la source RIBNC/PPSSI/AIRSI**) selon les situations constatées. Ne rien omettre : au réel, l'oubli type porte sur FDFP, TSE, patente, IRVM, RIBNC/PPSSI et les États 301/302.
+3. **Fixer périodicité + échéance** de chaque nature (mensuelle / trimestrielle / annuelle).
+4. **Construire la matrice nature × période** sur l'exercice audité, à **3 statuts** : déclaré / non déclaré / taxé d'office (source : e-impôts « déclarations » + « montants à payer » + avis d'imposition d'office reçus).
+5. **Opposer le RÉEL** (reconstitué : compta, relevés bancaires, paie) à chaque période.
+6. **Qualifier et traiter** (renvoi §32.1) : non taxé → déclaration spontanée ; TO ≤ réel → payer la TO ; TO > réel → dégrèvement ; sur TOUTE TO → remise gracieuse de la majoration ; résultat → DSF réelle. **On ne « régularise » pas une TO** (elle est déjà l'impôt de la période).
+7. **Livrable** : la « carte des déclarations » (onglet nature × période + récap par action + priorités).
+
+## 33.6 ⭐ LES PALIERS FRANCHIS — quand le CA réel fait sauter plusieurs régimes
+
+**La règle (doctrine gérant, cas collège puis LERO) :** quand la reconstitution révèle un CA réel qui **franchit plusieurs seuils de régime**, l'entreprise ne doit pas seulement l'impôt du régime d'arrivée — elle doit **l'impôt de CHAQUE palier franchi, jusqu'à arriver au réel**. La taxation du CA se reconstruit **par tranche**, jamais d'un bloc au taux final.
+
+**Les seuils et les taux** (à confirmer vs Annexe Fiscale en vigueur) :
+
+| Régime | Seuil de CA | Taux |
+|---|---|---|
+| **TEE** — Taxe d'État de l'Entreprenant | 5 M → 50 M | **4 % commerce · 5 % services** — si l'entreprise exerce **les deux, on retient le taux le plus élevé (5 %)** |
+| **RME** — Régime des Microentreprises | 50 M → 200 M | **6 %** du CA (4 % si adhérent d'un centre de gestion agréé) |
+| **RSI** — Réel Simplifié | 200 M → 500 M | régime réel : TVA 18 % + IBIC/IMF |
+| **RNI** — Réel Normal | > 500 M | réel, IMF × 1,2 |
+
+**Méthode de chiffrage :**
+1. Comparer **CA déclaré** et **CA réel reconstitué** — l'écart révèle les paliers franchis.
+2. **Découper le CA réel par tranche** et appliquer à chacune le taux de son régime.
+3. Porter le résultat en **bloc B du rapport d'exposition au redressement**.
+
+**Exemple LERO 2025** (CA réel 272 238 292, entreprise à la fois négoce et prestations) :
+- tranche TEE 0 → 50 000 000 × **5 %** = 2 500 000
+- tranche RME 50 → 200 000 000 (150 000 000) × **6 %** = 9 000 000
+- tranche RSI 200 → 272 238 292 : régime réel (TVA + IMF, chiffrés à part)
+- ⇒ **impôt des paliers franchis = 11 500 000**
+
+## 33.5 Livrable & réserve
+Livrable type : `POINT_DECLARATIONS_PAR_PERIODE_<CLIENT>.xlsx` (onglet « Carte des déclarations » + « Récap par action »). Alimente directement §32 (régularisation) et le rapport d'audit §3. **Réserve permanente** : seuils de régime, taux, périodicités et natures exactes à confirmer vs Annexe Fiscale en vigueur et la situation e-impôts du client. Voir `reference/FICHE_DECLARATIONS_EIMPOTS_EDI_EFI.md` (les 62 natures champ par champ) et [[toujours-verifier-dgi-2026]].
+
+---
+
+# 34. ⭐ CONTRÔLE DE CLÔTURE D'UN DOSSIER — À LANCER APRÈS CHAQUE TRAVAUX (capitalisé — dossier LERO, juillet 2026)
+
+> **Un dossier n'est pas fini quand le dernier fichier est produit. Il est fini quand AUCUN livrable ne contredit les autres.**
+> Décision du gérant (24/07/2026) : ce contrôle devient **systématique après chaque travaux**, pas seulement en fin de mission.
+
+## 34.1 Le problème qu'il résout
+
+Une mission produit des dizaines de livrables, diffusés dans plusieurs dossiers (dossier de travail, dossier d'analyse, pack réunion, base documentaire). Chaque correction d'un chiffre doit être répercutée **partout**. En pratique elle ne l'est jamais spontanément : les copies numérotées, les documents anciens dont la source markdown a été perdue, les onglets Excel secondaires continuent de porter l'ancien montant.
+
+**Le risque est direct** : le client ou l'administration ouvre deux documents du même dossier et y lit deux chiffres différents. Tout le travail perd sa crédibilité, y compris la partie juste.
+
+Cas LERO : à la clôture, quatre livrables portaient encore un impôt minimum minoré (6 607 142) corrigé depuis, et l'exposition avait changé cinq fois (128 962 819 → 119 651 114 → 123 770 683 → 135 209 513 → 145 523 033) sans que toutes les copies suivent.
+
+## 34.2 L'outil
+
+```bash
+python3 ~/.claude/skills/mdc-expert/scripts/controle_coherence_dossier.py "DOSSIER CLIENT" \
+    --perimes  128962819,119651114,6607142 \
+    --cles     145523033,106252880,29274358 \
+    --maitres  "EXERCICE 2025" \
+    --terminaux RAPPORT_,NOTE_DE_CONFORMITE \
+    --exempts  CONTROLE,AUDIT_FISCAL
+```
+
+Il lit tous les `.docx` et `.xlsx` du dossier (extraction XML directe, aucune dépendance) et exécute **quatre contrôles** :
+
+| # | Contrôle | Ce qu'il cherche | Bloquant |
+| --- | --- | --- | --- |
+| ① | **Montants périmés** | un chiffre corrigé qui survit quelque part | oui |
+| ② | **Propagation** | un chiffre définitif absent des livrables terminaux | informatif |
+| ③ | **Fraîcheur** | une copie de diffusion plus ancienne que son maître | oui |
+| ④ | **Complétude PDF** | un livrable sans son PDF à côté | informatif |
+
+Il apparie automatiquement les copies numérotées à leur maître (`08b_RAPPORT_X.docx` → `RAPPORT_X.docx`) et neutralise toutes les variantes d'espaces (fine, insécable) qui font échouer une simple recherche de chaîne.
+
+`--exempts` exclut les **rapports de contrôle**, qui citent légitimement les montants corrigés (« porté de X à Y »). Sans cette option, ils remonteraient comme faux positifs.
+
+**Code retour 1** si une anomalie bloquante subsiste : le contrôle peut donc être chaîné avant une remise (`python3 controle_coherence_dossier.py … && envoyer`).
+
+## 34.3 La procédure — six pas après chaque travaux
+
+1. **Lister les montants périmés** de la session : tout chiffre qui a changé, même une fois. Les noter au fur et à mesure, pas de mémoire à la fin.
+2. **Lancer le contrôle** avec `--perimes` et `--cles`.
+3. **Corriger les fichiers signalés** — par édition de valeur pour les `.xlsx`, par republication depuis la source markdown pour les `.docx`.
+4. **Rafraîchir les copies** de diffusion depuis les maîtres (le contrôle ③ donne la liste exacte).
+5. **Régénérer les PDF** des fichiers touchés (`xlsx_to_pdf_mdc.py` / `publish_pdf_mdc.py`).
+6. **Relancer le contrôle jusqu'au vert**, puis versionner (`git commit` + `push`).
+
+## 34.4 Trois règles de fond, apprises à la dure
+
+**Conserver la source markdown de tout livrable Word.** Un `.docx` publié sans sa source n'est plus corrigeable : il faut le réécrire entièrement. Ranger les `.md` à côté du dossier client, jamais uniquement dans un répertoire temporaire de session.
+
+**Ne jamais neutraliser une incohérence en rabotant une ligne.** Quand deux montants se recoupent, laisser chaque ligne à sa valeur intégrale et ouvrir une ligne dédiée en négatif, commentée. Sinon le lecteur voit réapparaître un chiffre qu'il avait fait corriger. Voir [[jamais-minorer-exposition-fiscale]].
+
+**Le contrôle ne doit jamais alléger le dossier.** S'il fait baisser un total, vérifier deux fois : sur LERO, le contrôle final a fait **monter** l'exposition de 10 313 520 (assiette 2026 assise sur le facturé au lieu du réel, cotisations sociales omises). C'est le sens normal d'un contrôle honnête.
+
+## 34.5 Articulation
+
+Ce contrôle est le **dernier maillon** de la chaîne : §24 (protocole d'audit) → §14 (audit contradictoire) → skill `auditeur-fiscal` (grille C1→C12) → **§34 (cohérence documentaire du dossier)** → remise.
+
+Il ne remplace aucun contrôle de fond : il vérifie que les conclusions du fond sont **effectivement présentes et identiques partout**.
+
+---
+
+# 35. ⭐⭐ LE CHEMIN DE L'AUDIT — SECTION D'ENTRÉE (consolidation juillet 2026)
+
+> **C'est ici qu'on commence toute mission d'audit.** Les sections §3, §12 à §16, §21, §23, §24, §26 et §31 à §34 restent la doctrine de détail ; §35 est le **chemin linéaire** qui les enchaîne. Si les deux divergent, §35 prime.
+>
+> **Manuel** : `Documents/LIVRABLES AUDIT LMDC/00_MANUELS_PROCEDURES/MANUEL_PROCEDURE_AUDIT_MDC.docx` (MC-MAN-AUDIT-2026-002)
+> **Checklist opérationnelle** : `CHECKLIST_AUDIT_MDC.xlsx` — 44 étapes cochables, 3 onglets (checklist · les 5 règles · les 9 points de blocage)
+
+## 35.1 Ce qu'on produit
+
+Le produit fini d'un audit n'est **pas un bilan** : c'est une **note de conformité adossée à une exposition chiffrée**, appuyée sur des références juridiques et sur des pièces.
+
+Trois questions, toujours dans cet ordre : **que fait réellement l'entreprise** (par ses flux, pas ses déclarations) · **qu'a-t-elle déclaré** · **que vaut l'écart**.
+
+## 35.2 Les cinq règles qui rendent un audit clair
+
+Chacune a été établie après une erreur réelle. Elles priment sur toute considération de présentation.
+
+| # | Règle | Ce qu'elle interdit |
+| --- | --- | --- |
+| **1** | **Toutes les assiettes sur le RÉEL** | chiffrer un exercice sur le CA réel et un autre sur le facturé ou le déclaré — deux méthodes dans un dossier, c'est une de trop (cas LERO 2026 : −10 313 520) |
+| **2** | **Jamais de minoration par défaut** | porter une déduction au chiffrage sans justificatif produit. *Test du faisceau : si tous les arbitrages penchent du même côté, c'est un biais* |
+| **3** | **Aucune compensation avec la TO** | imputer une taxation d'office liquidée sur l'impôt réel — les deux se **cumulent**, même sur le même mois |
+| **4** | **Les qualifications exclusives ne se cumulent jamais** | additionner CA et apport, ou PPSSI 2 % et RIBNC 7,5 % — une position retenue, l'autre entre parenthèses **hors total** |
+| **5** | **Aucun livrable ne contredit les autres** | corriger un chiffre sans le propager. Corollaire : **conserver la source markdown de tout Word**, sinon le document devient incorrigible |
+
+## 35.3 Les huit phases
+
+| Phase | Ce qu'on fait | Livrables | ⛔ Bloquant |
+| --- | --- | --- | --- |
+| **0 · Cadrage** | forme, activité, régime déclaré, périmètre (**plusieurs exercices = UN audit, UNE exposition, UNE notation**) | lettre de mission | régime inconnu |
+| **1 · Collecte** | 5 sources ; **le compte fourni n'est jamais le seul** | demande de pièces | relevés incomplets |
+| **2 · Le réel** | dépouillement opération par opération, chaîne des soldes, **anti-double compte**, TTC ÷ 1,18 | état des relevés · CA réel · catégorisation des sorties | double compte non écarté par écrit |
+| **3 · Le déclaré** | matrice **natures × périodes** déduite du régime, 3 statuts (déclaré / non déclaré / taxé d'office, en distinguant **liquidée**) ; **États 301 et 302** | grille déclarative | une case vide |
+| **4 · L'écart** | réel vs déclaré par nature ; **paliers franchis** par tranche ; **redevable** de chaque prélèvement ; deux montants distincts (« ce que le centre réclame » ≠ « ce que le client doit ») | montants par nature · point des impôts · rapport d'exposition | une colonne qui ne se recompose pas |
+| **5 · Comptabilité** | journal sur le **CA réel** ; **doctrine du tiers** ; **constatation avant règlement** ; à-nouveaux chaînés ; états financiers **système normal** | journal · base comptable · états financiers | journal ou bilan déséquilibré |
+| **6 · Les deux contrôles** | fiscal **C1→C12** (recalcul depuis la donnée brute) et comptable **7 axes**, menés **séparément** ; *un contrôle qui allège doit être vérifié deux fois* | rapport d'audit fiscal · rapport de contrôle | anomalie bloquante ou majeure |
+| **7 · Notation** | 7 domaines pondérés, malus par gravité, échelle AAA→D ; **visa seulement à partir de A (≥ 15/20)** | note de conformité | observation non sourcée |
+| **8 · Clôture** | **`controle_coherence_dossier.py`** (§34) · PDF complets · **`_SOURCES_MD`** · dossier **À TRANSMETTRE** classé A→F · **bordereau** · **courriel de transmission** (⛔ ne JAMAIS y joindre le rapport d'exposition ni le rapport de contrôle : le premier part **séparément**, le second reste interne ; annoncer la part **exigible**, pas l'exposition consolidée. ⛔ **N'ENGAGER AUCUNE ACTION** : aucun délai imposé, documents opérationnels « prêts à être activés », une seule demande — les disponibilités du client pour la **séance de travail** où le plan sera arrêté. ⛔ **COURRIEL COURT** : une douzaine de lignes, **aucun chiffre dans le corps** — annoncer la fin des travaux, ce qui a été fait en une phrase, remettre le dossier, demander les disponibilités. Le détail est dans les pièces) | audit global · rapport client · plan d'action · bordereau | contrôle au rouge |
+
+**Aucun blocage ne se contourne.** Un dossier livré avec un blocage non levé engage la responsabilité de l'Agence.
+
+## 35.4 Ce qu'on ne fait jamais
+
+**On n'invente aucune donnée** — champ absent = vide + `[À FOURNIR]` + question ciblée ; jamais une valeur devinée, **même signalée « à confirmer »**.
+**On ne présume pas le statut fiscal d'un tiers** — régime d'un fournisseur, exonération d'un client : cela se prouve par une pièce.
+**On ne livre pas une analyse sans contradiction** — un auditeur seul produit des erreurs, deux qui se contredisent produisent une vérité.
+**On ne neutralise pas une incohérence en rabotant une ligne** — chaque ligne garde sa valeur, le retraitement se voit à part.
+**On ne remet aucun document qui n'a pas passé le contrôle qualité automatique** — s'il ne passe pas, on ne produit pas le document.
+
+## 35.5 La boîte à outils
+
+| Besoin | Script |
+| --- | --- |
+| Publier un Word (contrôle bloquant) | `publish_livrable_mdc.py SRC.md DEST.docx "Titre" "Client" "Réf"` |
+| Publier un PDF (contrôle bloquant) | `publish_pdf_mdc.py SRC.md DEST.pdf …` |
+| Classeur Excel → PDF | `xlsx_to_pdf_mdc.py SRC.xlsx` |
+| Word → PDF (Word refuse l'AppleScript) | `docx_to_pdf_mdc.py SRC.docx` · `--lot DOSSIER` |
+| Cohérence du dossier (après **chaque** travaux) | `controle_coherence_dossier.py DOSSIER --perimes … --cles … --maitres …` |
+| Notation | `notateur-conformite/scripts/noter.py observations.json` |
+
+Skills mobilisés : **`auditeur-fiscal`** (grille C1→C12) · **`auditeur-superieur`** (livrables terminaux) · **`notateur-conformite`** (moteur de note).
