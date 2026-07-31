@@ -13,3 +13,7 @@ __pycache__/
 # macOS / OS
 .DS_Store
 Thumbs.db
+**/.DS_Store
+~$*
+.vite/
+node_modules/

@@ -164,6 +164,69 @@ def main():
     else:
         print("   ✅ tous les livrables ont leur PDF")
 
+    # ─── 5. ARITHMÉTIQUE DES MONTANTS NETS ─────────────────────────────────
+    # Cible le bug exact : une ligne "nette / à payer / à reverser" précédée
+    # d'au moins une valeur négative (une déduction), dont le montant affiché
+    # = somme des VALEURS ABSOLUES au lieu de la somme ALGÉBRIQUE. C'est la
+    # signature d'une addition posée à la place d'une soustraction (TVA nette,
+    # solde après déduction…). Restreint à ce motif pour zéro faux positif sur
+    # les totaux imbriqués.
+    print("\n⑤ ARITHMÉTIQUE — un montant net ne doit jamais être une addition de la déduction")
+    JALONS = ("NET", "À PAYER", "A PAYER", "À REVERSER", "A REVERSER", "= TVA", "SOLDE")
+    faux = []
+    try:
+        import openpyxl
+        xlsx = [f for f in fichiers if f.endswith(".xlsx")]
+    except ImportError:
+        openpyxl = None
+        xlsx = []
+    for f in xlsx:
+        if any(e in os.path.basename(f).upper() for e in exempts):
+            continue
+        try:
+            wb = openpyxl.load_workbook(f, data_only=True)
+        except Exception:
+            continue
+        for ws in wb.worksheets:
+            for col in range(1, ws.max_column + 1):
+                pile = []
+                for row in range(1, ws.max_row + 1):
+                    v = ws.cell(row=row, column=col).value
+                    lbl = ""
+                    for cc in range(1, col + 1):
+                        x = ws.cell(row=row, column=cc).value
+                        if isinstance(x, str) and x.strip():
+                            lbl = x.upper(); break
+                    if isinstance(v, (int, float)) and not isinstance(v, bool):
+                        est_net = any(j in lbl for j in JALONS)
+                        a_deduction = any(p < 0 for p in pile)
+                        if est_net and len(pile) >= 2 and a_deduction:
+                            algebrique = sum(pile)
+                            absolue = sum(abs(p) for p in pile)
+                            if abs(v - absolue) <= 2 and abs(v - algebrique) > 2:
+                                faux.append((os.path.relpath(f, racine), ws.title,
+                                             ws.cell(row=row, column=col).coordinate,
+                                             lbl[:36], v, algebrique))
+                            pile = []
+                        elif est_net:
+                            pile = []
+                        else:
+                            pile.append(v)
+                    elif isinstance(v, str) and v.strip():
+                        # un intertitre (ligne sans nombre) referme le groupe courant
+                        if any(k in v.upper() for k in ("①", "②", "③", "④", "SECTION", "BLOC")):
+                            pile = []
+    if openpyxl is None:
+        print("   (openpyxl absent — contrôle arithmétique ignoré)")
+    elif faux:
+        anomalies += len(faux)
+        for rel, onglet, coord, lbl, montant, correct in faux:
+            print(f"   ❌ {rel} / {onglet} / {coord}")
+            print(f"        « {lbl} » = {montant:,} — ADDITION détectée ; la soustraction donne {correct:,}")
+        print("\n   → la TVA (ou tout net) se calcule collectée MOINS déductible, jamais collectée PLUS déductible")
+    else:
+        print("   ✅ aucun montant net obtenu par addition d'une déduction")
+
     print("\n" + "═" * 78)
     if anomalies:
         print(f"  ❌ {anomalies} ANOMALIE(S) BLOQUANTE(S) — le dossier n'est PAS remettable en l'état")

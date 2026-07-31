@@ -4,7 +4,7 @@
 Usage : python3 xlsx_to_pdf_mdc.py SOURCE.xlsx [DEST.pdf]
 Chaque onglet devient une section du PDF. Orientation paysage, largeurs auto.
 """
-import sys, os
+import sys, os, re
 import openpyxl
 from reportlab.lib.pagesizes import A4, A3, landscape
 from reportlab.lib.units import mm
@@ -29,6 +29,71 @@ def fmt(v, nf=""):
         return f"({s})" if neg else s
     return str(v)
 
+_CELL = re.compile(r"^([A-Z]+)(\d+)$")
+_RANGE = re.compile(r"^([A-Z]+)(\d+):([A-Z]+)(\d+)$")
+
+def _col(letters):
+    n = 0
+    for ch in letters:
+        n = n * 26 + (ord(ch) - 64)
+    return n
+
+def eval_formula(wsf, wsv, coord, depth=0, seen=None):
+    """Évalue les formules simples (=SUM(plage/cellules), suites de ±refs) pour
+    le PDF, quand Excel n'a pas encore mis en cache la valeur. Récursif."""
+    if seen is None:
+        seen = set()
+    if coord in seen or depth > 40:
+        return None
+    seen.add(coord)
+    m = _CELL.match(coord)
+    if not m:
+        return None
+    r, c = int(m.group(2)), _col(m.group(1))
+    vcache = wsv.cell(row=r, column=c).value          # valeur mise en cache par Excel
+    if isinstance(vcache, (int, float)) and not isinstance(vcache, bool):
+        return vcache
+    f = wsf.cell(row=r, column=c).value
+    if not (isinstance(f, str) and f.startswith("=")):
+        return vcache if isinstance(vcache, (int, float)) else None
+    expr = f[1:].replace(" ", "")
+    # Découpe l'expression en termes signés (±), chaque terme = SUM(...) ou une cellule.
+    # Gère les formes mixtes : =B39+SUM(B40:B49) , =B18+B32+B44 , =B6-B7 …
+    termes = re.findall(r"([+\-]?)(SUM\([^)]*\)|[A-Z]+\d+)", expr, re.I)
+    reconstruit = "".join(s + t for s, t in termes)
+    if reconstruit != expr:          # forme non reconnue → on renonce proprement
+        return None
+    total = 0.0
+    for signe, terme in termes:
+        val = 0.0
+        ms = re.match(r"^SUM\((.*)\)$", terme, re.I)
+        if ms:
+            for part in ms.group(1).split(","):
+                rg = _RANGE.match(part)
+                if rg:
+                    c1, r1, c2, r2 = _col(rg.group(1)), int(rg.group(2)), _col(rg.group(3)), int(rg.group(4))
+                    for rr in range(min(r1, r2), max(r1, r2) + 1):
+                        for cc in range(min(c1, c2), max(c1, c2) + 1):
+                            v = eval_formula(wsf, wsv, f"{get_letter(cc)}{rr}", depth + 1, set(seen))
+                            if isinstance(v, (int, float)):
+                                val += v
+                elif _CELL.match(part):
+                    v = eval_formula(wsf, wsv, part, depth + 1, set(seen))
+                    if isinstance(v, (int, float)):
+                        val += v
+        else:
+            v = eval_formula(wsf, wsv, terme, depth + 1, set(seen))
+            val = v if isinstance(v, (int, float)) else 0.0
+        total += -val if signe == "-" else val
+    return total
+
+def get_letter(n):
+    s = ""
+    while n:
+        n, rem = divmod(n - 1, 26)
+        s = chr(65 + rem) + s
+    return s
+
 def used_bounds(ws):
     maxr = maxc = 0
     for row in ws.iter_rows():
@@ -38,13 +103,19 @@ def used_bounds(ws):
                 if c.column > maxc: maxc = c.column
     return maxr, maxc
 
-def sheet_table(ws, maxr, maxc, font_size):
+def sheet_table(ws, maxr, maxc, font_size, wsf=None):
     data, styles = [], []
     for r in range(1, maxr + 1):
         line = []
         for c in range(1, maxc + 1):
             cell = ws.cell(r, c)
-            txt = fmt(cell.value, cell.number_format)
+            v = cell.value
+            # formule non mise en cache par Excel : l'évaluer pour le PDF
+            if wsf is not None and (v is None or (isinstance(v, str) and v.startswith("="))):
+                fv = eval_formula(wsf, ws, cell.coordinate)
+                if isinstance(fv, (int, float)):
+                    v = fv
+            txt = fmt(v, cell.number_format)
             if len(txt) > 90:
                 txt = txt[:88] + "…"
             line.append(txt)
@@ -59,6 +130,7 @@ def sheet_table(ws, maxr, maxc, font_size):
 def convert(src, dest=None):
     dest = dest or os.path.splitext(src)[0] + ".pdf"
     wb = openpyxl.load_workbook(src, data_only=True)
+    wbf = openpyxl.load_workbook(src, data_only=False)   # formules, pour évaluation PDF
     name = os.path.basename(src)
     # orientation selon la largeur max
     widest = 0
@@ -75,6 +147,7 @@ def convert(src, dest=None):
     h_sub = ParagraphStyle("sub", fontName="Helvetica", fontSize=8, textColor=colors.HexColor("#555555"), leading=10)
     story = []
     for i, ws in enumerate(wb.worksheets):
+        wsf = wbf[ws.title] if ws.title in wbf.sheetnames else None
         maxr, maxc = used_bounds(ws)
         if maxr == 0:
             continue
@@ -89,7 +162,7 @@ def convert(src, dest=None):
                   Paragraph(f"{os.path.splitext(name)[0]} — onglet : {ws.title}", h_tit),
                   Spacer(1, 2 * mm)]
         fs = 7 if maxc > 10 else 8
-        data, extra = sheet_table(ws, maxr, maxc, fs)
+        data, extra = sheet_table(ws, maxr, maxc, fs, wsf)
         # largeurs proportionnelles au contenu
         wmax = [max((len(data[r][c]) for r in range(len(data))), default=1) for c in range(maxc)]
         wmax = [min(max(w, 3), 46) for w in wmax]

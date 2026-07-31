@@ -3820,6 +3820,7 @@ Il lit tous les `.docx` et `.xlsx` du dossier (extraction XML directe, aucune d�
 | ② | **Propagation** | un chiffre définitif absent des livrables terminaux | informatif |
 | ③ | **Fraîcheur** | une copie de diffusion plus ancienne que son maître | oui |
 | ④ | **Complétude PDF** | un livrable sans son PDF à côté | informatif |
+| ⑤ | **Arithmétique** | un montant net obtenu par ADDITION d'une déduction (TVA collectée + déductible au lieu de −) | oui |
 
 Il apparie automatiquement les copies numérotées à leur maître (`08b_RAPPORT_X.docx` → `RAPPORT_X.docx`) et neutralise toutes les variantes d'espaces (fine, insécable) qui font échouer une simple recherche de chaîne.
 
@@ -3841,6 +3842,8 @@ Il apparie automatiquement les copies numérotées à leur maître (`08b_RAPPORT
 **Conserver la source markdown de tout livrable Word.** Un `.docx` publié sans sa source n'est plus corrigeable : il faut le réécrire entièrement. Ranger les `.md` à côté du dossier client, jamais uniquement dans un répertoire temporaire de session.
 
 **Ne jamais neutraliser une incohérence en rabotant une ligne.** Quand deux montants se recoupent, laisser chaque ligne à sa valeur intégrale et ouvrir une ligne dédiée en négatif, commentée. Sinon le lecteur voit réapparaître un chiffre qu'il avait fait corriger. Voir [[jamais-minorer-exposition-fiscale]].
+
+**Un montant net se calcule TOUJOURS par soustraction, jamais par addition.** La TVA à reverser = collectée − déductible ; un solde après déduction = brut − déduction. Additionner la déduction fait payer deux fois la même taxe. Le gérant l'a relevé sur LERO le 24/07/2026 (« depuis quand pour trouver la TVA à reverser on additionne ? ») : une cellule sommait 4 964 086 + 3 444 781 = 8 408 867 au lieu de 4 964 086 − 3 444 781. Le contrôle ⑤ de `controle_coherence_dossier.py` bloque désormais ce motif automatiquement.
 
 **Le contrôle ne doit jamais alléger le dossier.** S'il fait baisser un total, vérifier deux fois : sur LERO, le contrôle final a fait **monter** l'exposition de 10 313 520 (assiette 2026 assise sur le facturé au lieu du réel, cotisations sociales omises). C'est le sens normal d'un contrôle honnête.
 
@@ -3892,6 +3895,19 @@ Chacune a été établie après une erreur réelle. Elles priment sur toute cons
 | **8 · Clôture** | **`controle_coherence_dossier.py`** (§34) · PDF complets · **`_SOURCES_MD`** · dossier **À TRANSMETTRE** classé A→F · **bordereau** · **courriel de transmission** (⛔ ne JAMAIS y joindre le rapport d'exposition ni le rapport de contrôle : le premier part **séparément**, le second reste interne ; annoncer la part **exigible**, pas l'exposition consolidée. ⛔ **N'ENGAGER AUCUNE ACTION** : aucun délai imposé, documents opérationnels « prêts à être activés », une seule demande — les disponibilités du client pour la **séance de travail** où le plan sera arrêté. ⛔ **COURRIEL COURT** : une douzaine de lignes, **aucun chiffre dans le corps** — annoncer la fin des travaux, ce qui a été fait en une phrase, remettre le dossier, demander les disponibilités. Le détail est dans les pièces) | audit global · rapport client · plan d'action · bordereau | contrôle au rouge |
 
 **Aucun blocage ne se contourne.** Un dossier livré avec un blocage non levé engage la responsabilité de l'Agence.
+
+## 35.3bis ⭐ CONSTRUCTION DES CHIFFRAGES — les totaux sont des FORMULES, jamais des nombres tapés
+
+**Cause racine de l'erreur TVA du 24/07/2026** (« depuis quand pour trouver la TVA à reverser on additionne ? ») : un total saisi en dur, indépendamment de ses lignes — une cellule affichait 8 408 867 (= collectée + déductible) au lieu de 1 519 305 (= collectée − déductible). Tant qu'un total est un littéral, rien ne garantit qu'il reflète les lignes.
+
+**Règle** : dans tout classeur MDC, un total ou un montant net est **écrit comme formule Excel vivante `=SUM(...)`** sur la plage de ses lignes. La **déduction est stockée en négatif** → `=SUM` fait la soustraction toute seule. Additionner une déduction devient **structurellement impossible**, et le total **se recalcule** si le gérant modifie une ligne.
+
+Outils :
+- **`scripts/blocs_mdc.py`** — helper `Bloc` : `b.ligne(row, libellé, montant)` (déduction en négatif) puis `b.total(row, libellé)` écrit `=SUM()` sur les lignes du groupe ; `b.total(..., sous_totaux=[l1,l2,l3])` agrège des sous-totaux ; `finaliser(wb)` pose `fullCalcOnLoad=True`.
+- **`scripts/xlsx_to_pdf_mdc.py`** évalue désormais les formules `=SUM(plage/cellules)` et les termes mixtes `=B29+SUM(B30:B39)` : le PDF affiche la valeur même si le fichier n'a jamais été ouvert dans Excel.
+- **Triple garantie** : (1) formule vivante = la valeur reflète toujours les cellules ; (2) `assert` de contrôle en Python à la construction ; (3) contrôle ⑤ de `controle_coherence_dossier.py` qui **bloque** tout net obtenu par addition d'une déduction.
+
+Livrable de référence reconstruit en formules vivantes : `POINT_IMPOTS_A_PAYER_LERO.xlsx` (rév.5).
 
 ## 35.4 Ce qu'on ne fait jamais
 
