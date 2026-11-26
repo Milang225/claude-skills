@@ -1,0 +1,222 @@
+# État courant MDC — généré le 2026-11-26
+
+## Clients (dossiers dans DOSSIER CLIENTS)
+
+- A PAYER DE LERO — dernier fichier : 2026-09-30
+- ACCES MATERIEL — dernier fichier : 2026-10-02
+- ACCES MATERIEL MEDICAL — dernier fichier : 2026-11-26
+- ACHAT EXPRESS — dernier fichier : 2026-10-02
+- AHUA ADJE JULIEN — dernier fichier : 2026-10-02
+- ASLA CONSULTING — dernier fichier : 2026-11-08
+- ATELIER DES REVES BY BGK — dernier fichier : 2026-11-02
+- AVE MARIA TRANSIT — dernier fichier : 2026-11-19
+- AXES HOLDING — dernier fichier : 2026-10-06
+- BALANCES DES COMPTES POUR BASE — dernier fichier : 2026-07-06
+- BALOU ADELAIDE — dernier fichier : 2026-10-30
+- BGL SERVICES — dernier fichier : 2026-11-13
+- BIWAL&CO — dernier fichier : 2026-10-02
+- BUILDING NEW AFRICA — dernier fichier : 2026-10-02
+- BUSINESS HALL COTE D'IVOIRE — dernier fichier : 2026-10-02
+- COLLEGE ST EXUPERY 2 — dernier fichier : 2026-11-21
+- DALENI SARL — dernier fichier : 2026-11-06
+- DIBMAT ET BUILD — dernier fichier : 2026-11-04
+- DOSSIERS IMMOBILIER — dernier fichier : 2026-09-30
+- DOUAN COMOE PIERRE — dernier fichier : 2026-10-02
+- DS SERVICE — dernier fichier : 2026-11-13
+- DYC PRESTIGE & DIVERS SARL — dernier fichier : 2026-10-30
+- EDI GILLES — dernier fichier : 2026-10-02
+- EGCI — dernier fichier : 2026-11-26
+- EGCI SARL — dernier fichier : 2026-11-19
+- ENTREPRISE KSM SARL — dernier fichier : 2026-10-02
+- ESSAI — dernier fichier : vide
+- ETUDE ME PREGNON TRAORE — dernier fichier : 2026-11-06
+- FABELLASHOP — dernier fichier : 2026-11-09
+- FAMILLE KAMARA — dernier fichier : 2026-11-26
+- FAMILLE KRA — dernier fichier : 2026-11-17
+- FOUSSENI MOUTAKILOU — dernier fichier : 2026-10-02
+- Formation — dernier fichier : 2026-04-20
+- GLOBAL PRESTIGE CONSULTING — dernier fichier : 2026-10-02
+- GLOBE COTE D'IVOIRE — dernier fichier : 2026-10-02
+- ID IMPACT SARL — dernier fichier : 2026-11-09
+- INVESTECH — dernier fichier : 2026-10-02
+- IVOIRE MINING — dernier fichier : 2026-11-23
+- KASSA GOLD HOLDING SA — dernier fichier : 2026-10-02
+- KF IMMOBILIER — dernier fichier : 2026-10-30
+- KG CONSULTING — dernier fichier : 2026-11-11
+- KWAANI SERVICES — dernier fichier : 2026-11-11
+- LAGO PHILEMON — dernier fichier : 2026-10-02
+- LATIFATOU — dernier fichier : 2026-10-02
+- LBTECH — dernier fichier : 2026-11-25
+- LE KING FERMIER — dernier fichier : 2026-11-09
+- LERO — dernier fichier : 2026-10-21
+- LIGHT & BRIGHT TECHNOLOGIES — dernier fichier : 2026-10-02
+- MABEK — dernier fichier : 2026-11-26
+- MABEK 2 — dernier fichier : 2026-10-29
+- MFD HOSPITALITY — dernier fichier : 2026-09-30
+- MFD HOSPITALITY CONSULTING — dernier fichier : 2026-10-02
+- MOBILIER_GROUP_S — dernier fichier : 2026-10-02
+- NADRELIE — dernier fichier : 2026-10-30
+- OSSE — dernier fichier : 2026-11-23
+- OUATTARA — dernier fichier : 2026-11-02
+- PRODIGY CORPORATION — dernier fichier : 2026-10-02
+- RICHTAZ MULTISERVICES — dernier fichier : 2026-11-09
+- RICMA SARL — dernier fichier : 2026-10-02
+- RINA HAIR — dernier fichier : 2026-10-02
+- SAPHIR TRAVAUX DIVERS — dernier fichier : 2026-09-30
+- SBL ENERGY COTE D'IVOIRE — dernier fichier : 2026-10-02
+- SCI 3KAS — dernier fichier : 2026-10-02
+- SIBIO — dernier fichier : 2026-10-02
+- SOM MULTI SERVICE — dernier fichier : 2026-10-02
+- SOSTIC — dernier fichier : 2026-10-02
+- TESTPROFIL — dernier fichier : 2026-10-26
+- TIM 7 — dernier fichier : 2026-11-26
+- TOE ISMAEL — dernier fichier : 2026-10-02
+- TRACE LOGISTICS — dernier fichier : 2026-10-30
+- WAEL — dernier fichier : 2026-11-03
+- WIIA — dernier fichier : 2026-10-02
+- WILLING SERVICES — dernier fichier : 2026-10-30
+- WINN'ART IMPRIM — dernier fichier : 2026-10-02
+- YURE — dernier fichier : 2026-11-13
+- _MODELES — dernier fichier : 2026-05-01
+
+## Documents récents SUPERVISEUR GENERAL
+
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/r2_config.json
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/etat_validation.json
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/mail_config.json
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/mail_index.json
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/logs/plateforme.log
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/premiere_vue.json
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/RAPPORT_PIECES_TRANSMISES_2026_TIM7_20261126.docx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/RAPPORT_PIECES_TRANSMISES_2026_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/carnet.json
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV24_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_ARRETEE_TIM7_20261126.docx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_ARRETEE_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV24_20261126.xlsx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV23_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_CORRIGEE_TIM7_20261126.docx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_CORRIGEE_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV23_20261126.xlsx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/PIECES_A_OBTENIR_2026_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/PIECES_A_OBTENIR_2026_TIM7_20261126.xlsx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/logs/plateforme.err
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/plateforme_production.py
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/_SOURCES_REGISTRE/_plateforme_production_AVANT_COMPRESSION_2026-11-26.py.bak
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV22_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV22_20261126.xlsx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/ETATS_DE_RAPPROCHEMENT_2026_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/ETATS_DE_RAPPROCHEMENT_2026_TIM7_20261126_CLASSEUR.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/ETATS_DE_RAPPROCHEMENT_2026_TIM7_20261126.docx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/ETATS_DE_RAPPROCHEMENT_2026_TIM7_20261126.xlsx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/_ANCIENNES_VERSIONS/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV22_20261126_2026-11-26_1104.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_20261126.docx
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/_ANCIENNES_VERSIONS/TIM 7/BASE_COMPTABLE_2025_FINALE_TIM7_REV22_20261126_2026-11-26_1104.xlsx
+- 2026-11-25 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/_RETIRES/MABEK/SCRIPT_DE_RESTITUTION_MABEK_TRANSPORT_2026-11-24_2026-11-25_0343.pdf
+- 2026-11-25 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/_RETIRES/MABEK/SCRIPT_DE_RESTITUTION_MABEK_TRANSPORT_2026-11-24_2026-11-25_0343.docx
+- 2026-11-25 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/MABEK/NOTE_AU_COMPTABLE_MABEK_TRANSPORT_2026-11-24.docx
+- 2026-11-25 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/MABEK/NOTE_AU_COMPTABLE_MABEK_TRANSPORT_2026-11-24.pdf
+- 2026-11-25 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/MABEK/CONSTAT_DE_NON_CONFORMITE_MABEK_TRANSPORT_2026-11-24.docx
+- 2026-11-25 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/MABEK/CONSTAT_DE_NON_CONFORMITE_MABEK_TRANSPORT_2026-11-24.pdf
+- 2026-11-24 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/MABEK/CARTOGRAPHIE_DES_DESTINATAIRES_MABEK_TRANSPORT_2026-11-24.docx
+- 2026-11-24 · ~/Documents/SUPERVISEUR GENERAL/MES_LIVRABLES/MABEK/CARTOGRAPHIE_DES_DESTINATAIRES_MABEK_TRANSPORT_2026-11-24.pdf
+
+## Documents récents DOSSIER CLIENTS
+
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/TABLEAU_D_EXPOSITION_MABEK_TRANSPORT_2026-11-24.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/SYNTHESE_DE_L_EXPOSITION_MABEK_TRANSPORT_2026-11-24.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/TABLEAU_D_EXPOSITION_MABEK_TRANSPORT_2026-11-24.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/SYNTHESE_DE_L_EXPOSITION_MABEK_TRANSPORT_2026-11-24.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/SCRIPT_DE_RESTITUTION_MABEK_TRANSPORT_2026-11-24.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/DEE/NOTE_REDRESSEMENT_ACCES_MATERIEL_MEDICAL.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/DEE/NOTE_REDRESSEMENT_ACCES_MATERIEL_MEDICAL.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/DEE/DEE_ENCAISSEMENTS_ACCES_MATERIEL_MEDICAL_2025.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/DEE/DEE_ENCAISSEMENTS_ACCES_MATERIEL_MEDICAL_2025.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/DEE/DEE_ACCES_MATERIEL_MEDICAL_2025.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/DEE/DEE_ACCES_MATERIEL_MEDICAL_2025.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/_sources/NOTE_REDRESSEMENT_ACCES_MATERIEL_MEDICAL.md
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/_sources/DEE_ACCES_MATERIEL_MEDICAL_2025.md
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/_sources/DEE_ENCAISSEMENTS_ACCES_MATERIEL_MEDICAL_2025.md
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/JOURNAUX/JOURNAL_2025_ACCES_MATERIEL_MEDICAL.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/JOURNAUX/JOURNAL_2024_ACCES_MATERIEL_MEDICAL.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/JOURNAUX/JOURNAL_2023_ACCES_MATERIEL_MEDICAL.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/JOURNAUX/JOURNAL_2022_ACCES_MATERIEL_MEDICAL.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/JOURNAUX/JOURNAL_2021_ACCES_MATERIEL_MEDICAL.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/CATEGORISATION_RELEVE_ACCES_MATERIEL_MEDICAL_2025.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/BASE_COMPTABLE_ACCES_MATERIEL_MEDICAL_2025.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/BASE_COMPTABLE_ACCES_MATERIEL_MEDICAL_2021-2025.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/_sources/build_categorisation.py
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/_generateur_base_2025.py
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/_generateur_base_comptable.py
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/ACCES MATERIEL MEDICAL/COMPTABILITE/_ecritures_amm.py
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/_INTERNE/ETAT_DU_DOSSIER_MABEK_TRANSPORT_2026-11-26.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/_INTERNE/ETAT_DU_DOSSIER_MABEK_TRANSPORT_2026-11-26.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/MABEK/AUDIT DE CONFORMITE 2026/_SOURCES_MD/ETAT_DU_DOSSIER_MABEK_TRANSPORT.md
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/FAMILLE KAMARA/SUIVI_PATRIMOINE/SUIVI_PATRIMOINE_FAMILLE_KAMARA.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/FAMILLE KAMARA/ATTOBAN_IDENTITES_FISCALES/COURRIER_CDI_II_PLATEAUX_ATTOBAN_SZ32_2026-11-26.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/FAMILLE KAMARA/DECLARATIONS_FONCIERES_2026/01_DF_ATTOBAN_II_PLATEAUX_SZ32_SUCCESSION_YAYA_KAMARA.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/FAMILLE KAMARA/ATTOBAN_IDENTITES_FISCALES/COURRIER_CDI_II_PLATEAUX_ATTOBAN_SZ32_2026-11-26.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/FAMILLE KAMARA/ATTOBAN_IDENTITES_FISCALES/NOTE_ATTOBAN_SECTION_SZ32_ANALYSE_REVISEE_2026-11-26.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/TIM 7/RAPPROCHEMENTS_2026/RAPPORT_PIECES_TRANSMISES_2026_TIM7_20261126.docx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/TIM 7/RAPPROCHEMENTS_2026/RAPPORT_PIECES_TRANSMISES_2026_TIM7_20261126.pdf
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/TIM 7/RAPPROCHEMENTS_2026/_SOURCES_MD/RAPPORT_PIECES_TRANSMISES_2026_TIM7.md
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/TIM 7/REGULARISATION_COMPLETE_2024-2025/_POUR_SUPERVISION/PIECES_A_OBTENIR_2026_TIM7_20261126.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/TIM 7/REGULARISATION_COMPLETE_2024-2025/_POUR_SUPERVISION/BASE_COMPTABLE_2025_FINALE_TIM7_REV24_20261126.xlsx
+- 2026-11-26 · ~/Documents/DOSSIER CLIENTS/TIM 7/COMPTABILITE/BASE_COMPTABLE_2025_FINALE_TIM7_REV24_20261126.pdf
+
+## Fichiers de suivi à lire
+
+- ~/Documents/SUIVI CLIENTS/SUIVI_DES_DOSSIERS_MDC.xlsx — modifié le 2026-11-25
+- ~/Documents/SUPERVISEUR GENERAL/00_REGISTRE_DES_DOCUMENTS_VALIDES.xlsx — modifié le 2026-11-06
+- ~/Documents/SUPERVISEUR GENERAL/00_JOURNAL_DE_PRODUCTION.xlsx — modifié le 2026-10-14
+- ~/Documents/SUIVI CLIENTS/VUE_360_DES_DOSSIERS_MDC.pdf — modifié le 2026-11-16
+
+## Mémoire du Superviseur (index)
+
+# Mémoire — SUPERVISEUR GENERAL
+
+- [Rôle de l'utilisateur](user-role.md) — dirige MDC (cabinet de conformité, Côte d'Ivoire), superviseur ; répondre en français.
+- [Projet supervision & relances](projet-supervision-relances.md) — système de suivi des clients/dossiers ; classeur Suivi_Superviseur_MDC.xlsx.
+- [Supervision rédaction avant livraison](supervision-redaction-avant-livraison.md) — RÈGLE : faire superviser par « la rédaction » (skill `redaction`, mise en forme brandée + revue fond/forme) tout document AVANT de le livrer.
+- [Rechargement Aperçu/Excel après régén](rechargement-apercu-excel-apres-regen.md) — après avoir régénéré un PDF/XLSX ouvert, forcer sa fermeture+réouverture (osascript) sinon l'utilisateur voit l'ancien cache.
+- [Préférences livrables](preferences-livrables.md) — règles de forme : proscrire le plan d'action en délais relatifs « J+7 → J+60 » dans les livrables.
+- [Méthodologie d'audit MDC](methodologie-audit-mdc.md) — ordre des travaux, triangles de cohérence, tests de bouclage à dérouler à chaque mission.
+- [Modèle reporting de gestion mensuel](modele-reporting-gestion-mensuel.md) — modèle réutilisable Excel (12 onglets, dont Arriérés) + rapport Word, volets comptable/fiscal/social.
+- [Kit de livrables d'audit MDC](kit-livrables-audit-mdc.md) — suite STANDARD de livrables à produire de soi-même (modèles St Exupéry & LERO) : classeur d'analyse bancaire 5 onglets + colonne « à régulariser », triangle du CA, point des impôts, vérif EF vs réalité. Ne pas attendre qu'on la redemande.
+- [Kit organisation client MDC](kit-organisation-client-mdc.md) — gabarit générique côté client : cahier de suivi Excel (caisse/banque/chèques/pièces/synthèse) + guide de transmission + note de service sorties d'argent. Rangé dans BASE DOCUMENTAIRE LMDC/06_PROCEDURES.
+- [FAMILLE KRA — reconstitution 2025](famille-kra-reconstitution-2025.md) — distributeur ; achats réels 2025 ≈ 200M vs CA déclaré 20,1M (×10) ; camion KAMA + prêt Baobab + Hiace à intégrer ; exposition fiscale majeure.
+- [Démarche d'audit — colonne vertébrale & suivi](demarche-audit-colonne-vertebrale-et-suivi.md) — le relevé = point de départ ; 9 maillons ; l'audit ABOUTIT à l'assainissement de la base puis au SUIVI PERMANENT (service récurrent) ; réclamer l'export Sage (journal/GL/balance) au cadrage.
+- [Standard qualité — travail de pro](standard-qualite-travail-pro.md) — EXIGENCE : plus jamais de dossier bâclé (réf. St Exupéry) ; dérouler les 9 maillons + double contrôle + cohérence + confrontation aux pièces avant remise.
+- [Machine LMDC — procédure](machine-lmdc-procedure.md) — PRIORITÉ du gérant ; cockpit `~/Documents/MACHINE LMDC` (playbook audit/suivi : qui fait quoi, quel mail, quel document, quel kit) + outils + livrables-types + offre de service.
+- [Écosystème système comptable](ecosysteme-systeme-comptable.md) — kit d'implantation chez le client (9 briques, 12 contrôles) + générateurs de manuel de procédures et de calendrier ; parcours IMPLANTATION du playbook.
+- [Assistant MDC — chatbot interne](assistant-mdc-chatbot-interne.md) — EN PAUSE (05/09/2026, coût clé API) ; construit et testé, tourne en local sur le Mac, prêt à reprendre.
+- [Limite pièces jointes mail](limite-pj-mail-gmail.md) — les PDF brandés MDC sont trop lourds pour create_draft : brouillon sans PJ + chemin du fichier à joindre.
+- [Organisation MDC — départements & coordination](organisation-mdc-departements.md) — organigramme 15/09/2026 ; supervision=exactitude, coordination=flux, secrétariat=trace ; groupes WhatsApp de suivi (un groupe = un client).
+- [Copie systématique base documentaire](copie-systematique-base-documentaire.md) — RÈGLE : chaque nouveau document → copie dans BASE DOCUMENTAIRE LMDC (thématique 01-08 + 07_DOSSIERS_TRAITES/client).
+- [Outillage terrain des collaborateurs](outillage-terrain-collaborateurs.md) — détecter les FAITS taxables chez le client (IRVM, TVA, timbre, AIRSI/PPSSI, informel, social) ; l'œil du contrôleur.
+- [Kit de détection terrain](kit-detection-terrain.md) — référentiel 139 indices + carnet Excel + fiche réflexe ; régénérés depuis _SOURCES/indices.py.
+- [Module droit des sociétés](module-droit-des-societes.md) — statuts, associés, litiges ; AUSCGIE archivé et articles vérifiés un à un ; Art 356 = compte courant débiteur nul.
+- [Formations « lire les états »](formations-lecture-des-etats.md) — balance, grand livre, bilan, résultat, TFT + cahier de 26 cas de détection d'anomalies.
+- [Revue des taux CGI 2026](revue-taux-cgi-2026.md) — 7 erreurs corrigées dans les cours bilan/résultat ; pièges récurrents (300 000, 5 conditions CCA, art. 144).
+- [Impression sécurisée](impression-securisee-mdc.md) — exemplaires nominatifs traçables (pantographe, filigrane, QR) ; ce qui est possible et ce qui ne l'est pas.
+- [Droits de timbre (CI)](droits-de-timbre-ci.md) — les 5 timbres d'une entreprise ; 1 % sur les apports en compte courant depuis l'AF 2025.
+- [Corpus LBC/FT à archiver](corpus-lbcft-a-archiver.md) — blanchiment : textes BCEAO/CENTIF/Pôle économique absents de la base ; comportements oui, chiffres non.
+- [Organisation du dossier contenu](organisation-dossier-contenu-mon-fiscaliste.md) — classé par semaine ; point d'entrée 00_CALENDRIER_PAR_SEMAINE ; `_publier_tout.py` pour les PDF.
+- [Style d'écriture Facebook](style-ecriture-facebook-gerant.md) — sa voix : oralité ivoirienne, glissement vous/toi, clôture sèche ; + les 2 garde-fous (ne pas nommer, ne pas guerroyer).
+- [Positionnement référence & promotion subtile](positionnement-reference-et-promotion-subtile.md) — règle des 90/10 ; 7 mécaniques ; 8 zones d'ignorance ; chaque épisode se décline en 12 pièces.
+- [Ligne éditoriale réseaux sociaux](ligne-editoriale-reseaux-sociaux.md) — TikTok MON FISCALISTE CI (90K) : ADN, 8 parasites, doctrine de l'associé silencieux, plan 30 jours.
+- [Positionnement « architecte » MON FISCALISTE](positionnement-architecte-mon-fiscaliste.md) — sujets de base épuisés ; puiser dans les 167 modules de FORMATION LMDC ; 52 lives sur 7 saisons.
+- [Kit de suivi des filiales](kit-suivi-filiales.md) — cockpit Excel 6 registres + note de procédure pour piloter un groupe de sociétés.
+- [4 docs procédure, tous séparés audit/suivi](checklist-audit-suivi-mdc-v2.md) — 2 checklists xlsx + 2 manuels docx, jamais fusionnés (règle posée 23/09/2026).
+- [Fix rendu xlsx_to_pdf_mdc.py](fix-xlsx-to-pdf-mdc-wrap.md) — bug de chevauchement de colonnes corrigé (23/09/2026), texte enroulé via Paragraph.
+- [Décorticage systématique des modules](decorticage-systematique-des-modules.md) — RÈGLE : tout nouveau module → 18 pièces de contenu + sa place dans l'agenda des lives ; grille des 7 angles.
+- [Charte affiches « Nomenclature »](charte-affiches-nomenclature.md) — couleurs, polices, structure des affiches de live + générateurs PNG et PDF.
+- [Chaîne YouTube — la parole aux administrations](chaine-youtube-administrations.md) — format essai chapitré ; principe fondateur : faire parler DGI, CNPS, CEPICI sur les bonnes pratiques.
+- [Rythme YouTube — 2 vidéos/semaine](rythme-youtube-deux-videos-semaine.md) — 1 long le dimanche + 1 court le mercredi ; l'année entière écrite (52+52) ; recaler les durées à 140 mots/min.
+- [Nom de la chaîne YouTube](nom-chaine-avec-mon-fiscaliste.md) — AVEC MON FISCALISTE ; la marque des réseaux courts reste MON FISCALISTE CI.
+- [Doctrine de la chaîne](doctrine-chaine-avec-mon-fiscaliste.md) — on ne se plaint pas, on montre comment font celles qui y arrivent ; « notre administration » ; jamais de corruption.
+- [Skill directeur artistique](skill-directeur-artistique.md) — écrit le contenu adossé aux skills de fond ; aucun chiffre sans vérification au texte.
+- [Checklist pièces création d'entreprise](checklist-pieces-creation-entreprise.md) — CHECKLIST_PIECES_CREATION_MDC.xlsx (24/09/2026), 24 pièces/actes sur 8 catégories.
+- [Politique tarifaire MDC](politique-tarifaire-mdc.md) — RÈGLE : tarifs selon la charge de travail réelle, jamais de grille fixe par tranche de CA dans les docs commerciaux.
+

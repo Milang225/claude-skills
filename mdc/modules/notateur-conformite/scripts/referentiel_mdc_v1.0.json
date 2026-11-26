@@ -1,0 +1,491 @@
+{
+  "nom": "Référentiel de l'Indice MDC de conformité",
+  "version": "1.0",
+  "date_effet": "2026-11-01",
+  "gel_jusqu_au": "2027-10-31",
+  "gravites": {
+    "CRITIQUE": 5,
+    "MAJEUR": 3,
+    "MINEUR": 1
+  },
+  "statuts": {
+    "C": {
+      "libelle": "Conforme",
+      "valeur": 1.0,
+      "couvert": true
+    },
+    "P": {
+      "libelle": "Partiellement conforme",
+      "valeur": 0.5,
+      "couvert": true
+    },
+    "NC": {
+      "libelle": "Non conforme",
+      "valeur": 0.0,
+      "couvert": true
+    },
+    "NV": {
+      "libelle": "Non vérifiable (pièce non produite)",
+      "valeur": 0.0,
+      "couvert": false
+    },
+    "NA": {
+      "libelle": "Non applicable",
+      "valeur": null,
+      "couvert": null
+    }
+  },
+  "regles": {
+    "plafond_domaine_si_critique_nc": 50,
+    "couverture_definitive_min": 80,
+    "couverture_provisoire_min": 50,
+    "maillon_critique": [
+      {
+        "critiques_nc_min": 3,
+        "niveau_max": "EXPOSE"
+      },
+      {
+        "critiques_nc_min": 1,
+        "niveau_max": "FRAGILE"
+      }
+    ],
+    "attestation": {
+      "indice_min": 70,
+      "couverture_min": 80,
+      "critiques_nc_max": 0,
+      "validite_mois": 12
+    }
+  },
+  "niveaux": [
+    {
+      "code": "MAITRISE",
+      "libelle": "Maîtrisé",
+      "min": 85,
+      "couleur": "#1B7F3B",
+      "lecture": "Conformité tenue et documentée ; risque résiduel faible."
+    },
+    {
+      "code": "SATISFAISANT",
+      "libelle": "Satisfaisant",
+      "min": 70,
+      "couleur": "#6BAA3A",
+      "lecture": "Bases solides ; quelques écarts à corriger sans urgence."
+    },
+    {
+      "code": "FRAGILE",
+      "libelle": "Fragile",
+      "min": 55,
+      "couleur": "#E3B505",
+      "lecture": "Écarts significatifs ; un contrôle produirait des rappels."
+    },
+    {
+      "code": "EXPOSE",
+      "libelle": "Exposé",
+      "min": 40,
+      "couleur": "#E07B1F",
+      "lecture": "Exposition réelle à redressement ; plan d'action prioritaire."
+    },
+    {
+      "code": "CRITIQUE",
+      "libelle": "Critique",
+      "min": 0,
+      "couleur": "#C0392B",
+      "lecture": "Perte de maîtrise ; régularisation immédiate."
+    }
+  ],
+  "domaines": [
+    {
+      "code": "T",
+      "libelle": "Trésorerie et flux",
+      "poids": 20
+    },
+    {
+      "code": "V",
+      "libelle": "Chiffre d'affaires et facturation",
+      "poids": 15
+    },
+    {
+      "code": "F",
+      "libelle": "Obligations fiscales",
+      "poids": 25
+    },
+    {
+      "code": "S",
+      "libelle": "Obligations sociales et paie",
+      "poids": 20
+    },
+    {
+      "code": "C",
+      "libelle": "Obligations comptables et légales",
+      "poids": 15
+    },
+    {
+      "code": "G",
+      "libelle": "Gouvernance et documentation",
+      "poids": 5
+    }
+  ],
+  "controles": [
+    {
+      "id": "T01",
+      "domaine": "T",
+      "gravite": "CRITIQUE",
+      "intitule": "Exhaustivité des comptes financiers",
+      "test": "Tous les comptes bancaires, comptes mobile money et placements de l'entreprise sont-ils connus, communiqués et inscrits au bilan ?",
+      "preuve": "Attestation de comptes de chaque banque, relevés ; recherche de virements vers des comptes non déclarés."
+    },
+    {
+      "id": "T02",
+      "domaine": "T",
+      "gravite": "CRITIQUE",
+      "intitule": "Relevés complets sur la période",
+      "test": "Les relevés de chaque compte couvrent-ils toute la période, sans mois ni feuillet manquant ?",
+      "preuve": "Relevés mensuels ; contrôle de continuité solde de fin / solde d'ouverture."
+    },
+    {
+      "id": "T03",
+      "domaine": "T",
+      "gravite": "CRITIQUE",
+      "intitule": "Flux de l'entreprise sur des comptes à son nom",
+      "test": "Les recettes et dépenses de l'entreprise transitent-elles exclusivement par des comptes ouverts à son nom (et non par des comptes personnels du dirigeant ou de tiers) ?",
+      "preuve": "Attestations de titularité des comptes ; recherche de recettes clients versées sur des comptes personnels."
+    },
+    {
+      "id": "T04",
+      "domaine": "T",
+      "gravite": "MAJEUR",
+      "intitule": "Rapprochement bancaire mensuel",
+      "test": "Un rapprochement bancaire est-il établi et visé chaque mois ?",
+      "preuve": "États de rapprochement datés et signés."
+    },
+    {
+      "id": "T05",
+      "domaine": "T",
+      "gravite": "MAJEUR",
+      "intitule": "Tenue de la caisse",
+      "test": "La caisse est-elle tenue au jour le jour et comptée à la clôture ?",
+      "preuve": "Journal ou brouillard de caisse, procès-verbal de comptage de clôture."
+    },
+    {
+      "id": "T06",
+      "domaine": "T",
+      "gravite": "CRITIQUE",
+      "intitule": "Justification des retraits d'espèces",
+      "test": "Chaque retrait d'espèces significatif a-t-il un emploi documenté (pièce de dépense, versement en caisse) ?",
+      "preuve": "Lignes de retrait des relevés rapprochées des pièces de caisse."
+    },
+    {
+      "id": "T07",
+      "domaine": "T",
+      "gravite": "MAJEUR",
+      "intitule": "Identification des encaissements",
+      "test": "Chaque encaissement significatif est-il rattaché à un client, une facture ou une opération identifiée ?",
+      "preuve": "Échantillon de crédits bancaires rapprochés des factures et du grand livre clients."
+    },
+    {
+      "id": "T08",
+      "domaine": "T",
+      "gravite": "MAJEUR",
+      "intitule": "Maîtrise des règlements en espèces",
+      "test": "Les règlements en espèces respectent-ils les plafonds légaux et restent-ils marginaux ?",
+      "preuve": "Analyse des sorties de caisse au regard des seuils du CGI et de la réglementation des paiements."
+    },
+    {
+      "id": "T09",
+      "domaine": "T",
+      "gravite": "MAJEUR",
+      "intitule": "Décaissements appuyés de pièces",
+      "test": "Les décaissements significatifs vers des fournisseurs sont-ils appuyés d'une facture normalisée au nom de l'entreprise ?",
+      "preuve": "Échantillon de débits bancaires rapprochés des factures fournisseurs."
+    },
+    {
+      "id": "V01",
+      "domaine": "V",
+      "gravite": "CRITIQUE",
+      "intitule": "Sincérité du chiffre d'affaires",
+      "test": "Le CA déclaré est-il cohérent avec les encaissements reconstitués, corrigés de la variation des créances (écart < 5 %) ?",
+      "preuve": "Reconstitution encaissements / CA ; liasse ; déclarations mensuelles."
+    },
+    {
+      "id": "V02",
+      "domaine": "V",
+      "gravite": "MAJEUR",
+      "intitule": "Facturation normalisée",
+      "test": "Toutes les ventes donnent-elles lieu à une facture normalisée, numérotée sans rupture ?",
+      "preuve": "Registre des factures, contrôle de la séquence, échantillon de factures normalisées."
+    },
+    {
+      "id": "V03",
+      "domaine": "V",
+      "gravite": "MAJEUR",
+      "intitule": "Suivi des créances clients",
+      "test": "Les créances clients sont-elles suivies par antériorité et relancées ?",
+      "preuve": "Balance âgée clients, historique de relances."
+    },
+    {
+      "id": "V04",
+      "domaine": "V",
+      "gravite": "MAJEUR",
+      "intitule": "Déclarations mensuelles cohérentes avec la facturation",
+      "test": "Le chiffre d'affaires déclaré chaque mois correspond-il aux factures émises sur le mois ?",
+      "preuve": "Registre des factures du mois comparé aux déclarations mensuelles."
+    },
+    {
+      "id": "V05",
+      "domaine": "V",
+      "gravite": "MAJEUR",
+      "intitule": "Absence de circuit de recettes parallèle",
+      "test": "Les recettes encaissées hors banque sont-elles intégralement déposées ou comptabilisées ?",
+      "preuve": "Comparaison recettes déclarées par l'entreprise / dépôts bancaires / caisse."
+    },
+    {
+      "id": "V06",
+      "domaine": "V",
+      "gravite": "MINEUR",
+      "intitule": "Cohérence des outils de gestion",
+      "test": "Les états de gestion internes (logiciel de vente, scolarité, stocks…) concordent-ils avec la comptabilité ?",
+      "preuve": "Rapprochement d'un état de gestion avec le compte de produits correspondant."
+    },
+    {
+      "id": "F01",
+      "domaine": "F",
+      "gravite": "CRITIQUE",
+      "intitule": "Régime d'imposition adapté",
+      "test": "Le régime d'imposition appliqué correspond-il au CA réel et à l'activité ?",
+      "preuve": "CA reconstitué comparé aux seuils des régimes ; DFE ; avis de la DGI."
+    },
+    {
+      "id": "F02",
+      "domaine": "F",
+      "gravite": "CRITIQUE",
+      "intitule": "Inventaire déclaratif complet",
+      "test": "Toutes les natures d'impôts et taxes dues par l'entreprise sont-elles identifiées et déclarées sur chaque période ?",
+      "preuve": "Grille obligations dues × déclarations déposées (historique e-impôts)."
+    },
+    {
+      "id": "F03",
+      "domaine": "F",
+      "gravite": "CRITIQUE",
+      "intitule": "Paiement des impôts déclarés",
+      "test": "Les impôts déclarés ont-ils été effectivement payés ?",
+      "preuve": "Quittances, avis de débit, situation fiscale e-impôts."
+    },
+    {
+      "id": "F04",
+      "domaine": "F",
+      "gravite": "MAJEUR",
+      "intitule": "Respect des délais déclaratifs",
+      "test": "Les déclarations sont-elles déposées dans les délais du calendrier fiscal ?",
+      "preuve": "Dates de dépôt comparées aux échéances légales."
+    },
+    {
+      "id": "F05",
+      "domaine": "F",
+      "gravite": "MAJEUR",
+      "intitule": "Retenues à la source",
+      "test": "Les retenues à la source dues sur les paiements aux tiers sont-elles opérées et reversées ?",
+      "preuve": "Échantillon de paiements à des prestataires ; déclarations de retenues."
+    },
+    {
+      "id": "F06",
+      "domaine": "F",
+      "gravite": "MAJEUR",
+      "intitule": "Traitement de la TVA",
+      "test": "Le statut TVA est-il instruit, et la TVA collectée et déduite est-elle correctement déterminée ?",
+      "preuve": "Rapprochement CA / TVA collectée ; contrôle des droits à déduction."
+    },
+    {
+      "id": "F07",
+      "domaine": "F",
+      "gravite": "MAJEUR",
+      "intitule": "Obligations annuelles",
+      "test": "Les états financiers, la liasse et les états annuels récapitulatifs sont-ils déposés ?",
+      "preuve": "Accusés de dépôt."
+    },
+    {
+      "id": "F08",
+      "domaine": "F",
+      "gravite": "CRITIQUE",
+      "intitule": "Traitement des procédures de l'administration",
+      "test": "Les avis de vérification, notifications et taxations d'office sont-ils traités dans les délais ?",
+      "preuve": "Courriers de la DGI et réponses ; état des contentieux."
+    },
+    {
+      "id": "F09",
+      "domaine": "F",
+      "gravite": "MINEUR",
+      "intitule": "Traçabilité des paiements fiscaux",
+      "test": "Chaque paiement fiscal est-il rattachable à une nature d'impôt et à une période ?",
+      "preuve": "Classement des quittances ; concordance banque / e-impôts."
+    },
+    {
+      "id": "F10",
+      "domaine": "F",
+      "gravite": "MAJEUR",
+      "intitule": "Détermination du résultat fiscal",
+      "test": "Les charges non déductibles sont-elles réintégrées et les déductions justifiées ?",
+      "preuve": "Tableau de passage du résultat comptable au résultat fiscal."
+    },
+    {
+      "id": "S01",
+      "domaine": "S",
+      "gravite": "CRITIQUE",
+      "intitule": "Déclaration de tous les salariés",
+      "test": "L'effectif réel (paie, banque, présence) est-il intégralement immatriculé et déclaré à la CNPS ?",
+      "preuve": "Effectif constaté comparé aux déclarations CNPS."
+    },
+    {
+      "id": "S02",
+      "domaine": "S",
+      "gravite": "CRITIQUE",
+      "intitule": "Cotisations sociales déclarées et payées",
+      "test": "Les cotisations CNPS sont-elles déclarées sur la bonne assiette et payées ?",
+      "preuve": "Déclarations et quittances CNPS ; recalcul sur la masse salariale."
+    },
+    {
+      "id": "S03",
+      "domaine": "S",
+      "gravite": "CRITIQUE",
+      "intitule": "Impôts et taxes sur salaires",
+      "test": "Les impôts et taxes assis sur les salaires sont-ils correctement calculés, déclarés et payés ?",
+      "preuve": "Recalcul sur un échantillon de bulletins ; déclarations et quittances."
+    },
+    {
+      "id": "S04",
+      "domaine": "S",
+      "gravite": "MAJEUR",
+      "intitule": "Concordance de la masse salariale",
+      "test": "La masse salariale est-elle identique en paie, en banque, en comptabilité et dans les déclarations ?",
+      "preuve": "Rapprochement à quatre sources."
+    },
+    {
+      "id": "S05",
+      "domaine": "S",
+      "gravite": "MAJEUR",
+      "intitule": "Bulletins et livre de paie",
+      "test": "Des bulletins de paie conformes sont-ils remis chaque mois et le livre de paie est-il tenu ?",
+      "preuve": "Bulletins, livre de paie."
+    },
+    {
+      "id": "S06",
+      "domaine": "S",
+      "gravite": "MAJEUR",
+      "intitule": "Contrats de travail",
+      "test": "Chaque salarié dispose-t-il d'un contrat écrit conforme au Code du travail ?",
+      "preuve": "Dossiers du personnel."
+    },
+    {
+      "id": "S07",
+      "domaine": "S",
+      "gravite": "MAJEUR",
+      "intitule": "Registres et obligations de l'employeur",
+      "test": "Les registres obligatoires et formalités auprès de l'administration du travail sont-ils tenus ?",
+      "preuve": "Registre d'employeur, déclarations d'embauche, affichages."
+    },
+    {
+      "id": "S08",
+      "domaine": "S",
+      "gravite": "MAJEUR",
+      "intitule": "Déclaration annuelle des salaires",
+      "test": "La déclaration annuelle des salaires est-elle déposée et concorde-t-elle avec la paie ?",
+      "preuve": "DISA et accusé de dépôt."
+    },
+    {
+      "id": "C01",
+      "domaine": "C",
+      "gravite": "CRITIQUE",
+      "intitule": "Existence d'une comptabilité",
+      "test": "Une comptabilité (journaux, grand livre, balance) existe-t-elle pour toute la période, conformément à l'obligation de tenue des livres ?",
+      "preuve": "Présentation des journaux, grand livre et balance ; identité de la personne qui les tient."
+    },
+    {
+      "id": "C02",
+      "domaine": "C",
+      "gravite": "CRITIQUE",
+      "intitule": "États financiers établis et arrêtés",
+      "test": "Les états financiers annuels sont-ils établis et arrêtés par l'organe de gestion dans les délais ?",
+      "preuve": "États financiers, procès-verbal ou décision d'arrêté des comptes."
+    },
+    {
+      "id": "C03",
+      "domaine": "C",
+      "gravite": "MAJEUR",
+      "intitule": "Visa ou certification des états financiers",
+      "test": "Les états financiers déposés portent-ils le visa d'un expert-comptable inscrit, ou la certification du commissaire aux comptes lorsque l'entreprise y est soumise ?",
+      "preuve": "Visa ou rapport de certification joint aux états déposés."
+    },
+    {
+      "id": "C04",
+      "domaine": "C",
+      "gravite": "MAJEUR",
+      "intitule": "Approbation et dépôt des comptes",
+      "test": "Les comptes sont-ils approuvés par les associés et déposés auprès de la DGI et du greffe dans les délais ?",
+      "preuve": "Procès-verbal d'assemblée, accusés de dépôt."
+    },
+    {
+      "id": "C05",
+      "domaine": "C",
+      "gravite": "MAJEUR",
+      "intitule": "Commissaire aux comptes lorsque la loi l'exige",
+      "test": "Un commissaire aux comptes est-il désigné lorsque la forme sociale ou les seuils légaux l'imposent ?",
+      "preuve": "Bilan, CA et effectif comparés aux seuils de l'AUSCGIE ; décision de nomination."
+    },
+    {
+      "id": "C06",
+      "domaine": "C",
+      "gravite": "MAJEUR",
+      "intitule": "Concordance déclarations / états financiers",
+      "test": "Le chiffre d'affaires, la masse salariale et les impôts figurant aux états financiers déposés concordent-ils avec les déclarations fiscales et sociales de la période ?",
+      "preuve": "Rapprochement des montants déposés et des montants déclarés ; écarts expliqués par l'entreprise."
+    },
+    {
+      "id": "C07",
+      "domaine": "C",
+      "gravite": "MINEUR",
+      "intitule": "Comptable identifié auprès de la DGI",
+      "test": "La personne qui tient la comptabilité ou établit les déclarations est-elle identifiée et déclarée à la DGI ?",
+      "preuve": "Déclaration d'existence, communication trimestrielle des intervenants (LPF art. 62)."
+    },
+    {
+      "id": "G01",
+      "domaine": "G",
+      "gravite": "CRITIQUE",
+      "intitule": "Séparation des patrimoines",
+      "test": "Les flux personnels du dirigeant ou des associés sont-ils exclus des comptes de l'entreprise, et les prélèvements formalisés ?",
+      "preuve": "Analyse des bénéficiaires et libellés des relevés ; décisions d'associés."
+    },
+    {
+      "id": "G02",
+      "domaine": "G",
+      "gravite": "MAJEUR",
+      "intitule": "Comptes courants d'associés",
+      "test": "Les comptes courants d'associés sont-ils couverts par une convention et suivis ?",
+      "preuve": "Conventions, grand livre du compte courant."
+    },
+    {
+      "id": "G03",
+      "domaine": "G",
+      "gravite": "MAJEUR",
+      "intitule": "Dossier permanent juridique",
+      "test": "Statuts, RCCM, DFE, PV d'approbation des comptes et pouvoirs sont-ils à jour et disponibles ?",
+      "preuve": "Dossier permanent."
+    },
+    {
+      "id": "G04",
+      "domaine": "G",
+      "gravite": "MAJEUR",
+      "intitule": "Conservation des pièces",
+      "test": "Les pièces comptables et justificatifs sont-ils conservés et retrouvables sur la durée légale ?",
+      "preuve": "Test de retrouvabilité sur un échantillon d'opérations anciennes."
+    },
+    {
+      "id": "G05",
+      "domaine": "G",
+      "gravite": "MINEUR",
+      "intitule": "Procédures et circuit de validation",
+      "test": "Un circuit écrit d'autorisation des dépenses et de suivi des échéances existe-t-il et est-il appliqué ?",
+      "preuve": "Procédures écrites, visas sur les pièces."
+    }
+  ],
+  "perimetre": "Le référentiel vérifie des faits au regard d'obligations publiques. Il n'apprécie pas la qualité des comptabilités (domaine réservé aux experts-comptables inscrits, ord. 2009-387) et ne constitue pas une consultation juridique."
+}

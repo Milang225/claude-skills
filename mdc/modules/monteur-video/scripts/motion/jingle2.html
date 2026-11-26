@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Jingle 2 — logo Mon Fiscaliste + La Maison de la Conformité</title>
+<style>
+html,body{margin:0;padding:0;overflow:hidden;background:#FAF7F0}
+body{position:relative;font-family:-apple-system,"SF Pro Display","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+.abs{position:absolute}
+</style></head>
+<body><div id="root" class="abs" style="inset:0"></div>
+<script>
+// Seconde partie du jingle (5,4 s, démarre après le montage de 2,6 s) — logo du gérant utilisé TEL QUEL (image fournie).
+// 0,0 flash blanc · 0,05 logo · 0,45 éclat sur le sceau · 1,75 « SOYEZ EN RÈGLE » · 2,35 bascule ·
+// 2,55 « Une chaîne de La Maison de la Conformité » · 4,8–5,4 fondu au noir
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), P=(t,a,d)=>cl((t-a)/d);
+const oQ=x=>1-Math.pow(1-x,5), oC=x=>1-Math.pow(1-x,3), iO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const oB=(x,s=1.5)=>{if(x<=0)return 0;if(x>=1)return 1;x-=1;return x*x*((s+1)*x+s)+1};
+const R=i=>{const x=Math.sin(i*127.1+311.7)*43758.5453;return x-Math.floor(x)};
+const $=h=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild};
+const S=(e,o)=>{for(const k in o)e.style[k]=o[k]};
+let W,H,V,E={};
+function init(cfg){
+  W=cfg.W;H=cfg.H;V=H>W;document.body.style.width=W+'px';document.body.style.height=H+'px';
+  const r=document.getElementById('root');
+  r.appendChild($(`<div class="abs" style="inset:0;background:radial-gradient(${V?'110% 70% at 50% 35%':'80% 90% at 50% 45%'},#FFFFFF 0%,#FAF7F0 55%,#EFE7D6 100%)"></div>`));
+  E.dots=[...Array(36)].map((_,i)=>{const s=5+R(i)*12;const d=$(`<div class="abs" style="width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.75),rgba(212,175,55,0) 70%)"></div>`);r.appendChild(d);return {d,x:R(i+3)*W,y:R(i+7)*H,v:8+R(i+9)*24,ph:R(i+11)*6}});
+  const lw=V?W*.86:W*.5, cy=V?H*.36:H*.40;
+  E.logoBox=$(`<div class="abs" style="left:${(W-lw)/2}px;top:${cy-lw*137/386/2}px;width:${lw}px"></div>`);r.appendChild(E.logoBox);
+  E.logo=$(`<img src="${cfg.logo}" style="display:block;width:100%;image-rendering:auto">`);E.logoBox.appendChild(E.logo);
+  E.glint=$(`<div class="abs" style="left:${-lw*.06}px;top:${-lw*.05}px;width:${lw*.3}px;height:${lw*.3}px;border-radius:50%;background:radial-gradient(circle,rgba(255,250,225,.95) 0%,rgba(255,215,120,.45) 22%,transparent 55%)"></div>`);E.logoBox.appendChild(E.glint);
+  E.sweep=$(`<div class="abs" style="left:0;top:0;width:100%;height:100%;background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.85) 50%,transparent 60%);background-size:300% 100%;-webkit-mask-image:url(${cfg.logo});-webkit-mask-size:100% 100%;mask-image:url(${cfg.logo});mask-size:100% 100%"></div>`);E.logoBox.appendChild(E.sweep);
+  const ty=cy+lw*137/386/2+(V?70:60);
+  E.tag=$(`<div class="abs" style="left:0;width:${W}px;top:${ty}px;display:flex;justify-content:center;align-items:center;gap:26px">
+     <span class="l" style="height:3px;background:linear-gradient(90deg,transparent,#C9A227);display:block;width:0"></span>
+     <span class="t" style="font-weight:800;font-size:${V?52:58}px;letter-spacing:.26em;white-space:nowrap;background:linear-gradient(100deg,#16213F 0%,#16213F 38%,#E8B64A 50%,#16213F 62%,#16213F 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent">SOYEZ EN RÈGLE</span>
+     <span class="l" style="height:3px;background:linear-gradient(90deg,#C9A227,transparent);display:block;width:0"></span></div>`);r.appendChild(E.tag);
+  const mw=V?W*.8:W*.40, my=V?H*.2:H*.24;
+  E.mdc=$(`<div class="abs" style="left:${(W-mw)/2}px;top:${my}px;width:${mw}px;text-align:center">
+     <div class="k" style="font-weight:800;font-size:30px;letter-spacing:.42em;color:#B8862A;margin-bottom:24px">UNE CHAÎNE DE</div>
+     <div class="c" style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 26px 70px rgba(22,33,63,.25)"><img src="${cfg.mdc}" style="display:block;width:100%">
+       <div class="sh abs" style="inset:0;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%);background-size:300% 100%"></div></div>
+     <div class="s" style="margin-top:28px;font-weight:700;font-size:${V?34:32}px;letter-spacing:.14em;color:#16213F">COMPTABLE · FISCAL · SOCIAL</div>
+     <div class="a" style="margin-top:10px;font-size:${V?25:23}px;letter-spacing:.22em;color:#6B7389">PRÉPARER · ASSISTER · DÉFENDRE</div></div>`);r.appendChild(E.mdc);
+  E.flash=$(`<div class="abs" style="inset:0;background:#fff"></div>`);r.appendChild(E.flash);
+  E.noir=$(`<div class="abs" style="inset:0;background:#000"></div>`);r.appendChild(E.noir);
+  const imgs=[...document.images].map(im=>new Promise(ok=>{if(im.complete)ok();else im.onload=im.onerror=ok}));
+  return Promise.all([document.fonts.ready,...imgs]).then(()=>true);
+}
+function renderAt(T){
+  E.dots.forEach(p=>{const y=(p.y-T*p.v+H*2)%H;S(p.d,{left:p.x+Math.sin(T*.7+p.ph)*18+'px',top:y+'px',opacity:(.3+.5*Math.sin(T*1.4+p.ph)**2)*oC(P(T,.2,.8))})});
+  E.flash.style.opacity=1-oC(P(T,0,.35));
+  // logo tel quel : apparition nette, éclat sur le sceau, reflet qui traverse
+  const l=oQ(P(T,.05,.6));S(E.logo,{opacity:l,filter:l<1?`blur(${(1-l)*14}px)`:'none',transform:`scale(${.88+.12*l+.01*T})`});
+  E.glint.style.opacity=Math.exp(-Math.pow((T-.5)/.14,2));E.sweep.style.backgroundPosition=`${100-100*iO(P(T,.7,.9))}% 0`;
+  const tg=oQ(P(T,1.75,.45));const tt=E.tag.querySelector('.t');
+  S(tt,{opacity:tg,filter:tg<1?`blur(${(1-tg)*10}px)`:'none',transform:`translateY(${(1-tg)*14}px)`,backgroundPosition:`${100-100*iO(P(T,1.95,.9))}% 0`});
+  E.tag.querySelectorAll('.l').forEach(e=>e.style.width=(V?80:120)*oC(P(T,1.85,.5))+'px');
+  // bascule vers La Maison de la Conformité
+  const o=iO(P(T,2.35,.45));S(E.logoBox,{opacity:1-o,translate:`0 ${-50*o}px`});S(E.tag,{opacity:1-o,translate:`0 ${-50*o}px`});
+  const m=oB(P(T,2.55,.55),1.3);S(E.mdc,{opacity:cl(P(T,2.55,.25)),transform:`translateY(${(1-m)*60}px) scale(${.92+.08*m})`});
+  E.mdc.querySelector('.k').style.opacity=oC(P(T,2.5,.4));E.mdc.querySelector('.s').style.opacity=oC(P(T,3.1,.45));E.mdc.querySelector('.a').style.opacity=oC(P(T,3.4,.45));
+  E.mdc.querySelector('.sh').style.backgroundPosition=`${100-100*iO(P(T,2.9,.9))}% 0`;
+  E.noir.style.opacity=oC(P(T,4.8,.6));
+  return true;
+}
+window.init=init;window.renderAt=renderAt;
+</script></body></html>

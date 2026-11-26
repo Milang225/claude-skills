@@ -1,0 +1,1327 @@
+{
+ "nom": "ep00_manifeste",
+ "image_orateur": {
+  "source": "/Users/bilefilsseverin/Downloads/A001_09291755_C124.MOV",
+  "t": 110.0,
+  "recadrage": [
+   40,
+   100,
+   3200,
+   1800
+  ]
+ },
+ "mots_cles": [
+  "ennemi",
+  "ennemis",
+  "lois",
+  "fermer",
+  "polémiques",
+  "chiffre",
+  "employés",
+  "d'employés",
+  "contrôles",
+  "couler",
+  "0",
+  "plaindre",
+  "ailleurs",
+  "étouffer",
+  "autrement",
+  "essentielles",
+  "oppressions",
+  "écosystème",
+  "l'argent",
+  "administration",
+  "favoritisme",
+  "langage",
+  "gratuitement",
+  "redressement",
+  "protection",
+  "conformité",
+  "solides",
+  "engagements",
+  "vrai",
+  "erreurs",
+  "marche",
+  "ordre",
+  "astuces",
+  "combines",
+  "peur",
+  "associé",
+  "silencieux",
+  "comptes",
+  "connaître"
+ ],
+ "sections": {
+  "2": {
+   "kicker": "Partie 2",
+   "title": "Les questions<br>que personne ne pose"
+  },
+  "3": {
+   "kicker": "Partie 3",
+   "title": "La mission"
+  },
+  "4": {
+   "kicker": "Partie 4",
+   "title": "La vision"
+  },
+  "5": {
+   "kicker": "Partie 5",
+   "title": "Mes 3 engagements"
+  },
+  "6": {
+   "kicker": "Partie 6",
+   "title": "Ce qu'on ne fera pas,<br>et la règle de base"
+  }
+ },
+ "scenes": [
+  {
+   "type": "derriere",
+   "debut": 0.0,
+   "fin": {
+    "mot": [
+     0,
+     "quand"
+    ],
+    "bord": "fin",
+    "decalage": 0.35
+   },
+   "textes": {
+    "top": "Jusqu'à",
+    "main": "quand ?"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      0,
+      "quand"
+     ]
+    }
+   }
+  },
+  {
+   "type": "mot_geant",
+   "debut": {
+    "mot": [
+     1,
+     "considérer"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     1,
+     "ennemi"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "label": "l'administration",
+    "big": "ennemi ?",
+    "pills": [
+     "Impôts",
+     "Contrôles",
+     "Pénalités",
+     "Déclarations",
+     "Redressement",
+     "Patente",
+     "TVA",
+     "Amendes"
+    ]
+   },
+   "cles": {
+    "label": {
+     "mot": [
+      1,
+      "l'administration"
+     ]
+    },
+    "big": {
+     "mot": [
+      1,
+      "ennemi"
+     ]
+    }
+   }
+  },
+  {
+   "type": "frise",
+   "debut": {
+    "mot": [
+     2,
+     "voir"
+    ],
+    "decalage": -0.4
+   },
+   "fin": {
+    "mot": [
+     2,
+     "ennemis"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "title": "Les lois",
+    "sub": "nos ennemis ?",
+    "labels": [
+     "Code général des impôts",
+     "Loi de finances",
+     "Annexe fiscale",
+     "Doctrine DGI"
+    ],
+    "labels_v": [
+     "CGI",
+     "Loi de finances",
+     "Annexe fiscale",
+     "Doctrine DGI"
+    ]
+   },
+   "cles": {
+    "sub": {
+     "mot": [
+      2,
+      "ennemis"
+     ]
+    }
+   }
+  },
+  {
+   "type": "document",
+   "debut": {
+    "mot": [
+     3,
+     "si"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     3,
+     "fermer"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "quote": "« Si je paie tout… »",
+    "header": "République de Côte d'Ivoire",
+    "title": "Avis d'imposition",
+    "amount_label": "Montant à payer",
+    "amount": "12 480 000",
+    "big": "je vais fermer ?"
+   },
+   "cles": {
+    "card": {
+     "mot": [
+      3,
+      "paie"
+     ]
+    },
+    "big": {
+     "mot": [
+      3,
+      "fermer"
+     ]
+    }
+   }
+  },
+  {
+   "type": "barre",
+   "debut": {
+    "mot": [
+     4,
+     "comparaisons"
+    ],
+    "decalage": -0.8
+   },
+   "fin": {
+    "mot": [
+     4,
+     "polémiques"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "header": "je ne veux <span class=\"itgold\">absolument pas</span> entrer dans les…",
+    "items": [
+     "comparaisons",
+     "polémiques"
+    ]
+   },
+   "cles": {
+    "t0": {
+     "mot": [
+      4,
+      "comparaisons"
+     ]
+    },
+    "t1": {
+     "mot": [
+      4,
+      "polémiques"
+     ]
+    }
+   },
+   "hero": "polémiques"
+  },
+  {
+   "type": "balance",
+   "debut": {
+    "mot": [
+     5,
+     "une"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     5,
+     "fortune"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "title": "elles paient beaucoup plus que nous…",
+    "left": "elles",
+    "right": "nous autres",
+    "after": "…et elles font fortune."
+   },
+   "cles": {
+    "b": {
+     "mot": [
+      5,
+      "fortune"
+     ]
+    }
+   }
+  },
+  {
+   "type": "contraste",
+   "debut": {
+    "mot": [
+     6,
+     "pendant"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     6,
+     "d'employés"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "low": "pendant que nous nous décourageons…",
+    "high": "elles font<br>du chiffre.",
+    "stat1": "Chiffre d'affaires",
+    "stat2_num": 100,
+    "stat2_label": "employés"
+   },
+   "cles": {
+    "high": {
+     "mot": [
+      6,
+      "elles"
+     ]
+    },
+    "stat": {
+     "mot": [
+      6,
+      "centaines"
+     ]
+    }
+   }
+  },
+  {
+   "type": "courbe",
+   "debut": {
+    "mot": [
+     7,
+     "car"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     7,
+     "seconde"
+    ],
+    "bord": "fin",
+    "decalage": 0.35
+   },
+   "textes": {
+    "quote": "« ne faites pas de <span style=\"font-weight:700\">comparaison</span>… »",
+    "labels": [
+     "contrôle fiscal",
+     "redressement",
+     "pénalités"
+    ],
+    "conclusion": "de quoi <span style=\"font-weight:800\">couler</span> un business"
+   },
+   "cles": {
+    "conclusion": {
+     "mot": [
+      7,
+      "couler"
+     ]
+    }
+   }
+  },
+  {
+   "type": "derriere",
+   "debut": {
+    "mot": [
+     8,
+     "finalement"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     8,
+     "font"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "top": "finalement,",
+    "main": "comment ?"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      8,
+      "comment"
+     ]
+    }
+   }
+  },
+  {
+   "type": "compteur",
+   "debut": {
+    "mot": [
+     9,
+     "si"
+    ],
+    "decalage": -0.25
+   },
+   "fin": {
+    "mot": [
+     9,
+     "plaindre"
+    ],
+    "bord": "fin",
+    "decalage": 0.3
+   },
+   "textes": {
+    "label": "et si les impôts étaient à…",
+    "from": 35,
+    "to": 0,
+    "suffix": "%",
+    "pills": [
+     "TVA <b>0%</b>",
+     "Patente <b>0%</b>",
+     "IBIC <b>0%</b>",
+     "ITS <b>0%</b>",
+     "IMF <b>0%</b>"
+    ],
+    "after": "…on se plaindrait encore."
+   },
+   "cles": {
+    "hit": {
+     "mot": [
+      9,
+      "0"
+     ]
+    },
+    "after": {
+     "mot": [
+      9,
+      "plaindre"
+     ]
+    }
+   },
+   "hero": "0%"
+  },
+  {
+   "type": "boucle",
+   "debut": {
+    "mot": [
+     9,
+     "on",
+     2
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     9,
+     "boucle"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "labels": [
+     "se plaindre",
+     "payer",
+     "se plaindre encore"
+    ],
+    "center": "la même<br>boucle"
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      9,
+      "boucle"
+     ]
+    }
+   }
+  },
+  {
+   "type": "ailleurs",
+   "debut": {
+    "mot": [
+     10,
+     "donc"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     10,
+     "ailleurs"
+    ],
+    "bord": "fin",
+    "decalage": 0.7
+   },
+   "textes": {
+    "title": "le problème n'est pas là…",
+    "big": "ailleurs.",
+    "pills": [
+     "taux",
+     "impôts",
+     "contrôles",
+     "pénalités",
+     "l'administration",
+     "les lois",
+     "la TVA",
+     "les délais"
+    ]
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      10,
+      "problème"
+     ]
+    }
+   }
+  },
+  {
+   "type": "respire",
+   "debut": {
+    "mot": [
+     11,
+     "et"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     11,
+     "étouffer"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "line1": "l'administration n'est pas là",
+    "strike": "pour nous étouffer"
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      11,
+      "étouffer"
+     ]
+    }
+   }
+  },
+  {
+   "type": "marque",
+   "debut": {
+    "mot": [
+     12,
+     "c'est"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     12,
+     "chaîne"
+    ],
+    "bord": "fin",
+    "decalage": 0.9
+   },
+   "textes": {
+    "line1": "voir les choses <span class=\"itgold\">autrement.</span>",
+    "line2": "les analyser <span class=\"itgold\">autrement.</span>"
+   },
+   "cles": {
+    "l1": {
+     "mot": [
+      12,
+      "mis"
+     ]
+    },
+    "l2": {
+     "mot": [
+      12,
+      "chaîne"
+     ]
+    }
+   }
+  },
+  {
+   "type": "numero",
+   "debut": {
+    "mot": [
+     15,
+     "la"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     15,
+     "d'oppressions"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "n": "1",
+    "kicker": "Question 1",
+    "title": "Comment font-elles face à ce que nous appelons <span class=\"goldg\">oppression</span> ?"
+   }
+  },
+  {
+   "type": "vague",
+   "debut": {
+    "mot": [
+     17,
+     "la"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     18,
+     "ici"
+    ],
+    "bord": "fin",
+    "decalage": 0.3
+   },
+   "textes": {
+    "kicker": "Question 2",
+    "title": "Comment surfent-elles sur cet <span class=\"goldg\">écosystème</span> ?"
+   }
+  },
+  {
+   "type": "reseau",
+   "debut": {
+    "mot": [
+     19,
+     "parce"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     20,
+     "filiales"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "center": "écosystème",
+    "nodes": [
+     "ses règles",
+     "ses temps",
+     "ses interlocuteurs"
+    ],
+    "branches": [
+     "succursales",
+     "filiales"
+    ]
+   },
+   "cles": {
+    "b": {
+     "mot": [
+      20,
+      "succursales"
+     ]
+    }
+   }
+  },
+  {
+   "type": "billets",
+   "debut": {
+    "mot": [
+     21,
+     "et"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     22,
+     "ça"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "title": "« elles ont de l'argent »",
+    "after": "c'est bien plus que ça."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      21,
+      "pas",
+      1
+     ]
+    },
+    "b": {
+     "mot": [
+      22,
+      "bien"
+     ]
+    }
+   }
+  },
+  {
+   "type": "cle",
+   "debut": {
+    "mot": [
+     23,
+     "la"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     24,
+     "administration"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "kicker": "Question 3 — la plus importante",
+    "title": "Comment comprennent-elles <span class=\"goldg\">notre administration</span> ?"
+   }
+  },
+  {
+   "type": "enveloppe_non",
+   "debut": {
+    "mot": [
+     25,
+     "pardon"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     25,
+     "bouger"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "title": "corruption ? pots-de-vin ?",
+    "after": "faut bouger."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      25,
+      "pots-de-vin"
+     ]
+    },
+    "b": {
+     "mot": [
+      25,
+      "faut"
+     ]
+    }
+   }
+  },
+  {
+   "type": "foule",
+   "debut": {
+    "mot": [
+     26,
+     "j'ai"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     27,
+     "nous",
+     2
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "title": "notre administration",
+    "after": "elle est à nous."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      27,
+      "à"
+     ]
+    }
+   }
+  },
+  {
+   "type": "prix",
+   "debut": {
+    "mot": [
+     31,
+     "on",
+     1
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     31,
+     "précise"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "title": "l'information",
+    "after": "gratuitement."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      31,
+      "gratuitement"
+     ]
+    }
+   }
+  },
+  {
+   "type": "calendrier",
+   "debut": {
+    "mot": [
+     33,
+     "j'ai"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     33,
+     "redressement"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "mois": "CONTRÔLE FISCAL",
+    "title": "le jour de ton redressement…",
+    "after": "trop tard pour découvrir la loi."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      33,
+      "jour"
+     ]
+    }
+   }
+  },
+  {
+   "type": "bouclier",
+   "debut": {
+    "mot": [
+     37,
+     "derrière"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     37,
+     "désavantages"
+    ],
+    "bord": "fin",
+    "decalage": 0.3
+   },
+   "textes": {
+    "title": "derrière chaque loi…",
+    "after": "une protection."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      37,
+      "protection"
+     ]
+    }
+   }
+  },
+  {
+   "type": "fondations",
+   "debut": {
+    "mot": [
+     41,
+     "ma"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     41,
+     "solides"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "title": "des bases solides",
+    "labels": [
+     "conformité",
+     "respect des règles",
+     "déclarations à jour",
+     "comptes tenus"
+    ]
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      41,
+      "bases"
+     ]
+    }
+   }
+  },
+  {
+   "type": "iceberg",
+   "debut": {
+    "mot": [
+     42,
+     "une"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     42,
+     "noooon"
+    ],
+    "bord": "fin",
+    "decalage": 0.8
+   },
+   "textes": {
+    "title": "une entreprise, ce n'est pas que…",
+    "tip": "le financier",
+    "deep": [
+     "fiscal",
+     "social",
+     "juridique",
+     "conformité"
+    ]
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      42,
+      "financier"
+     ]
+    }
+   }
+  },
+  {
+   "type": "triptyque",
+   "debut": {
+    "mot": [
+     43,
+     "face"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     43,
+     "chaîne"
+    ],
+    "bord": "fin",
+    "decalage": 0.8
+   },
+   "textes": {
+    "title": "mes 3 engagements"
+   }
+  },
+  {
+   "type": "decodage",
+   "debut": {
+    "mot": [
+     45,
+     "pas"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     46,
+     "vous",
+     1
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "title": "Engagement 1 · expliquer les règles <span class=\"itgold\">pour de vrai</span>",
+    "label1": "réciter la loi",
+    "label2": "l'expliquer",
+    "jargon": "Art. — Sont admises en déduction les charges visées à l'alinéa précédent, sous réserve des dispositions…",
+    "clair": "D'où vient la règle, à quoi elle sert, ce qu'elle change pour vous."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      45,
+      "débrouiller"
+     ]
+    }
+   }
+  },
+  {
+   "type": "numero",
+   "debut": {
+    "mot": [
+     47,
+     "le"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     47,
+     "elle-même"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "n": "2",
+    "kicker": "Engagement 2",
+    "title": "Donner la parole à <span class=\"goldg\">l’administration</span>"
+   }
+  },
+  {
+   "type": "flux",
+   "debut": {
+    "mot": [
+     51,
+     "mais"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     51,
+     "erreurs"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "title": "elle voit passer des milliers d'entreprises",
+    "after": "…et les mêmes erreurs."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      51,
+      "mêmes"
+     ]
+    }
+   }
+  },
+  {
+   "type": "semaine",
+   "debut": {
+    "mot": [
+     52,
+     "ce"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     52,
+     "semaine"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "title": "pour vous, un accident…",
+    "after": "pour elle, une erreur qui revient chaque semaine."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      52,
+      "erreur"
+     ]
+    }
+   }
+  },
+  {
+   "type": "croissance",
+   "debut": {
+    "mot": [
+     57,
+     "des"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     59,
+     "demande"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "title": "Engagement 3 · vous montrer que ça marche",
+    "badges": [
+     "en règle",
+     "financements obtenus",
+     "marchés gagnés"
+    ]
+   }
+  },
+  {
+   "type": "boite_outils",
+   "debut": {
+    "mot": [
+     61,
+     "pas"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     62,
+     "réclame"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "title": "pas d'astuces, pas de combines…",
+    "after": "des dispositifs prévus par la loi.",
+    "tools": [
+     "exonérations",
+     "régimes adaptés",
+     "réductions d'impôt",
+     "délais de paiement"
+    ]
+   },
+   "cles": {
+    "b": {
+     "mot": [
+      62,
+      "dispositifs"
+     ]
+    }
+   }
+  },
+  {
+   "type": "orage",
+   "debut": {
+    "mot": [
+     63,
+     "pas"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     63,
+     "comprendre"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "title": "pas de peur…",
+    "after": "comprendre."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      63,
+      "comprendre"
+     ]
+    }
+   }
+  },
+  {
+   "type": "confidentiel",
+   "debut": {
+    "mot": [
+     64,
+     "et"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     64,
+     "dis"
+    ],
+    "bord": "fin",
+    "decalage": 0.3
+   },
+   "textes": {
+    "title": "jamais un dossier, jamais un nom"
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      64,
+      "cas"
+     ]
+    }
+   }
+  },
+  {
+   "type": "associe",
+   "debut": {
+    "mot": [
+     66,
+     "l'état"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     68,
+     "comptes"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "title": "L'État, votre associé silencieux",
+    "slice": "l'État",
+    "pie": "votre résultat",
+    "after": "un jour, il regarde les comptes."
+   },
+   "cles": {
+    "b": {
+     "mot": [
+      68,
+      "regarde"
+     ]
+    }
+   }
+  },
+  {
+   "type": "parchemin",
+   "debut": {
+    "mot": [
+     69,
+     "alors"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     69,
+     "plus"
+    ],
+    "bord": "fin",
+    "decalage": 0.9
+   },
+   "textes": {
+    "kicker": "LA RÈGLE DE BASE",
+    "rule": "Ce que vous n'accepteriez pas d'un associé, ne l'acceptez pas de lui."
+   },
+   "cles": {
+    "a": {
+     "mot": [
+      69,
+      "plus"
+     ]
+    }
+   }
+  },
+  {
+   "type": "derriere",
+   "debut": {
+    "mot": [
+     71,
+     "pas"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     71,
+     "connaître"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "top": "pas le craindre.",
+    "main": "le connaître"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      71,
+      "connaître"
+     ]
+    }
+   }
+  }
+ ],
+ "fin": {
+  "type": "chapitre",
+  "duree": 6,
+  "transition": "burn",
+  "textes": {
+   "kicker": "Avec Mon Fiscaliste",
+   "title": "L'État, votre <span class=\"goldg\">associé silencieux</span>.<br>Apprenons à le connaître.",
+   "sub": "Abonnez-vous — le premier épisode arrive"
+  }
+ }
+}

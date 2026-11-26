@@ -16,6 +16,14 @@ production des documents commerciaux MDC, administration serveur.
 - `scripts/` — générateurs de livrables (Word/PDF à en-tête MDC), utilitaires.
 - `INDEX.md` (dans `reference/`) — point d'entrée à lire en début de session.
 
+### `monteur-video/` — Monteur vidéo de la chaîne AVEC MON FISCALISTE
+Montage automatique d'un rush en vidéo YouTube 4K + Short : coupe des bafouillages, regard hors objectif
+couvert (Apple Vision), motion design aux couleurs de la marque (Chrome headless), transitions, texte derrière
+le personnage, son et export recommandés YouTube. Piloté par un `projet.json` par vidéo.
+
+- `SKILL.md` — méthode complète · `reference/` — catalogue des scènes, format du projet, charte, audio,
+  export, dépannage · `scripts/` — moteur (`monteur.py`, `motion/`, `tools/`) · `exemples/ep01_projet.json`.
+
 ## Sécurité — ne jamais versionner
 
 Les identifiants serveur (VPS Contabo : IP, mot de passe root, VNC) sont **déportés hors dépôt**
@@ -31,3 +39,7 @@ Le `.gitignore` exclut : `**/.private/`, `*.bak`, `*.env`, `*.secret`, caches Py
 git clone <url-du-depot-prive> ~/.claude/skills
 # puis recréer manuellement ~/.claude/skills/mdc-expert/.private/VPS_CONTABO.md (identifiants serveur)
 ```
+
+## Organisation actuelle
+
+Un seul skill `mdc/` ; les 19 anciens skills sont des modules dans `mdc/modules/` (MODULE.md au lieu de SKILL.md), liens de compatibilité à la racine. État courant : `mdc/etat/rafraichir.py`.

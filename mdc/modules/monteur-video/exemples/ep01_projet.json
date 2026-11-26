@@ -1,0 +1,620 @@
+{
+ "nom": "ep01_administration_ennemie",
+ "source": "/Users/bilefilsseverin/Downloads/A001_09291755_C124.MOV",
+ "chaine": "Avec Mon Fiscaliste",
+ "chaine_sous_titre": "CÔTE D'IVOIRE",
+ "monogramme": "MF",
+ "cadrage_visage_x": 0.395,
+ "musique": true,
+ "couvrir_regards": true,
+ "groupes": [
+  [
+   26.0,
+   29.9
+  ],
+  [
+   38.95,
+   55.6
+  ],
+  [
+   98.35,
+   102.85
+  ],
+  [
+   108.95,
+   123.05
+  ],
+  [
+   130.25,
+   138.55
+  ],
+  [
+   139.3,
+   145.12
+  ]
+ ],
+ "retraits": [
+  [
+   48.958,
+   50.125
+  ],
+  [
+   133.6,
+   137.2
+  ]
+ ],
+ "texte": [
+  "Jusqu'à quand on va continuer de considérer l'administration comme notre ennemi ?",
+  "Jusqu'à quand on va continuer de voir les lois comme nos ennemis ? Dites-moi, jusqu'à quand on va continuer de dire que si je paie tout ce qu'on me demande de payer, alors je vais faire faillite. Je ne veux absolument pas entrer dans les comparaisons et dans les polémiques.",
+  "Pendant que nous nous décourageons, elles font des chiffres, elles ont des centaines d'employés.",
+  "Et ne faites pas de comparaison, car elles subissent des contrôles qui pourraient faire couler plusieurs business à la seconde. Finalement, comment elles font ? Et je suis persuadé que si on dit que les impôts sont à taux zéro, on va continuer de se plaindre.",
+  "Sur cette chaîne, je veux qu'on arrive à voir les choses autrement, et les analyser autrement.",
+  "La première question est de savoir comment elles font pour faire face à ce que nous qualifions de pression."
+ ],
+ "horodatages": [
+  [
+   1,
+   "payer,",
+   50.13,
+   50.45
+  ],
+  [
+   4,
+   "autrement,",
+   132.99,
+   133.43
+  ],
+  [
+   4,
+   "et",
+   137.31,
+   137.46
+  ],
+  [
+   4,
+   "les",
+   137.46,
+   137.62
+  ],
+  [
+   4,
+   "analyser",
+   137.62,
+   138.0
+  ],
+  [
+   4,
+   "autrement.",
+   138.0,
+   138.4
+  ]
+ ],
+ "horodatages_groupe": {
+  "0": [
+   [
+    26.21,
+    26.62
+   ],
+   [
+    26.62,
+    26.8
+   ],
+   [
+    26.8,
+    26.97
+   ],
+   [
+    26.97,
+    27.08
+   ],
+   [
+    27.08,
+    27.46
+   ],
+   [
+    27.46,
+    27.62
+   ],
+   [
+    27.62,
+    28.16
+   ],
+   [
+    28.16,
+    28.82
+   ],
+   [
+    28.82,
+    29.0
+   ],
+   [
+    29.0,
+    29.22
+   ],
+   [
+    29.22,
+    29.73
+   ]
+  ]
+ },
+ "coupures_sous_titres": [
+  [
+   0,
+   1
+  ]
+ ],
+ "mots_cles": [
+  "ennemi",
+  "ennemis",
+  "lois",
+  "faillite",
+  "polémiques",
+  "chiffres",
+  "employés",
+  "d'employés",
+  "contrôles",
+  "couler",
+  "zéro",
+  "plaindre",
+  "autrement",
+  "de pression",
+  "l'administration",
+  "seconde"
+ ],
+ "scenes": [
+  {
+   "type": "derriere",
+   "debut": 0.0,
+   "fin": {
+    "mot": [
+     0,
+     "considérer"
+    ],
+    "decalage": -0.2
+   },
+   "textes": {
+    "top": "Jusqu'à",
+    "main": "quand ?"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      0,
+      "quand"
+     ]
+    }
+   }
+  },
+  {
+   "type": "mot_geant",
+   "debut": {
+    "mot": [
+     0,
+     "considérer"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     0,
+     "ennemi"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "label": "l'administration",
+    "big": "ennemi ?",
+    "pills": [
+     "Impôts",
+     "Contrôles",
+     "Pénalités",
+     "Déclarations",
+     "Redressement",
+     "Patente",
+     "TVA",
+     "Amendes"
+    ]
+   },
+   "cles": {
+    "label": {
+     "mot": [
+      0,
+      "l'administration"
+     ]
+    },
+    "big": {
+     "mot": [
+      0,
+      "ennemi"
+     ]
+    }
+   }
+  },
+  {
+   "type": "frise",
+   "debut": {
+    "mot": [
+     1,
+     "voir"
+    ],
+    "decalage": -0.4
+   },
+   "fin": {
+    "mot": [
+     1,
+     "ennemis"
+    ],
+    "bord": "fin",
+    "decalage": 0.9
+   },
+   "textes": {
+    "title": "Les lois",
+    "sub": "nos ennemies ?",
+    "labels": [
+     "Code général des impôts",
+     "Loi de finances",
+     "Annexe fiscale 2026",
+     "Doctrine DGI"
+    ],
+    "labels_v": [
+     "CGI 2026",
+     "Loi de finances",
+     "Annexe fiscale",
+     "Doctrine DGI"
+    ]
+   },
+   "cles": {
+    "sub": {
+     "mot": [
+      1,
+      "ennemis"
+     ]
+    }
+   }
+  },
+  {
+   "type": "document",
+   "debut": {
+    "mot": [
+     1,
+     "si"
+    ],
+    "decalage": -0.25
+   },
+   "fin": {
+    "mot": [
+     1,
+     "faillite"
+    ],
+    "bord": "fin",
+    "decalage": 0.5
+   },
+   "textes": {
+    "quote": "« Si je paie tout… »",
+    "header": "République de Côte d'Ivoire",
+    "title": "Avis d'imposition",
+    "amount_label": "Montant à payer",
+    "amount": "12 480 000",
+    "big": "faillite ?"
+   },
+   "cles": {
+    "card": {
+     "mot": [
+      1,
+      "paie"
+     ]
+    },
+    "big": {
+     "mot": [
+      1,
+      "faillite"
+     ]
+    }
+   }
+  },
+  {
+   "type": "barre",
+   "debut": {
+    "mot": [
+     1,
+     "comparaisons"
+    ],
+    "decalage": -0.9
+   },
+   "fin": {
+    "mot": [
+     1,
+     "polémiques"
+    ],
+    "bord": "fin",
+    "decalage": 0.6
+   },
+   "textes": {
+    "header": "je ne veux <span class=\"itgold\">absolument pas</span> entrer dans les…",
+    "items": [
+     "comparaisons",
+     "polémiques"
+    ]
+   },
+   "cles": {
+    "t0": {
+     "mot": [
+      1,
+      "comparaisons"
+     ]
+    },
+    "t1": {
+     "mot": [
+      1,
+      "polémiques"
+     ]
+    }
+   },
+   "hero": "polémiques"
+  },
+  {
+   "type": "contraste",
+   "debut": {
+    "mot": [
+     2,
+     "pendant"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     2,
+     "d'employés"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "low": "pendant que nous nous décourageons…",
+    "high": "elles font<br>des chiffres.",
+    "stat1": "Chiffre d'affaires",
+    "stat2_num": 100,
+    "stat2_label": "employés"
+   },
+   "cles": {
+    "high": {
+     "mot": [
+      2,
+      "elles"
+     ]
+    },
+    "stat": {
+     "mot": [
+      2,
+      "centaines"
+     ]
+    }
+   }
+  },
+  {
+   "type": "courbe",
+   "debut": {
+    "mot": [
+     3,
+     "car"
+    ],
+    "decalage": -0.2
+   },
+   "fin": {
+    "mot": [
+     3,
+     "seconde"
+    ],
+    "bord": "fin",
+    "decalage": 0.35
+   },
+   "textes": {
+    "quote": "« ne faites pas de <span style=\"font-weight:700\">comparaison</span>… »",
+    "labels": [
+     "contrôle fiscal",
+     "redressement",
+     "pénalités"
+    ],
+    "conclusion": "de quoi <span style=\"font-weight:800\">couler</span> un business"
+   },
+   "cles": {
+    "conclusion": {
+     "mot": [
+      3,
+      "couler"
+     ]
+    }
+   }
+  },
+  {
+   "type": "derriere",
+   "debut": {
+    "mot": [
+     3,
+     "comment"
+    ],
+    "decalage": -0.05
+   },
+   "fin": {
+    "mot": [
+     3,
+     "si"
+    ],
+    "decalage": -0.25
+   },
+   "textes": {
+    "top": "",
+    "main": "comment ?"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      3,
+      "comment"
+     ]
+    }
+   }
+  },
+  {
+   "type": "compteur",
+   "debut": {
+    "mot": [
+     3,
+     "si"
+    ],
+    "decalage": -0.25
+   },
+   "fin": {
+    "mot": [
+     3,
+     "plaindre"
+    ],
+    "bord": "fin",
+    "decalage": 0.4
+   },
+   "textes": {
+    "label": "et si les impôts étaient à…",
+    "from": 35,
+    "to": 0,
+    "suffix": "%",
+    "pills": [
+     "TVA <b>0%</b>",
+     "Patente <b>0%</b>",
+     "IBIC <b>0%</b>",
+     "ITS <b>0%</b>",
+     "IMF <b>0%</b>"
+    ],
+    "after": "…on se plaindrait encore."
+   },
+   "cles": {
+    "hit": {
+     "mot": [
+      3,
+      "zéro"
+     ]
+    },
+    "after": {
+     "mot": [
+      3,
+      "plaindre"
+     ]
+    }
+   },
+   "hero": "0%"
+  },
+  {
+   "type": "marque",
+   "debut": {
+    "mot": [
+     4,
+     "sur"
+    ],
+    "decalage": -0.05
+   },
+   "fin": {
+    "mot": [
+     4,
+     "autrement",
+     1
+    ],
+    "bord": "fin",
+    "decalage": 0.45
+   },
+   "textes": {
+    "line1": "voir les choses <span class=\"itgold\">autrement.</span>",
+    "line2": "les analyser <span class=\"itgold\">autrement.</span>"
+   },
+   "cles": {
+    "l1": {
+     "mot": [
+      4,
+      "voir"
+     ]
+    },
+    "l2": {
+     "mot": [
+      4,
+      "analyser"
+     ]
+    }
+   }
+  },
+  {
+   "type": "derriere",
+   "debut": {
+    "mot": [
+     5,
+     "question"
+    ],
+    "decalage": -0.1
+   },
+   "fin": {
+    "mot": [
+     5,
+     "comment"
+    ],
+    "bord": "fin",
+    "decalage": 0.3
+   },
+   "textes": {
+    "top": "La première",
+    "main": "question"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      5,
+      "question"
+     ]
+    }
+   }
+  },
+  {
+   "type": "derriere",
+   "debut": {
+    "mot": [
+     5,
+     "à"
+    ],
+    "decalage": -0.1
+   },
+   "fin": "fin_video",
+   "textes": {
+    "top": "",
+    "main": "pression"
+   },
+   "cles": {
+    "main": {
+     "mot": [
+      5,
+      "de pression"
+     ]
+    }
+   }
+  }
+ ],
+ "fin": {
+  "type": "chapitre",
+  "duree": 6,
+  "transition": "burn",
+  "textes": {
+   "kicker": "Question 1",
+   "title": "Comment font-elles face<br>à la <span class=\"goldg\">pression fiscale</span> ?",
+   "sub": "La réponse dans le prochain épisode"
+  }
+ },
+ "fond_fin_source": 146.4,
+ "miniature": {
+  "t": 100.3,
+  "recadrage": [
+   100,
+   137,
+   2400,
+   1350
+  ],
+  "haut": "L'administration",
+  "mot": "ennemi ?",
+  "bas": ""
+ }
+}

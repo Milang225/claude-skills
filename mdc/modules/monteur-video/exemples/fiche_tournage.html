@@ -1,0 +1,238 @@
+<title>Fiche de tournage cinéma</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root{
+  --ink:#131C38; --ink-soft:#4A5470; --ground:#F3F4F7; --surface:#FFFFFF; --line:#DCDFE8;
+  --gold:#B8871F; --gold-2:#E9C46A; --gold-wash:#F8EFD8; --done:#2F7D5B; --warn:#B4452F;
+  --shadow:0 1px 2px rgba(19,28,56,.06),0 6px 20px rgba(19,28,56,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ink:#EEF0F6; --ink-soft:#A5AEC6; --ground:#0D1428; --surface:#141D38; --line:#26304F;
+    --gold:#E2B654; --gold-2:#F0CF7C; --gold-wash:#2A2A2E; --done:#5CC194; --warn:#EE8A74;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ink:#EEF0F6; --ink-soft:#A5AEC6; --ground:#0D1428; --surface:#141D38; --line:#26304F;
+  --gold:#E2B654; --gold-2:#F0CF7C; --gold-wash:#2A2A2E; --done:#5CC194; --warn:#EE8A74;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:"Source Sans 3","Segoe UI",system-ui,sans-serif;font-size:17px;line-height:1.5;
+  padding-inline:16px;padding-block:0 96px}
+.wrap{max-width:720px;margin:0 auto}
+header{padding-block:28px 18px;border-bottom:1px solid var(--line)}
+.brand{font-family:"Great Vibes","Snell Roundhand",cursive;font-size:34px;color:var(--gold);line-height:1}
+.kicker{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+h1{font-family:Montserrat,system-ui,sans-serif;font-weight:700;font-size:clamp(26px,6vw,34px);line-height:1.15;margin:14px 0 8px;text-wrap:balance}
+.lead{color:var(--ink-soft);margin:0;max-width:62ch}
+h2{font-family:Montserrat,system-ui,sans-serif;font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  margin:34px 0 12px;display:flex;align-items:baseline;gap:10px}
+h2 .n{font-variant-numeric:tabular-nums;color:var(--ink-soft);font-weight:600;letter-spacing:.05em}
+/* réglages clés */
+.keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+@media (max-width:560px){.keys{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.key{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.key b{display:block;font-family:Montserrat,system-ui,sans-serif;font-size:20px;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.key span{font-size:13.5px;color:var(--ink-soft);line-height:1.3;display:block;margin-top:2px}
+/* schéma */
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:14px;color:var(--ink-soft);margin-top:8px}
+/* liste */
+ul.check{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.item{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.item input{appearance:none;-webkit-appearance:none;width:24px;height:24px;margin:1px 0 0;border:2px solid var(--line);border-radius:7px;
+  display:grid;place-content:center;background:var(--ground);cursor:pointer}
+.item input::after{content:"";width:11px;height:6px;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.item input:checked{background:var(--done);border-color:var(--done)}
+.item input:checked::after{opacity:1}
+.item input:focus-visible{outline:3px solid var(--gold-2);outline-offset:2px}
+.item .t{font-weight:600}
+.item .why{display:block;color:var(--ink-soft);font-size:15px;margin-top:2px}
+.item:has(input:checked){background:transparent}
+.item:has(input:checked) .t{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--line)}
+.val{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.note{background:var(--gold-wash);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 14px;font-size:15.5px}
+.note b{color:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:Montserrat,system-ui,sans-serif;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.bad{color:var(--warn)} td.good{color:var(--done);font-weight:600}
+/* barre de progression */
+.bar{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);
+  border-top:1px solid var(--line);box-shadow:0 -6px 18px rgba(0,0,0,.06)}
+.bar .in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.meter{flex:1;height:8px;border-radius:8px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));transition:width .25s}
+.count{font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
+button{font:600 14px Montserrat,system-ui,sans-serif;color:var(--ink);background:transparent;border:1.5px solid var(--line);border-radius:999px;
+  padding:8px 14px;cursor:pointer;white-space:nowrap}
+button:hover{border-color:var(--gold)}
+button:focus-visible{outline:3px solid var(--gold-2);outline-offset:2px}
+.ok{display:none;color:var(--done);font-weight:700}
+footer{margin-top:34px;color:var(--ink-soft);font-size:14px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">Avec Mon Fiscaliste</div>
+    <div class="kicker">Côte d'Ivoire · Fiche de tournage</div>
+    <h1>Tourner une vidéo qui a l'air cinéma</h1>
+    <p class="lead">À ouvrir le jour du tournage. Coche au fur et à mesure : tout ce qui est réglé ici, c'est du temps et de la qualité gagnés au montage.</p>
+    <div class="keys" aria-label="Les 6 réglages clés">
+      <div class="key"><b>25 i/s</b><span>Cadence (courant 50 Hz)</span></div>
+      <div class="key"><b>1/50 s</b><span>Obturateur à 180°</span></div>
+      <div class="key"><b>ISO bas</b><span>Exposer avec la lumière</span></div>
+      <div class="key"><b>5600 K</b><span>Balance verrouillée</span></div>
+      <div class="key"><b>× 2</b><span>≈ 52 mm, à 1,5–2,5 m</span></div>
+      <div class="key"><b>AF · AE</b><span>Verrouillés sur les yeux</span></div>
+    </div>
+  </header>
+
+  <h2><span class="n">1</span> Mise en place du décor</h2>
+  <figure>
+    <svg viewBox="0 0 640 360" role="img" aria-label="Plan vu de dessus : mur au fond, lampe d'ambiance, toi à 2–3 m du mur, contre-jour derrière toi, lumière principale à 45° d'un côté, tissu noir de l'autre, caméra A en face, caméra B à 30° plus près.">
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10z" fill="var(--ink-soft)"/></marker></defs>
+      <rect x="20" y="16" width="600" height="14" rx="3" fill="var(--line)"/>
+      <text x="320" y="50" text-anchor="middle" font-size="13" fill="var(--ink-soft)" font-family="Montserrat,system-ui,sans-serif" letter-spacing="2">MUR (plus sombre que le visage)</text>
+      <circle cx="120" cy="70" r="16" fill="var(--gold-2)" opacity=".9"/><circle cx="120" cy="70" r="30" fill="var(--gold-2)" opacity=".18"/>
+      <text x="120" y="112" text-anchor="middle" font-size="13" fill="var(--ink)" font-family="Source Sans 3,system-ui,sans-serif">Lampe chaude (décor)</text>
+      <line x1="560" y1="150" x2="560" y2="36" stroke="var(--ink-soft)" stroke-dasharray="4 4" marker-start="url(#ar)" marker-end="url(#ar)"/>
+      <text x="572" y="98" font-size="13" fill="var(--ink-soft)" font-family="Source Sans 3,system-ui,sans-serif">2–3 m</text>
+      <rect x="300" y="96" width="40" height="18" rx="4" fill="var(--ink)"/>
+      <text x="320" y="88" text-anchor="middle" font-size="12.5" fill="var(--ink)" font-family="Source Sans 3,system-ui,sans-serif">Contre-jour</text>
+      <circle cx="320" cy="170" r="24" fill="var(--ink)"/><text x="320" y="175" text-anchor="middle" font-size="13" fill="var(--ground)" font-family="Montserrat,system-ui,sans-serif" font-weight="700">TOI</text>
+      <rect x="138" y="196" width="86" height="54" rx="8" fill="var(--gold)" transform="rotate(-35 181 223)"/>
+      <text x="170" y="286" text-anchor="middle" font-size="13" fill="var(--ink)" font-family="Source Sans 3,system-ui,sans-serif">Lumière clé douce</text>
+      <text x="170" y="302" text-anchor="middle" font-size="12" fill="var(--ink-soft)" font-family="Source Sans 3,system-ui,sans-serif">45°, au-dessus des yeux</text>
+      <line x1="210" y1="214" x2="292" y2="180" stroke="var(--gold)" stroke-width="2" marker-end="url(#ar)"/>
+      <rect x="420" y="150" width="12" height="80" rx="3" fill="var(--ink)" transform="rotate(20 426 190)"/>
+      <text x="470" y="250" text-anchor="middle" font-size="13" fill="var(--ink)" font-family="Source Sans 3,system-ui,sans-serif">Tissu noir</text>
+      <rect x="302" y="300" width="36" height="24" rx="5" fill="var(--ink)"/><circle cx="320" cy="298" r="6" fill="var(--ink)"/>
+      <text x="320" y="344" text-anchor="middle" font-size="13" fill="var(--ink)" font-family="Source Sans 3,system-ui,sans-serif">Caméra A (face)</text>
+      <rect x="430" y="274" width="30" height="20" rx="5" fill="var(--ink-soft)" transform="rotate(-30 445 284)"/>
+      <text x="488" y="318" text-anchor="middle" font-size="13" fill="var(--ink)" font-family="Source Sans 3,system-ui,sans-serif">Caméra B (30°, serrée)</text>
+      <line x1="320" y1="290" x2="320" y2="200" stroke="var(--ink-soft)" stroke-dasharray="3 5"/>
+      <line x1="440" y1="272" x2="336" y2="190" stroke="var(--ink-soft)" stroke-dasharray="3 5"/>
+    </svg>
+    <figcaption>Vue de dessus. Le prompteur se pose sous l'objectif de la caméra A.</figcaption>
+  </figure>
+  <ul class="check" style="margin-top:12px">
+    <li><label class="item"><input type="checkbox" id="d1"><span><span class="t">S'installer à 2–3 m du mur, en biais</span><span class="why">Le fond devient plus sombre et plus flou : tu te détaches, l'image gagne en profondeur.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="d2"><span><span class="t">Allumer une lampe chaude dans le décor</span><span class="why">Donne de la vie au fond et justifie la lumière ; garder le fond 1 à 2 diaphragmes sous le visage.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="d3"><span><span class="t">Néon vert passé en ambre / or, ou éteint</span><span class="why">Le vert jure avec l'or de la marque et teinte la peau.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="d4"><span><span class="t">Plafonniers éteints</span><span class="why">La lumière du dessus creuse les yeux et aplatit le visage.</span></span></label></li>
+  </ul>
+
+  <h2><span class="n">2</span> Lumière</h2>
+  <ul class="check">
+    <li><label class="item"><input type="checkbox" id="l1"><span><span class="t">Lumière clé douce à 45°, un peu au-dessus des yeux</span><span class="why">Softbox 60–90 cm ou fenêtre voilée : c'est elle qui sculpte le visage.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="l2"><span><span class="t">Tissu noir côté ombre</span><span class="why">« Negative fill » : l'ombre se creuse, le visage prend du relief. Trop contrasté ? Remplacer par un réflecteur blanc.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="l3"><span><span class="t">Petit contre-jour derrière, en hauteur</span><span class="why">Un liseré sur les épaules et les cheveux sépare la silhouette du fond.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="l4"><span><span class="t">Toutes les LED sur la même température</span><span class="why">Mêmes Kelvin partout (ex. 5600 K) sauf la lampe de décor, volontairement chaude.</span></span></label></li>
+  </ul>
+
+  <h2><span class="n">3</span> Réglages caméra · Blackmagic Cam</h2>
+  <ul class="check">
+    <li><label class="item"><input type="checkbox" id="c1"><span><span class="t">4K · <span class="val">25 i/s</span> · obturateur <span class="val">180°</span> (1/50 s)</span><span class="why">Flou de mouvement naturel et aucun scintillement des LED sur le courant 50 Hz. L'épisode 1 était au 1/257 s : rendu saccadé.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="c2"><span><span class="t">ISO le plus bas, exposition réglée par la lumière</span><span class="why">Dehors : filtre ND, jamais un obturateur plus rapide.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="c3"><span><span class="t">Balance des blancs verrouillée, identique sur les 2 téléphones</span><span class="why">Sinon la couleur de peau change entre les plans.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="c4"><span><span class="t">Mise au point et exposition verrouillées sur les yeux</span><span class="why">Exposer pour le visage, pas pour le mur : une peau foncée ne doit pas être sous-exposée.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="c5"><span><span class="t">Cadrage × 2 (≈ 52 mm), caméra à 1,5–2,5 m</span><span class="why">Visage plus flatteur qu'en grand-angle de près, fond plus doux.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="c6"><span><span class="t">HDR désactivé · stabilisation désactivée sur trépied · débit maximal</span><span class="why">Apple Log si ton iPhone le propose (modèles Pro), sinon profil standard.</span></span></label></li>
+  </ul>
+
+  <h2><span class="n">4</span> Cadrage</h2>
+  <ul class="check">
+    <li><label class="item"><input type="checkbox" id="f1"><span><span class="t">Plan poitrine, yeux au tiers supérieur, caméra à hauteur des yeux</span><span class="why">Garder un peu d'air au-dessus de la tête : le montage zoome jusqu'à 1,2×.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="f2"><span><span class="t">Caméra B décalée d'au moins 30°, plus serrée, du même côté</span><span class="why">Le montage coupe dessus au lieu de faire des sauts d'image ; moins d'animations pour masquer.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="f3"><span><span class="t">Prompteur sous l'objectif de la caméra A</span><span class="why">Ton regard reste dans l'objectif : sur l'épisode 1, 80 % d'animations servaient à couvrir des regards vers les notes.</span></span></label></li>
+  </ul>
+
+  <h2><span class="n">5</span> Son</h2>
+  <ul class="check">
+    <li><label class="item"><input type="checkbox" id="s1"><span><span class="t">DJI Mic : enregistrement interne 32 bits flottants activé</span><span class="why">Fichier de secours de meilleure qualité que l'audio de l'iPhone.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="s2"><span><span class="t">Micro 15–20 cm sous le menton, bonnette et câble cachés</span><span class="why">Pas de frottement contre le t-shirt ni de collier qui tinte.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="s3"><span><span class="t">Écouter 10 s au casque : la voix est-elle dans les deux oreilles ?</span><span class="why">Sur l'épisode 1, la voix n'était que dans le canal gauche.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="s4"><span><span class="t">Pièce calme : clim et ventilateur coupés, rideaux tirés</span><span class="why">Moins de bruit de fond et d'écho = voix plus « studio ».</span></span></label></li>
+  </ul>
+
+  <h2><span class="n">6</span> Pendant la prise</h2>
+  <ul class="check">
+    <li><label class="item"><input type="checkbox" id="p1"><span><span class="t">Clap des mains au début de chaque prise</span><span class="why">Sert à synchroniser les deux caméras et le son du DJI.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="p2"><span><span class="t">Une erreur ? Pause de 2 s, puis reprendre la phrase entière</span><span class="why">La coupe tombe dans le silence et reste invisible.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="p3"><span><span class="t">Regard dans l'objectif, surtout sur l'accroche et la conclusion</span><span class="why">Ce sont les moments où le texte « derrière toi » est le plus fort.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="p4"><span><span class="t">Filmer 5 s de fond vide et 3 plans de détail</span><span class="why">Mains, documents, bureau : de quoi illustrer sans animation.</span></span></label></li>
+  </ul>
+
+  <h2><span class="n">7</span> Après</h2>
+  <ul class="check">
+    <li><label class="item"><input type="checkbox" id="a1"><span><span class="t">Transférer : vidéos caméra A et B + fichier WAV du DJI</span><span class="why">Tout dans le même dossier, nommé par épisode.</span></span></label></li>
+    <li><label class="item"><input type="checkbox" id="a2"><span><span class="t">Envoyer le plan ou le script avec les rushes</span><span class="why">Le montage suit ton intention et les chiffres affichés sont vérifiés.</span></span></label></li>
+  </ul>
+
+  <h2>Ce qui change par rapport à l'épisode 1</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Réglage</th><th>Épisode 1</th><th>À faire</th></tr></thead>
+      <tbody>
+        <tr><td>Obturateur</td><td class="bad">1/257 s</td><td class="good">1/50 s (180°)</td></tr>
+        <tr><td>Cadence</td><td class="bad">24 i/s</td><td class="good">25 i/s</td></tr>
+        <tr><td>Distance au mur</td><td class="bad">Collé au mur blanc</td><td class="good">2–3 m, fond plus sombre</td></tr>
+        <tr><td>Néon du fond</td><td class="bad">Vert</td><td class="good">Ambre / or ou éteint</td></tr>
+        <tr><td>Regard</td><td class="bad">Souvent vers les notes</td><td class="good">Prompteur sous l'objectif</td></tr>
+        <tr><td>Son</td><td class="bad">Canal gauche seul</td><td class="good">WAV interne du DJI</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note" style="margin-top:18px"><b>Ce que le montage rattrape, et ce qu'il ne rattrape pas.</b> Il simule un léger travelling et un fond flouté grâce au détourage, et il recentre le son. Une vraie lumière, une vraie profondeur de champ et un deuxième angle restent toujours supérieurs à leur simulation.</p>
+
+  <footer>Méthode tirée de l'American Society of Cinematographers (« Shot Craft : The Talking Head »), de CineD et des guides Blackmagic Camera, adaptée au studio Avec Mon Fiscaliste.</footer>
+</div>
+
+<div class="bar" role="region" aria-label="Progression">
+  <div class="in">
+    <div class="meter" aria-hidden="true"><i id="fill"></i></div>
+    <span class="count" id="count">0 / 0</span>
+    <span class="ok" id="ok">Prêt à tourner</span>
+    <button type="button" id="reset">Tout décocher</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY='fiche-tournage-amf';
+  var boxes=[].slice.call(document.querySelectorAll('.check input[type=checkbox]'));
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){saved={}}
+  boxes.forEach(function(b){if(saved[b.id])b.checked=true});
+  function update(){
+    var n=boxes.filter(function(b){return b.checked}).length;
+    document.getElementById('count').textContent=n+' / '+boxes.length;
+    document.getElementById('fill').style.width=(100*n/boxes.length)+'%';
+    var done=n===boxes.length;
+    document.getElementById('ok').style.display=done?'inline':'none';
+    document.getElementById('count').style.display=done?'none':'inline';
+  }
+  function save(){
+    var s={};boxes.forEach(function(b){if(b.checked)s[b.id]=1});
+    try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}
+  }
+  boxes.forEach(function(b){b.addEventListener('change',function(){update();save()})});
+  document.getElementById('reset').addEventListener('click',function(){
+    boxes.forEach(function(b){b.checked=false});update();save();
+  });
+  update();
+})();
+</script>

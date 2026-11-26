@@ -1,0 +1,70 @@
+{
+  "_mode_emploi": "COPIER ce fichier, l'adapter au dossier, puis: python3 scripts/dresser_dee.py mon_config.json --out DEE.md --publish. Deux types de section: TABLEAU (colonnes+lignes+total+note) ou EXPOSITION (type=exposition, colonnes+scenarios). Ne rien inventer: laisser [À FOURNIR] / [JJ/MM/AAAA].",
+  "client": "GLOBE CÔTE D'IVOIRE SARL",
+  "reference": "MC-DEE-GCI-2026-004",
+  "remplace": "MC-DEE-GCI-2026-002 et -003",
+  "destinataire": "Monsieur le Gérant de GLOBE CÔTE D'IVOIRE SARL",
+  "objet": "Éléments du dossier comptable 2026 nécessitant vos explications avant traitement définitif",
+  "echeance": "[JJ/MM/AAAA]",
+  "preambule": "Dans le cadre de la finalisation de votre comptabilité 2026, l'intégration de votre relevé bancaire UBA et le croisement avec vos pièces font apparaître un ensemble de mouvements et de situations que nous ne pouvons pas traiter définitivement sans vos explications.",
+  "sections": [
+    {
+      "titre": "Encaissements en attente de justification (compte 4711)",
+      "intro": "Inscrits en encaissements à justifier — non comptabilisés en chiffre d'affaires tant que leur origine n'est pas établie.",
+      "colonnes": ["Date", "Libellé au relevé", "Montant (FCFA)", "Explication demandée"],
+      "lignes": [
+        ["15/05/2026", "Virement reçu ATLANTIC PRECIOUS METAL", "29 452 092", "Origine ? Règlement client (→ facture + TVA), apport, prêt ? Fournir la pièce."],
+        ["29/06/2026", "Remise de chèque (comp. 0828887)", "1 221 025", "De quel client et au titre de quelle facture ?"]
+      ],
+      "total": ["", "Total 4711", "30 673 117", ""],
+      "note": "Le seul virement ATLANTIC (29,4 M) dépasse tout le CA facturé de la période ; s'il s'agit d'une vente il incorpore ≈ 4,5 M de TVA."
+    },
+    {
+      "titre": "Décaissements en attente de justification (compte 4712)",
+      "intro": "Inscrits en décaissements à justifier — non comptabilisés en charge ni en compte courant.",
+      "colonnes": ["Date", "Libellé au relevé", "Montant (FCFA)", "Explication demandée"],
+      "lignes": [
+        ["22/06/2026", "Chèque 4737904 KOFFI KOUAME AMOS", "12 000 000", "Bénéficiaire et titre (fournisseur, associé, prêt) ? Fournir la pièce."],
+        ["01/07/2026", "Chèque 4737905 KOFFI KOUAME AMOS", "2 000 000", "Même demande."],
+        ["01/06/2026", "Chèque 4737901 au GÉRANT (N'GUESSAN ASSAN)", "2 000 000", "Voir section dédiée ci-dessous."]
+      ],
+      "total": ["", "Total 4712", "16 000 000", ""],
+      "note": ""
+    },
+    {
+      "titre": "Le chèque de 2 000 000 au gérant — nature à établir et exposition associée",
+      "type": "exposition",
+      "intro": "Ce prélèvement n'est appuyé par aucune pièce : il reste en attente (4712), NON qualifié. Chaque hypothèse emporte une exposition fiscale différente que nous portons à votre connaissance.",
+      "colonnes": ["Hypothèse (à confirmer)", "Traitement", "Exposition estimée", "Base légale (CGI)"],
+      "scenarios": [
+        ["Distribution / prélèvement sur bénéfices", "revenu réputé distribué → IRVM", "≈ 300 000 (15 % × 2 000 000) + pénalités si tardif", "Art. 180-183"],
+        ["Rémunération du gérant", "ITS (barème) + bulletin obligatoire", "ITS selon barème + CN/FDFP", "Art. 115-120"],
+        ["Remboursement d'une avance antérieure du gérant", "neutre fiscalement", "néant (si preuve de l'avance)", "—"],
+        ["Prêt / avance au gérant", "à rembourser ; requalification possible", "IRVM en cas de requalification", "Art. 180"]
+      ],
+      "demandes": "(1) la nature exacte du prélèvement ; (2) la pièce qui la fonde (PV d'assemblée, acte de rémunération + bulletin, preuve d'une avance) ; (3) si la somme est due à la société, ses modalités de remboursement. L'écriture définitive sera passée dès votre réponse."
+    },
+    {
+      "titre": "Achats réglés sans facture — avances fournisseurs (compte 409)",
+      "intro": "Réglés par virement à des fournisseurs identifiés, sans facture normalisée (FNE). Inscrits en avances versées dans l'attente des factures.",
+      "colonnes": ["Date", "Fournisseur", "Montant (FCFA)", "Demande"],
+      "lignes": [
+        ["16/07/2026", "ALWAYS IMPORT-EXPORT (marchandises)", "7 222 560", "Transmettre la facture normalisée (déduction de la TVA)."],
+        ["16/07/2026", "TOTAL EXPERTISE (fourniture pompe)", "5 035 000", "Transmettre la facture normalisée."]
+      ],
+      "total": ["", "Total 409", "12 257 560", ""],
+      "note": ""
+    },
+    {
+      "titre": "Relevés de TOUS les comptes bancaires (compte 5211)",
+      "intro": "Le croisement révèle un paiement effectué depuis un autre compte (GUIHON AUTO 328 780 réglé par virement, absent du relevé UBA), et des règlements clients / CNPS absents d'UBA — ce qui confirme l'existence d'au moins un autre compte.",
+      "colonnes": ["Point", "Demande"],
+      "lignes": [
+        ["2e compte confirmé", "Communiquer les relevés de la TOTALITÉ de vos comptes (toutes banques), depuis la création."],
+        ["Relevé d'avril manquant", "Communiquer le relevé UBA d'avril 2026 pour figer la répartition capital banque/caisse."]
+      ],
+      "total": null,
+      "note": ""
+    }
+  ]
+}
