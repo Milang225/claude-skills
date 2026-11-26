@@ -202,6 +202,7 @@ peuvent s'enchaîner (fond → vérification → mise en forme → envoi).
 | N'importe quelle question de métier MDC | skill `mdc`, puis le module ci-dessous |
 | Toute écriture, journal, ordre de saisie Sage, balance, à-nouveaux | `mdc` › `ecritures-sans-faute` **(obligatoire)** |
 | Second regard indépendant avant remise | `mdc` › `auditeur-comptable` (+ agent `auditeur-comptable`) |
+| Révision des comptes d'un client (balance, justification des soldes, rapport de révision) | `mdc` › `revision-comptes` |
 | Comptabilité, relevés bancaires, e-impôts, documents commerciaux | `mdc` › `mdc-expert` |
 | Impôt, taux, article, exonération, régime | `mdc` › `fiscalite-ci` |
 | Résultat comptable → fiscal, déductibilité | `mdc` › `reintegrations-deductions` |

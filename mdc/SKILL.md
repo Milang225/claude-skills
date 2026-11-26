@@ -1,7 +1,7 @@
 ---
 name: mdc
 description: >
-  SKILL UNIQUE de MDC (La Maison de la Conformité SARL) — regroupe en un seul point d'entrée toute l'expertise du cabinet : comptabilité SYSCOHADA, fiscalité ivoirienne (CGI 2026, TVA, ITS, IMF, I-BIC, patente), réintégrations/déductions, avantages en nature, retenues sur salaire, EBNL, audit global et pilotage de mission, contrôle fiscal, notation de conformité (Indice /100), diagnostic financier, LBC/FT, points à éclaircir et DEE, production et mise en forme des livrables (rédaction brandée, PDF/Word/Excel), préparation des mails clients (brouillons Gmail), cartographie « qui reçoit quoi », vidéo et direction artistique de la chaîne AVEC MON FISCALISTE. Connaît l'état courant des clients et des documents créés. Déclenche dès que l'utilisateur parle d'un client MDC, d'un dossier, d'une mission, d'un document à produire ou vérifier, d'un impôt, d'une écriture, d'un relevé bancaire, d'un audit, d'une note, d'une DEE, d'un mail client, d'un livrable, de la plateforme MDC, ou de la chaîne YouTube.
+  SKILL UNIQUE de MDC (La Maison de la Conformité SARL) — regroupe en un seul point d'entrée toute l'expertise du cabinet : comptabilité SYSCOHADA, révision des comptes, fiscalité ivoirienne (CGI 2026, TVA, ITS, IMF, I-BIC, patente), réintégrations/déductions, avantages en nature, retenues sur salaire, EBNL, audit global et pilotage de mission, contrôle fiscal, notation de conformité (Indice /100), diagnostic financier, LBC/FT, points à éclaircir et DEE, production et mise en forme des livrables (rédaction brandée, PDF/Word/Excel), préparation des mails clients (brouillons Gmail), cartographie « qui reçoit quoi », vidéo et direction artistique de la chaîne AVEC MON FISCALISTE. Connaît l'état courant des clients et des documents créés. Déclenche dès que l'utilisateur parle d'un client MDC, d'un dossier, d'une mission, d'un document à produire ou vérifier, d'un impôt, d'une écriture, d'une révision des comptes, d'une balance, d'un relevé bancaire, d'un audit, d'une note, d'une DEE, d'un mail client, d'un livrable, de la plateforme MDC, ou de la chaîne YouTube.
 ---
 
 # MDC — skill unique
@@ -22,6 +22,7 @@ Lire `modules/<nom>/MODULE.md` du ou des modules concernés avant d'agir. Plusie
 |---|---|
 | **Toute écriture, journal, ordre de saisie Sage, balance, à-nouveaux, liasse : contrôle obligatoire avant remise** | `ecritures-sans-faute` |
 | **Second regard indépendant avant remise : écritures justes, principes comptables respectés, mises à jour faites (dossier et skill)** | `auditeur-comptable` (agent `auditeur-comptable` pour une relecture indépendante) |
+| **Réviser les comptes d'un client : justifier les soldes par cycle, régularisations, rapport de révision des comptes** | `revision-comptes` |
 | Comptabilité, écritures, relevés bancaires, télédéclaration e-impôts, documents commerciaux (note méthodo, propale, contrat), serveur | `mdc-expert` |
 | Question d'impôt, taux, article, exonération, régime | `fiscalite-ci` |
 | Passage résultat comptable → fiscal, déductibilité | `reintegrations-deductions` |
