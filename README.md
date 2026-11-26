@@ -24,6 +24,11 @@ le personnage, son et export recommandés YouTube. Piloté par un `projet.json` 
 - `SKILL.md` — méthode complète · `reference/` — catalogue des scènes, format du projet, charte, audio,
   export, dépannage · `scripts/` — moteur (`monteur.py`, `motion/`, `tools/`) · `exemples/ep01_projet.json`.
 
+## Installer toute la façon de travailler sur un autre PC
+
+Voir **[`_harness/README.md`](_harness/README.md)** : skills, agent, tâche planifiée, mémoires, consignes et
+Plateforme MDC, avec les scripts `install.ps1` (Windows) et `install.sh` (Mac).
+
 ## Sécurité — ne jamais versionner
 
 Les identifiants serveur (VPS Contabo : IP, mot de passe root, VNC) sont **déportés hors dépôt**

@@ -1,0 +1,15 @@
+---
+name: controle-aej-trace-logistics-2026-10-12
+description: Contrôle AEJ (visa des contrats des non-Ivoiriens) chez TRACE LOGISTICS CI le 12/10/2026 à 14 h ; dossier préparé le 09/10
+metadata:
+  type: project
+---
+Courrier AEJ n° 004539/MPJIPSC/AEJ/AA du 09/09/2026 (arrêté 560 du 19/07/2019 modifiant l'arrêté 6421 du 15/06/2004) : contrôle le lundi 12/10/2026 à 14 h chez TRACE LOGISTICS (Abidjan, NCC 2404990E, gérante Mme TRAORE Aminatou Nafony). Pièces : DISA 2024-2025, livre de paie, contrats des non-Ivoiriens visés AEJ, état 301 2024-2025, bulletins des non-Ivoiriens.
+Dossier : `DOSSIER CLIENTS/TRACE LOGISTICS/CONTROLE_AEJ_VISA_CONTRATS_2026-10-12/` — note MC-NOTE-AEJ-TRACE-2026-001 (situation A mission TRACE BF / B salarié de fait TRACE CI ; lettre de report et bordereau en annexes) + tableau de recensement (frais de visa estimés, barème 2004 : africain CDD 0,5 mois, CDI 0,75 ; non-africain 1 et 1,5 ; à confirmer pour 2019).
+Faits : activité débutée le 01/01/2025 (pas de DISA ni d'état 301 2024) ; 1 salarié SMIG déclaré en 2025, sans contrat ni CNPS connus. Les docs de détachement du 08/10 visaient AVE MARIA : à refaire au nom de TRACE CI si les Burkinabè y travaillent.
+**How to apply:** à la reprise, demander le PV du contrôle et le recensement rempli ; déposer les demandes de visa (situation B) dans les 15 jours. Lié à [[dossier-ave-maria-ecomaf]].
+Salariés de TRACE BF à Abidjan (avenants du 01/06/2026, « affectation au sein de TRACE LOGISTICS Côte d'Ivoire » depuis le 05/06/2026) : BALIMA Ismael (Comptable, CDD, TRACE00081), TIENDREBEOGO Mikahil (Facturier, CDI, TRACE00061), BAMOGO Sidi Mahamadi (Chef de Bureau, CDD jusqu'au 31/05/2027, TRACE00074) ; brut 723 324 / 723 324 / 747 259. TRACE BF : RCCM BF OUA-01-2024-M-16164, Ouaga 2000 Secteur 15 Lot 09 Parcelle 18 Section P, 05 BP 6121 ; n° fiscal 00182430X (ne pas écrire « IFU ») ; agrément 338 ; COMPAORE = « gérant » (demande du gérant). Actes de mission refaits le 09/10 (fin de mission 30/11/2026) dans `DOSSIER CLIENTS/TRACE LOGISTICS/DETACHEMENT_SALARIES_TRACE_BF_MISSION_ABIDJAN_2026-10/`. Le gérant a demandé de dater les actes du 01/09/2026 : refusé (antidate) ; dates laissées à la signature réelle.
+- 09/10/2026 : motif de la mission des 3 salariés = supervision des investissements de TRACE BF au sein d'AVE MARIA (demande du gérant) ; article 7 bis « Suivi des fonds par le Financeur » ajouté à CONV-FIN-01.
+- N° d'employeur CNSS de TRACE BF communiqué : 1388880W (inscrit dans les actes de mission). Fonctions pendant la mission : BALIMA Comptable, TIENDREBEOGO Facturier, BAMOGO Coordinateur (son poste contractuel reste Chef de Bureau).
+- Numéros CNSS Burkina : BALIMA 193011105038P ; TIENDREBEOGO 196021105050H ; BAMOGO 190126020271L (inscrits dans les actes de mission).
+- Arrivée des 3 salariés en CI le 28/08/2026, début de mission le 01/09/2026 (déclaration du gérant), fin 30/11/2026. Contradiction à surveiller avec les avenants de juin (affectation à Treichville dès le 05/06 ou le 10/06).

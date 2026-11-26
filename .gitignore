@@ -18,3 +18,4 @@ Thumbs.db
 .vite/
 node_modules/
 *.bak*
+_harness/.memoires_exclues_local.txt

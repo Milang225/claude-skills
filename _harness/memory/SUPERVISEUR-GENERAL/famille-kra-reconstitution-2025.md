@@ -1,0 +1,32 @@
+---
+name: famille-kra-reconstitution-2025
+description: "FAMILLE KRA SARL — reconstitution base comptable 2025 ; achats réels ~200M vs CA déclaré 20,1M ; exposition fiscale majeure."
+metadata: 
+  node_type: memory
+  type: project
+  originSessionId: 1f635844-ed41-460f-a5b0-61afe9d46891
+  modified: 2026-08-04T17:21:35.903Z
+---
+
+**FAMILLE KRA SARL** — NCC 2229049M — gérant KRA KOUAKOU DIEUDONNÉ — activité « commerce général de produits importés » = **distributeur/semi-grossiste** (revend produits alimentaires & grande conso). Régime déclaré : Entreprenant / TEE, système SMT. RCCM CI-ABJ-03-2022-B13-04487.
+
+**Constat central (mission 2025)** : les factures d'achat fournisseurs donnent des **achats réels 2025 ≈ 199,7 M FCFA (226 factures)** — soit **~10× le CA déclaré (20 100 500 en TEE/DECL 26)**. Fournisseurs : UNIFOOD, IMPERIAL (Consumer Ivory Coast), NUTRI, CDCI, G2ICI, ROSUN, MOAYE, DEP/DIST, I.GE.DIS, SAKER. Détail mensuel dans `ETAT FINANCIER 25/ACHATS_REELS_2025_FAMILLE_KRA.xlsx`. ⇒ Régime Entreprenant/SMT **non applicable** ; exposition TVA collectée + IS/IMF + requalification de régime. Voir [[projet-supervision-relances]].
+
+**Éléments absents de la base 2024 à intégrer en à-nouveau 2025** :
+- Camion **KAMA M3** (SPRIINT TECH, 14/03/2025) : HT 13 317 192, TVA 2 397 095, AIRSI 785 714, net 16 500 001 → immobilisation 245 (au nom de la SARL).
+- **Hiace** (décharge 24/02/2024) : 2 000 000, acheté au **nom personnel du gérant** → séparation de patrimoine.
+- **DEUX emprunts** : (1) **BAOBAB** LD2435470324, principal 11 347 153, décaissé 20/12/2024, 9 éch. de 1 465 084 (15/11/2025→15/07/2026), solde 31/12/2025 = 9 585 504, intérêts 2025 ≈ 1,17 M. (2) **GESCI ADJAME** (GES-CI, Crédit Renforcement, dossier A01CRD2025051U00117), montant 50 000 000, **décaissé 19/02/2025**, 18 éch. de ~2 700 000, **1re éch. 30/01/2026** (différé) → **dette 2025, remboursements 2026-2027** ; capital échéancier 40 588 413, intérêts 6 424 809, total restant 47 013 222. Écart montant/échéancier 9 411 587 = épargne nantie probable (à confirmer). Intégré via compte d'attente : D 275 épargne 9 411 587 + D 471 emploi à justifier 40 588 413 / C 162 GESCI 50 000 000. Intérêts courus 2025 (~3,9M) non encore chiffrés.
+
+**Imposition sur la MARGE (gros/demi-gros)** : la marge appariée achat(facture)/vente(barème) donne par famille : confiserie UNIFOOD ~23%, épicerie/tomate/tartine ~12-20%, boissons ~7%, savon ~4%, riz/féculents ~0-5%. **Marge moyenne pondérée ≈ 8,6-10%** sur les achats → marge brute réelle ≈ 200M × ~10% ≈ **17-24M**, centrée ~20M. ⇒ **≈ la base déclarée 20 100 500** : sur l'assiette « marge » le client est GLOBALEMENT COHÉRENT ; l'écart ×10 ne porte que sur le CA en volume, pas sur l'assiette taxée. Détail onglet « Marge brute » du fichier ACHATS_REELS_2025. Recentrer l'exposition sur la FORME (régime réel/RNI vu CA ~220M, TVA, tenue) et non sur un revenu caché.
+
+**Données réelles d'exploitation (≠ déclaré)** : loyer 60 000/mois (720 000/an) vs 2 400 000 déclaré ; wifi 20 000/mois (240 000/an) ; TEE réelle payée ≈ 170 000/an (forfait ~14 k/mois) ; ITS payé ~4 200/mois. EF 2024 déposé le 20/05/2025 (réf. DGI LIAS3250520943762) : CA 17,2M, stock final 3 253 700, capital 1 000 000.
+
+**Socle 2024 OFFICIEL (fichiers `Comptabilite 2024/`, établis 19/04/2026 par MDC — font foi, remplacent la version « approfondie »)** : Bilan clôture 31/12/2024 = Actif 3 611 378 (Stocks 3 253 700 + Clients 411 103 978 + Caisse 253 700) ; Passif = Capital **1 648 273** + Report à nouveau/résultat cumulé **1 963 105** (résultat 2024 = **+1 153 100 bénéfice**) ; **AUCUNE dette ni fournisseur**. CR 2024 : CA 17 200 000, CMV 11 717 000, marge brute 5 483 000, loyer 1 200 000 (100k/mois), salaires 1 800 000, TEE 300 000, FDFP. C'est l'à-nouveau 2025. Le prêt Baobab (11,3M, 20/12/2024) est absent de la liasse 2024 → intégré à l'ouverture 2025.
+
+**QUALIFICATION retenue par le superviseur : COMMISSIONNAIRE/DÉPOSITAIRE** (pas négociant), à ancrer sur une disposition/note DGI que le superviseur fournira + contrat de dépôt. Donc CA de KRA = **la commission (= marge) = 20 100 500** (= exactement le déclaré). Écritures : flux achats 200M/ventes 220M en **comptes de tiers 467X** (4671/4672, se soldent), produit en **7062 Commissions**, JAMAIS 601/701. Nuance honnête relevée : les factures fournisseurs sont des ventes fermes réglées comptant (= achat en propre) → risque de requalification en négociant ; d'où la nécessité du contrat + facture de commission. Réf. doctrine MDC : comptable-knowledge/08-intermediaires-mandataires.md ; AUDCG Art 169-207 ; SYSCOHADA Art 35 ; CGI Art 144 ; stations-service Note DGI 0030/2011. Régimes : TCE ≤5M, TEE 5-50M (4% CA), RME 50-200M, RSI/RNI >200M (=seuil TVA) — fiscal-knowledge/03-regimes.md.
+
+**Livrables produits** (`STATUT & FACTURATION/`, Word MDC) : NOTE_STATUT_FACTURATION, CONTRAT_DEPOT_VENTE (trame), MODELES_FACTURES (facture de vente pour compte + facture de commission = CA). À passer à la rédaction avant remise client.
+
+**Base 2025 DÉFINITIVE** (`ETAT FINANCIER 25/RECONSTITUTION_MARGE_2025_FAMILLE_KRA.xlsx`, 7 onglets dont Balance) : à-nouveau = bilan 2024 officiel (3 611 378) ; emprunts encaissés en trésorerie (Baobab reçu janv. 2025 en régul ; GESCI 19/02/2025) puis employés (véhicule + marchandise) ; excédent de trésorerie converti en STOCK pour ramener la trésorerie < 2 700 000. Corrections actées : capital 1 000 000 ; TVA camion capitalisée ; **AIRSI = charge (64), pas récupérable sous TEE** ; **salaires 2 employés × 75 000 = 1 800 000** (ITS 4 200/mois, FDFP 18 000, TEE 170 000). **Intérêts courus 31/12 constatés** (166) = 4 021 992 (GESCI 3 932 187 = 10,5 mois × 374 494 ; Baobab 89 805 = 15-31/12). **Résultat 2025 final = +2 848 180 ; Trésorerie 2 271 184 ; Stock 45 054 113 ; Actif = Passif = 70 067 054** (balance Σ soldes 89 807 469). Reste à confirmer : inventaire stock, conditions du différé GESCI, épargne nantie 9 411 587, Hiace, CNPS.
+
+**Décisions superviseur (03/08/2026)** : (1) EF à « caler sur le déclaré » — MAIS choix pris avant de connaître les 200M d'achats ; incohérence à réarbitrer (CA 20M vs achats 200M = EF impossible). (2) Extraction achats = total « Net à payer » par facture, mois par mois (fait). Factures = PDF scannés (souvent manuscrits) ; OCR vision via montages. Doublons exclus : re-scans août p31-33 ; fichier « DÉCEMBRE 2026 » = surtout des re-scans de novembre (p1-17), vraies factures déc = p18-27.

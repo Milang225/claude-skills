@@ -1,0 +1,30 @@
+---
+name: circuit-de-cadrage
+description: RÈGLE (24/10/2026) — chaque mission a son cadrage : Superviseur et Coordination définissent étapes et délais, la Direction valide, puis le point de cadrage part chez le client
+metadata:
+  type: feedback
+---
+
+Circuit voulu par le gérant : **chaque mission doit avoir son cadrage**, défini « sous la supervision de la coordinatrice et du superviseur », qui fixent les **étapes et les délais**. Dès qu'ils ont décidé, **un rapport est envoyé au gérant** (Direction). **S'il valide**, un **point de cadrage** (étapes + délais, sans rien d'interne) est envoyé au client ; l'équipe l'envoie elle-même par mail ([[suivi-missions-plateforme-interne]]).
+
+**Dans l'outil (implémenté le 24/10) :** rôles Direction, Superviseur, Coordination, Collaborateur. Seuls les trois premiers définissent étapes, délais, responsables, pièces, décisions, préalables et créent une mission ; le collaborateur consigne son travail, dépose les preuves, change le statut. Onglet « Cadrage » : En préparation → À valider par la Direction → Validé (ou À corriger, avec commentaire obligatoire). Le point au client n'existe qu'après validation ; toute modification des étapes ou délais après soumission remet le cadrage en préparation. La Direction voit « Missions (n à valider) » et une tuile.
+
+**Limite :** l'outil n'envoie aucun mail ; la Direction est prévenue dans l'outil seulement (alerte par mail = décision de l'informatique, réserve R16 de la fiche).
+
+**Pourquoi :** la consigne vient de l'ordre ORD-2026-0046 (délais à renseigner par M. SOGBOU) et de la règle « chaque mission doit avoir son dossier de réalisation » ([[dossier-de-realisation-par-mission]]). Elle précise [[equipe-definit-les-etapes]] : l'équipe qui définit les étapes, ce sont le Superviseur et la Coordination.
+
+**Comment l'appliquer :** ne jamais charger ni valider un cadrage à leur place ; M. SOGBOU est le Superviseur, la Coordinatrice est NIAMIEN MURIELLE, l'assistante de direction GNAMIEN EMMANUELLA (rôle à décider pour son compte) ; les comptes Superviseur et Coordination sont à créer dans l'écran « Équipe » par le compte Direction.
+
+**Annuaire (24/10) :** les personnes désignables comme responsables se gèrent dans l'écran Équipe, avec ou sans compte (SOGBOU DOMINIQUE, Superviseur ; NIAMIEN MURIELLE, Coordinatrice ; GNAMIEN EMMANUELLA, Assistante de direction). Leurs comptes ne sont pas créés : le gérant les crée lui-même.
+
+**Précisions du gérant (24/10, soir) :** le cadrage vient EN PREMIER et c'est DANS le cadrage qu'on détermine les étapes (onglet Cadrage = premier onglet, ajout rapide, ordre, délais ; « Suivi des étapes » = consigner le travail). Quand le cadrage lui est soumis, la Direction **modifie ou valide** (ou renvoie) avant l'envoi au client ; ses modifications laissent le cadrage « soumis » et sont tracées à l'historique. Question ouverte : bloquer ou non le démarrage du travail avant validation (aujourd'hui : simple bandeau).
+
+**Deux objectifs de la plateforme (gérant, 24/10 soir) :** (1) **produire les livrables du cadrage** : cahier des charges et note de cadrage (comme MC-CDC-TRANS-2026-001 et MC-CAD-TRANS-2026-001), générés depuis le cadrage à la charte de l'Agence, PDF et Word rangés dans le dossier du client (onglet Cadrage, bloc « Documents du cadrage », contenu saisi dans « Contenu du cahier des charges ») ; (2) **suivre l'exécution** avec les observations, et **un rapport au client à chaque étape achevée et chaque semaine** (rapports dus : tuile, liste d'accueil, pastille ; l'équipe envoie le mail, rien ne part seul). Production réservée au poste de l'Agence (générateurs Python), indisponible sous Windows.
+
+**Formulaires (24/10 soir) :** le gérant a demandé « les éléments, outils ou formulaires permettant d'aboutir aux livrables » : l'onglet Cadrage est un parcours guidé (bilan de complétude, points de cadrage en cartes, données de référence en tableau, règles/vigilances/clôture en listes, pièces/décisions/préalables, dossier du client, aperçu et production). Les sujets proposés sont des invites, jamais du contenu préécrit ([[equipe-definit-les-etapes]]). Reprise du cadrage d'une mission modèle possible. Documents de MABEK produits le 24/10 (MC-CDC-TRANS-2026-001 et MC-CAD-2026-0046) dans DOSSIER CLIENTS/MABEK/ORD-2026-0046 CADRAGE ; contenu repris de ses documents existants ; responsables N'CHO et N'GUESSAN encore à confirmer.
+
+**Leçon (24/10 soir) :** le gérant ne trouvait pas où « dresser le cahier des charges » : l'onglet s'appelait « Cadrage », la page était longue, et des onglets Safari étaient restés sur une ancienne version. Désormais : onglet « Cahier des charges » en premier, huit parties dans l'ordre du document, bouton « Élaborer le cahier des charges » en haut de chaque mission, bandeau « nouvelle version disponible ». Après chaque mise à jour, penser à recharger les onglets Safari du gérant (lecture/recharge possibles par osascript, sur autorisation tacite de la demande). Préférer nommer les écrans avec les mots du gérant (cahier des charges, livrable) plutôt qu'avec les miens (cadrage, parcours).
+
+**Le CRM est la source de l'identité du client (24/10 soir) :** « tous les clients sont dans la capture 2 » (Clients CRM du site d'administration, 69 clients). Ne jamais faire ressaisir société, NCC, centre des impôts, régime, RCCM, forme juridique, représentant, siège, contact : ils viennent de la fiche CRM (variable de page `_ordreClients`, lue par Safari, copiée dans la base locale ; lien mission-client par `_ordresList.client_id`). Jamais repris : capital social, tarifs, prestations, notes (montants/données internes). Le CRM corrige mes documents (NCC de TIM 7 = 2046563Z, pas 2046663 ; régime de la société de M. OUATTARA = TEE). Fichier source des clients non conservé dans le dossier de l'outil (coordonnées de personnes).
+
+**Décision (gérant) :** une copie ponctuelle du CRM suffit pour l'instant, pas de mise à jour automatique. Pour rafraîchir : relire `_ordreClients` dans la page d'administration, puis `seed/importer_clients.py` serveur arrêté.

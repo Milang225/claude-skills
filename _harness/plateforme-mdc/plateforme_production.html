@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Production MDC</title>
+<style>
+:root{--bg:#f6f6f9;--card:#fff;--ink:#1a1a2e;--muted:#6b6b80;--line:#e3e3ea;--navy:#1a1a2e;--gold:#c99a2e;--goldbg:#fbf3dc;
+--ok:#1d7a46;--okbg:#e6f5ec;--warn:#a85a00;--warnbg:#fff1dc;--bad:#b00020;--badbg:#fdecec;--todo:#5a5a70;--todobg:#efeff4;--hover:#f0f0f6}
+@media (prefers-color-scheme:dark){:root{--bg:#12121c;--card:#1b1b29;--ink:#ececf3;--muted:#9a9ab0;--line:#2c2c3e;--navy:#0d0d17;--gold:#e8c547;--goldbg:#2d2814;
+--ok:#5fd394;--okbg:#14301f;--warn:#ffb35c;--warnbg:#33240f;--bad:#ff7a8a;--badbg:#3a1820;--todo:#b8b8cc;--todobg:#26263a;--hover:#22223a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+header{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+header h1{font-size:17px;margin:0;font-weight:650;letter-spacing:.2px}header h1 span{color:var(--gold)}
+header .maj{color:#b9b9cc;font-size:12px;margin-left:auto}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:7px;padding:5px 10px;cursor:pointer}
+button:hover{background:var(--hover)}button.prim{background:var(--gold);color:#1a1a2e;border-color:var(--gold);font-weight:600}
+header button{background:transparent;color:#fff;border-color:#3b3b55}header button:hover{background:#2a2a42}
+main{max-width:1250px;margin:0 auto;padding:18px 24px 60px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer}.stat b{display:block;font-size:22px}
+.stat small{color:var(--muted)}.stat.on{outline:2px solid var(--gold)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.bar input[type=search]{flex:1;min-width:220px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.bar select{padding:7px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}.tabs button{white-space:nowrap}.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.grp{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.gh{display:flex;align-items:center;gap:12px;padding:11px 14px;cursor:pointer;user-select:none}.gh:hover{background:var(--hover)}
+.gh .chev{width:14px;color:var(--muted);transition:transform .15s}.grp.open .chev{transform:rotate(90deg)}
+.gh .name{font-weight:650;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gh .meta{color:var(--muted);font-size:12px;white-space:nowrap}
+.pills{display:flex;gap:5px}.pill{font-size:11px;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.p-ok{background:var(--okbg);color:var(--ok)}.p-todo{background:var(--todobg);color:var(--todo)}.p-warn{background:var(--warnbg);color:var(--warn)}.p-bad{background:var(--badbg);color:var(--bad)}
+.gb{display:none;border-top:1px solid var(--line)}.grp.open .gb{display:block}
+.sub{padding:6px 14px;background:var(--goldbg);font-size:12px;font-weight:600;color:var(--ink);border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:92px 1fr auto auto;gap:10px;align-items:center;padding:7px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}.row:hover{background:var(--hover)}
+.row .dn{min-width:0}.row .dn a{color:var(--ink);text-decoration:none;font-weight:500;cursor:pointer;word-break:break-word}.row .dn a:hover{text-decoration:underline}
+.row .dn small{display:block;color:var(--muted);font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .dt{color:var(--muted);font-size:12px}.fmt{display:flex;gap:4px}.fmt button{padding:2px 7px;font-size:11px;text-transform:uppercase}
+.act{display:flex;gap:4px;align-items:center}.act button{padding:3px 8px;font-size:12px}
+.obs{color:var(--bad);font-size:11px;display:block}
+.gtools{display:flex;gap:6px;padding:8px 14px;border-top:1px solid var(--line);background:var(--bg)}
+.empty{color:var(--muted);text-align:center;padding:40px}
+.liv{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);cursor:pointer;white-space:nowrap}.liv input{accent-color:var(--gold);width:15px;height:15px;cursor:pointer}
+.liv.on{color:var(--gold);font-weight:600}.upd{color:var(--warn);border-color:var(--warn)}
+.catsel{font-size:11px;border:1px solid var(--line);border-radius:5px;background:var(--card);color:var(--muted);padding:1px 4px;max-width:260px}
+.vw{position:fixed;inset:0;background:rgba(10,10,20,.55);display:none;z-index:20;padding:18px}.vw.on{display:flex}
+.vbox{background:var(--card);border-radius:12px;flex:1;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.vh{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.vh b{flex:1;min-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vh .on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.vw iframe{flex:1;border:0;width:100%;background:#fff}
+.rubs{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:-4px 0 14px}.rubs .lab{color:var(--muted);font-size:12px;margin-right:2px}
+.rub{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:20px;background:var(--card);padding:1px 4px 1px 10px;font-size:12px}
+.rub.on{background:var(--navy);color:#fff;border-color:var(--navy)}.rub span{cursor:pointer;padding:3px 2px}.rub button{border:0;background:transparent;color:inherit;padding:2px 5px;font-size:11px;opacity:.7}
+.rub button:hover{opacity:1}.inb{background:var(--goldbg);border:1px solid var(--gold);border-radius:6px;padding:3px 8px;font-size:11px;margin-top:4px;display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tabs .cnt{background:var(--gold);color:#1a1a2e;border-radius:10px;padding:0 6px;font-size:11px;margin-left:4px;font-weight:700}
+.remote [data-open],.remote [data-finder],.remote [data-move],.remote #b-liv,.remote #b-export,.remote #vo,.remote #vfd,.remote #b-acces,.remote #b-mail,.remote #b-mod,.remote #b-r2{display:none!important}.clb{font-size:11px;color:#1f6fb2;display:block}.clb.old{color:var(--warn)}
+.mailinfo{display:block;font-size:11px;color:var(--ink);margin-top:2px}.mailinfo a{color:var(--gold)}
+.lonly{display:none}.remote .lonly{display:inline-block}
+.acc p{margin:6px 0}.acc code{background:var(--goldbg);padding:3px 8px;border-radius:5px;font-size:15px;user-select:all}.acc input{padding:8px;border:1px solid var(--line);border-radius:7px;width:240px;background:var(--card);color:var(--ink)}.acc input[type=radio],.acc input[type=checkbox]{width:auto;padding:0;margin:0 4px 0 0;vertical-align:middle}
+.sel{width:16px;height:16px;accent-color:var(--navy);cursor:pointer;margin-right:6px;vertical-align:middle}
+.selbar{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;background:var(--navy);color:#fff;border-radius:12px;padding:10px 14px;display:none;gap:10px;align-items:center;z-index:15;box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.selbar.on{display:flex}.selbar button{background:transparent;color:#fff;border-color:#4a4a66}.selbar button.prim{background:var(--gold);color:#1a1a2e;border-color:var(--gold)}
+.envb{font-size:11px;color:var(--ok);display:block}.acc textarea{width:100%;min-height:120px;padding:8px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);font:inherit}
+.sugg{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}.sugg button{font-size:12px;padding:3px 9px;border-radius:14px}.sugg .lab{color:var(--muted);font-size:12px}
+.ac{position:relative}.acl{position:absolute;left:0;right:0;top:100%;background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.15);z-index:30;max-height:240px;overflow:auto;display:none}
+.acl div{padding:7px 10px;cursor:pointer;font-size:13px}.acl div:hover,.acl div.on{background:var(--hover)}.acl small{color:var(--muted);margin-left:6px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+@media (max-width:760px){.row{grid-template-columns:1fr;gap:4px}main{padding:12px}header{padding:12px}}
+.eetat{display:none;margin:8px 0;padding:10px 12px;border-radius:8px;font-size:14px;background:#eef1f7;border:1px solid var(--line)}.eetat.on{display:block}.eetat.ok{background:#e8f5ec;border-color:#1d7a46;color:#14522f}.eetat.ko{background:#fdecec;border-color:#c0392b;color:#8e2a20}.eetat button{margin-left:8px}
+</style>
+</head>
+<body>
+<header>
+  <h1>LA MAISON DE LA CONFORMITÉ — <span>Production des documents</span></h1>
+  <button id="b-refresh" title="Relire les dossiers maintenant">Actualiser</button>
+  <button id="b-r2" title="Envoyer des documents vers votre bucket Cloudflare R2">☁️ Cloud R2</button>
+  <button id="b-mail" title="Importer automatiquement les pièces jointes reçues par mail">📨 Mails reçus</button>
+  <button id="b-acces" title="Ouvrir la plateforme sur votre téléphone ou un autre ordinateur du même Wi-Fi">📱 Accès téléphone</button>
+  <a class="lonly" href="/logout"><button type="button">Se déconnecter</button></a>
+  <button id="b-mod" title="Ouvrir le dossier MES_MODELES dans le Finder">Ouvrir mes modèles</button>
+  <button id="b-liv" title="Ouvrir le dossier MES_LIVRABLES dans le Finder">Ouvrir mes livrables</button>
+  <button id="b-export" title="Écrire le journal Excel et l'ouvrir">Exporter en Excel</button>
+  <span class="maj" id="maj"></span>
+</header>
+<main>
+  <div class="stats" id="stats"></div>
+  <div class="bar">
+    <div class="tabs"><button data-v="inbox" title="Nouveaux documents à ranger vous-même pendant 3 jours">📥 À ranger<span class="cnt" id="nin"></span></button><button data-v="dossier" class="on">Par dossier</button><button data-v="jour">Par jour</button><button data-v="recents" title="Tous les documents créés et modifiés, du plus récent au plus ancien, jour par jour, sans passer par les dossiers">🆕 Créés et modifiés</button><button data-v="cat">Par classification</button><button data-v="livrables">★ Mes livrables</button><button data-v="transmettre" title="Les livrables prêts à partir vers le cloud R2">☁️ À transmettre</button><button data-v="guides" title="Les documents validés que vous avez mis dans une procédure : arrivée du client, création d'entreprise, suivi complet, audit complet">📘 Guides et procédures</button><button data-v="mail">📨 Reçus par mail</button><button data-v="modeles">⭐ Mes modèles</button></div>
+    <input type="search" id="q" placeholder="Rechercher un document, un dossier, une référence…">
+    <select id="per"><option value="all">Toute la période</option><option value="0">Aujourd'hui</option><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option><option value="90">90 derniers jours</option></select>
+    <select id="cat"><option value="">Toutes les classifications</option></select>
+    <select id="st"><option value="">Tous les statuts</option><option>À valider</option><option>Validé</option><option>À corriger</option><option>Modifié après validation</option></select>
+  </div>
+  <div class="rubs" id="rubs"></div>
+  <div id="list"></div>
+</main>
+<div class="vw" id="viewer"><div class="vbox"><div class="vh"><b id="vt"></b><span id="vf"></span>
+<button id="ved" title="Modifier le texte du Word ici même ; le PDF se met à jour à l'enregistrement" style="display:none">✎ Modifier</button><button id="vo" title="Ouvrir le fichier dans son application (Aperçu, Word, Excel)">↗ Ouvrir dans l'application</button><button id="vfd" title="Montrer dans le Finder">⌕ Finder</button><button id="vx" title="Fermer (Échap)">✕ Fermer</button></div>
+<iframe id="vi" title="Aperçu du document"></iframe></div></div>
+<div class="vw" id="mailp"><div class="vbox" style="max-width:680px;margin:auto;flex:0 1 auto"><div class="vh"><b>📨 Pièces jointes reçues par mail</b><button id="mx">✕ Fermer</button></div>
+<div class="acc" style="padding:16px 18px;max-height:75vh;overflow:auto" id="mailbody">Chargement…</div></div></div>
+<div class="vw" id="acces"><div class="vbox" style="max-width:640px;margin:auto;flex:0 1 auto"><div class="vh"><b>📱 Accès depuis votre téléphone ou un autre ordinateur</b><button id="ax">✕ Fermer</button></div>
+<div class="acc" style="padding:16px 18px" id="accbody">Chargement…</div></div></div>
+<div class="selbar" id="selbar"><span id="selcount"></span><button class="prim" id="b-env">📤 Préparer l'envoi</button><button id="b-r2send">☁️ Envoyer vers R2</button><select id="b-selpr" title="Ranger tous les documents sélectionnés dans une procédure"><option value="__">Ranger dans…</option><option value="">Aucune procédure</option></select><button id="b-selclr">Vider la sélection</button></div>
+<div class="vw" id="r2p"><div class="vbox" style="max-width:680px;margin:auto;flex:0 1 auto"><div class="vh"><b>☁️ Mode cloud — Cloudflare R2</b><button id="rx">✕ Fermer</button></div>
+<div class="acc" style="padding:16px 18px;max-height:78vh;overflow:auto" id="r2body"></div></div></div>
+<div class="vw" id="envp"><div class="vbox" style="max-width:720px;margin:auto;flex:0 1 auto"><div class="vh"><b>📤 Préparer l'envoi</b><button id="ex">✕ Fermer</button></div>
+<div class="acc" style="padding:16px 18px;max-height:78vh;overflow:auto" id="envbody"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const GT=[['Guides collaborateurs',/GUIDE/],['Manuels',/MANUEL/],['Procédures',/PROCEDURE|PROTOCOLE(?![ _-]?D[ _'-]?ACCORD)|MODE[ _-]?OPERATOIRE/],['Politiques et directives',/POLITIQUE|DIRECTIVE|CHARTE|REGLES?([ _-]|$)/],
+ ['Notes de service et feuilles de route',/NOTE[ _-]?DE[ _-]?SERVICE|FEUILLE[ _-]?DE[ _-]?ROUTE/],['Fiches de tâches et cahiers des charges',/FICHE[ _-]?DE[ _-]?(TACHES|TRAVAIL)|CAHIER[ _-]?DES[ _-]?CHARGES|CHECK/],['Kits et modèles',/(^|[ _-])KIT|MODELE/]];
+const methode=x=>gtype(x)||x.d.startsWith('MDC');
+const gtype=x=>{const u=x.n.toUpperCase();for(const[t,rx] of GT)if(rx.test(u))return t;return null};
+const SEL=new Set();const TOKEN='__TOKEN__';let DOCS=[],CATS=[],RUBS=[],ETAPES=[],PROCS=[],VIEW='dossier',OPEN=new Set();
+function rubs(){const ct=$('#cat').value;$('#rubs').innerHTML='<span class="lab">Mes rubriques :</span>'+RUBS.map(r=>{const n=DOCS.filter(x=>x.c===r).length;return`<span class="rub${ct===r?' on':''}"><span data-rubgo="${esc(r)}" title="Afficher la rubrique">${esc(r)} (${n})</span><button data-rubren="${esc(r)}" title="Renommer">✎</button><button data-rubdel="${esc(r)}" title="Supprimer la rubrique">✕</button></span>`}).join('')+'<button id="b-rub" title="Créer un dossier à vous">+ Nouvelle rubrique</button>'}
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fd=iso=>{const[y,m,d]=iso.split('-');return`${d}/${m}/${y}`};
+const JOURS=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'],MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const longd=iso=>{const t=new Date(iso+'T12:00:00');return`${JOURS[t.getDay()]} ${t.getDate()} ${MOIS[t.getMonth()]} ${t.getFullYear()}`};
+async function api(path,body){const r=await fetch(path,{method:body?'POST':'GET',headers:{'X-MDC-Token':TOKEN,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});if(r.status===403&&!api._re){api._re=1;location.reload();throw new Error(403)}if(!r.ok)throw new Error(r.status);return r.json()}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+async function load(refresh){try{const d=await api('/api/docs'+(refresh?'?refresh=1':''));document.body.classList.toggle('remote',!d.local);DOCS=d.docs;CATS=d.cats;ETAPES=d.etapes||[];PROCS=d.procedures||[];RUBS=d.rub;const cv=$('#cat').value;$('#cat').innerHTML='<option value="">Toutes les classifications</option>'+CATS.map(c=>`<option>${esc(c)}</option>`).join('');$('#cat').value=CATS.includes(cv)?cv:'';
+ const nin=DOCS.filter(x=>x.in).length;$('#nin').textContent=nin||'';$('#nin').style.display=nin?'':'none';rubs();$('#maj').textContent='Mis à jour le '+d.maj;render()}catch(e){load._n=(load._n||0)+1;if(load._n<=20){$('#list').innerHTML='<p class="empty">Connexion à la plateforme… nouvel essai dans quelques secondes.</p>';setTimeout(()=>load(refresh),4000)}else{$('#list').innerHTML='<p class="empty">La plateforme ne répond pas. Relancez l\'application « Plateforme MDC », puis rechargez la page.</p>'}return}load._n=0;}
+const SC={'Validé':'p-ok','À valider':'p-todo','À corriger':'p-bad','Modifié après validation':'p-warn'};
+function filtered(){const q=$('#q').value.trim().toLowerCase(),per=$('#per').value,st=$('#st').value,ct=$('#cat').value;const today=new Date();today.setHours(0,0,0,0);
+ return DOCS.filter(x=>{if((VIEW==='livrables'||VIEW==='transmettre')&&!x.l)return false;if(VIEW==='modeles'&&!x.md)return false;if(VIEW==='guides'&&!x.pr)return false;if(VIEW==='mail'&&!(x.mail||x.d==='📨 REÇUS PAR MAIL'))return false;if(VIEW==='inbox'&&!x.in)return false;if(ct&&x.c!==ct)return false;if(st&&x.s!==st)return false;if(per!=='all'){const dd=new Date(x.j+'T00:00:00');if((today-dd)/864e5>+per)return false}
+ if(q&&!(x.n+' '+x.d+' '+x.e+' '+x.c).toLowerCase().includes(q))return false;return true})}
+function stats(){const today=new Date().toISOString().slice(0,10),c=s=>DOCS.filter(x=>x.s===s).length;
+ const items=[['Documents',DOCS.length,'',''],["Produits aujourd'hui",DOCS.filter(x=>x.j===today).length,'','0'],['À valider',c('À valider'),'À valider',''],['Validés',c('Validé'),'Validé',''],['À corriger',c('À corriger'),'À corriger',''],['Modifiés après validation',c('Modifié après validation'),'Modifié après validation',''],['★ Mes livrables',DOCS.filter(x=>x.l).length,'','L']];
+ $('#stats').innerHTML=items.map(([l,n,s,p])=>`<div class="stat${(s&&$('#st').value===s)||(p==='L'&&VIEW==='livrables')||(p&&p!=='L'&&$('#per').value===p&&!$('#st').value)?' on':''}" data-s="${esc(s)}" data-p="${p}"><b>${n}</b><small>${l}</small></div>`).join('')}
+function pills(arr){const c=s=>arr.filter(x=>x.s===s).length,o=[];const v=c('Validé'),a=c('À valider'),w=c('Modifié après validation'),b=c('À corriger');
+ if(v)o.push(`<span class="pill p-ok">${v} validé${v>1?'s':''}</span>`);if(a)o.push(`<span class="pill p-todo">${a} à valider</span>`);if(b)o.push(`<span class="pill p-bad">${b} à corriger</span>`);if(w)o.push(`<span class="pill p-warn">${w} modifié${w>1?'s':''}</span>`);return`<div class="pills">${o.join('')}</div>`}
+function row(x,showDossier){return`<div class="row" data-k="${esc(x.k)}"><div class="dt"><input type="checkbox" class="sel" data-sel="${esc(x.k)}"${SEL.has(x.k)?' checked':''} title="Sélectionner pour l'envoi">${fd(x.j)}</div>
+ <div class="dn"><a data-voir="${esc(x.k)}" data-ext="${esc(x.f.includes('pdf')?'pdf':x.f[0])}" title="Consulter dans la plateforme">${esc(x.n)}</a><small>${showDossier?esc(x.d)+' · ':''}<select class="catsel" data-cat="${esc(x.k)}" title="Ranger ce document : choisir une catégorie ou une de vos rubriques">${RUBS.length?'<optgroup label="Mes rubriques">'+RUBS.map(c=>`<option${c===x.c?' selected':''}>${esc(c)}</option>`).join('')+'</optgroup>':''}<optgroup label="Catégories de l'Agence">${CATS.filter(c=>!RUBS.includes(c)).map(c=>`<option${c===x.c?' selected':''}>${esc(c)}</option>`).join('')}</optgroup><option value="__new__">➕ Nouvelle rubrique…</option></select>${true?` · Procédure : <select class="catsel" data-pr="${esc(x.k)}" title="Mettre ce document dans une procédure de l'Agence"><option value=""${x.pr?'':' selected'}>Aucune</option>${PROCS.map(t=>`<option${t===x.pr?' selected':''}>${esc(t)}</option>`).join('')}</select>`:''} · ${esc(x.e)}</small>${x.mail?`<span class="mailinfo">📨 De <b>${esc(x.mail.de)}</b> — « ${esc(x.mail.objet)} » — reçu le ${fd(x.mail.date)} · <a href="https://mail.google.com/mail/u/0/#search/rfc822msgid%3A${encodeURIComponent(x.mail.mid)}" target="_blank" rel="noopener">voir le mail</a></span>`:''}${x.cl?`<span class="clb${x.cl.ajour?'':' old'}">☁️ ${x.cl.ajour?'Dans R2 depuis le '+fd(x.cl.le):'Modifié depuis l\'envoi vers R2 du '+fd(x.cl.le)+' — à renvoyer'}</span>`:''}${x.env?`<span class="envb">📤 ${x.env.mode==='envoyer'?'Envoyé':x.env.mode==='gmail'?'Brouillon Gmail créé':'Dossier d\'envoi préparé'} le ${fd(x.env.le)} — « ${esc(x.env.objet)} »${x.env.a?' pour '+esc(x.env.a):''}</span>`:''}${x.o?`<span class="obs">${esc(x.o)}</span>`:''}${x.in?`<div class="inb">📥 À ranger : choisissez sa place dans le menu ci-dessus, sinon rangement automatique le ${fd(x.al)} dans « ${esc(x.c)} » <button data-keep="${esc(x.k)}" data-kc="${esc(x.c)}">✓ Garder cette place</button><button data-move="${esc(x.k)}" title="Choisir un dossier sur le Mac et y déplacer le fichier">📁 Déplacer vers un dossier…</button></div>`:''}</div>
+ <div class="fmt">${x.f.map(f=>`<button data-voir="${esc(x.k)}" data-ext="${f}" title="Consulter le ${f.toUpperCase()} dans la plateforme">${f}</button>`).join('')}<button data-open="${esc(x.k)}" data-ext="${esc(x.f.includes('pdf')?'pdf':x.f[0])}" title="Ouvrir dans l'application du Mac">↗</button><button data-finder="${esc(x.k)}" title="Montrer dans le Finder">⌕</button><button data-move="${esc(x.k)}" title="Déplacer le fichier vers un dossier de votre choix">📁</button></div>
+ <div class="act"><label class="liv${x.l?' on':''}" title="${x.l?'Dans mes livrables depuis le '+fd(x.ll)+' — décocher pour retirer':'Cocher pour ajouter ce document à mes livrables'}"><input type="checkbox" data-liv="${esc(x.k)}"${x.l?' checked':''}>★ Livrable</label>
+ <label class="liv${x.md?' on':''}" title="${x.md?'Dans mes modèles depuis le '+fd(x.mdl)+' — décocher pour retirer':'Ce document me plaît : le garder comme modèle'}"><input type="checkbox" data-mod="${esc(x.k)}"${x.md?' checked':''}>⭐ Modèle</label>
+ ${x.lu?`<button class="upd" data-livup="${esc(x.k)}" title="Le document a été modifié depuis son ajout : mettre à jour la copie">↻ Nouvelle version</button>`:''}<span class="pill ${SC[x.s]}">${esc(x.s)}${x.v&&x.s==='Validé'?' le '+fd(x.v):''}</span>
+ ${x.s!=='Validé'?`<button data-val="${esc(x.k)}" title="Valider ce document">✓ Valider</button>`:`<button data-undo="${esc(x.k)}" title="Remettre à valider">↺</button>`}
+ <button data-cor="${esc(x.k)}" title="Marquer à corriger, avec une observation">✎</button></div></div>`}
+function render(){stats();const L=filtered(),box=$('#list');if(!L.length){box.innerHTML='<p class="empty">Aucun document pour ces critères.</p>';return}
+ const q=$('#q').value.trim();
+ if(q||VIEW==='recents'){const arr=[...L].sort((a,b)=>(b.mt||0)-(a.mt||0)||a.n.localeCompare(b.n));
+  if(q){box.innerHTML=`<p class="meta" style="margin:6px 2px 10px">${arr.length} document${arr.length>1?'s':''} trouvé${arr.length>1?'s':''} pour « ${esc(q)} »${arr.length>300?' (300 premiers affichés)':''}</p><div class="grp open"><div class="gb">${arr.slice(0,300).map(x=>row(x,true)).join('')}</div></div>`;return}
+  const days={};arr.forEach(x=>(days[x.j]=days[x.j]||[]).push(x));
+  box.innerHTML=Object.keys(days).sort().reverse().slice(0,30).map(d=>`<div class="grp open" data-g="recents:${d}"><div class="gh"><span class="name">${longd(d)}</span>${pills(days[d])}<span class="meta">${days[d].length} document${days[d].length>1?'s':''} créé${days[d].length>1?'s':''} ou modifié${days[d].length>1?'s':''}</span></div><div class="gb">${days[d].map(x=>row(x,true)).join('')}</div></div>`).join('');return}
+ const by={};const gkey=x=>x.mail?(x.mail.de+' — '+x.mail.adresse):'Déposés dans le dossier';if(VIEW==='mail'){L.forEach(x=>(by[gkey(x)]=by[gkey(x)]||[]).push(x))}else if(VIEW==='guides'){L.forEach(x=>{const t=x.pr;(by[t]=by[t]||[]).push(x)})}else if(VIEW==='livrables'){L.forEach(x=>{const t=x.pr||'À ranger';(by[t]=by[t]||[]).push(x)})}else if(VIEW==='cat'||VIEW==='modeles'){L.forEach(x=>(by[x.c]=by[x.c]||[]).push(x))}else if(VIEW!=='jour'){L.forEach(x=>(by[x.d]=by[x.d]||[]).push(x))}else{L.forEach(x=>(by[x.j]=by[x.j]||[]).push(x))}
+ const GO=GT.map(g=>g[0]);const PO=[...PROCS,'Choisis, à valider'];const keys=Object.keys(by).sort((a,b)=>VIEW==='guides'?PO.indexOf(a)-PO.indexOf(b):VIEW==='livrables'?[...PROCS,'À ranger'].indexOf(a)-[...PROCS,'À ranger'].indexOf(b):VIEW==='guides'?GO.indexOf(a)-GO.indexOf(b):(VIEW==='cat'||VIEW==='modeles')?CATS.indexOf(a)-CATS.indexOf(b):VIEW!=='jour'?(Math.max(...by[b].map(x=>+x.j.replace(/-/g,'')))-Math.max(...by[a].map(x=>+x.j.replace(/-/g,'')))||a.localeCompare(b)):b.localeCompare(a));
+ if((VIEW==='guides'||VIEW==='livrables')&&!$('#q').value.trim()){const OO=VIEW==='guides'?PO:[...PROCS,'À ranger'];PROCS.forEach(p=>{if(!by[p])by[p]=[]});keys.splice(0,keys.length,...Object.keys(by).sort((a,b)=>OO.indexOf(a)-OO.indexOf(b)))}
+ box.innerHTML=keys.map(g=>{if(!by[g].length)return`<div class="grp"><div class="gh"><span class="chev">▶</span><span class="name">${esc(g)}</span><span class="meta">${VIEW==='livrables'?'Aucun livrable pour l\'instant':'Aucun document choisi pour l\'instant'}</span></div></div>`;const arr=by[g].sort((a,b)=>b.j.localeCompare(a.j)||a.n.localeCompare(b.n));const id=VIEW+':'+g,open=OPEN.has(id);
+  const last=arr[0].j,title=VIEW!=='jour'?esc(g):longd(g),meta=(VIEW==='cat'||VIEW==='guides'||VIEW==='livrables')?`${arr.length} document${arr.length>1?'s':''} · ${new Set(arr.map(x=>x.d)).size} dossier(s) · dernière production le ${fd(last)}`:VIEW!=='jour'?`${arr.length} document${arr.length>1?'s':''} · dernière production le ${fd(last)}`:`${arr.length} document${arr.length>1?'s':''} · ${new Set(arr.map(x=>x.d)).size} dossier(s)`;
+  let body='';if(open){if(VIEW==='cat'||VIEW==='modeles'||VIEW==='guides'||VIEW==='livrables'){const bd={};arr.forEach(x=>{const sk=VIEW==='guides'?(gtype(x)||'Autres documents'):x.d;(bd[sk]=bd[sk]||[]).push(x)});Object.keys(bd).sort((a,b)=>(b.startsWith('MDC')-a.startsWith('MDC'))||a.localeCompare(b)).forEach(d=>{body+=`<div class="sub">${esc(d)}</div>`+bd[d].map(x=>row(x,false)).join('')})}else if(VIEW!=='jour'){let cur='';arr.forEach(x=>{if(x.j!==cur){cur=x.j;body+=`<div class="sub">${longd(cur)}</div>`}body+=row(x,false)})}
+   else{const bd={};arr.forEach(x=>(bd[x.d]=bd[x.d]||[]).push(x));const mx=d=>Math.max(...bd[d].map(x=>x.mt||0));Object.keys(bd).sort((a,b)=>mx(b)-mx(a)).forEach(d=>{body+=`<div class="sub">${esc(d)}</div>`+bd[d].sort((a,b)=>(b.mt||0)-(a.mt||0)).map(x=>row(x,false)).join('')})}
+   const todo=arr.filter(x=>x.s!=='Validé').length,nin=arr.filter(x=>x.in).length;body+=`<div class="gtools"><button data-selall="${esc(id)}">☑ Tout sélectionner (${arr.length})</button>${nin?`<button data-keepall="${esc(id)}">✓ Garder les places proposées (${nin})</button>`:''}${todo?`<button class="prim" data-valall="${esc(id)}">✓ Valider les ${todo} document${todo>1?'s':''} affiché${todo>1?'s':''} non validé${todo>1?'s':''}</button>`:''}</div>`}
+  return`<div class="grp${open?' open':''}" data-g="${esc(id)}"><div class="gh"><span class="chev">▶</span><span class="name">${title}</span>${pills(arr)}<span class="meta">${meta}</span></div><div class="gb">${body}</div></div>`}).join('');
+ box._groups=Object.fromEntries(keys.map(g=>[VIEW+':'+g,by[g]]))}
+document.addEventListener('click',async e=>{if(e.target.matches('input[data-liv],input[data-mod],input[data-sel],select'))return;const t=e.target.closest('[data-selall],[data-move],#b-rub,[data-rubgo],[data-rubren],[data-rubdel],[data-keep],[data-keepall],[data-voir],[data-livup],[data-open],[data-finder],[data-val],[data-undo],[data-cor],[data-valall],.gh,.stat,.tabs button');if(!t)return;
+ try{if(t.matches('.tabs button')){VIEW=t.dataset.v;document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b===t));render();return}
+ if(t.matches('.stat')){if(t.dataset.p==='L'){VIEW='livrables';document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v==='livrables'));$('#st').value='';$('#per').value='all';render();return}
+  $('#st').value=t.dataset.s||'';$('#per').value=t.dataset.p||'all';render();return}
+ if(t.matches('.gh')){const id=t.parentElement.dataset.g;if(!id||id.startsWith('recents:'))return;OPEN.has(id)?OPEN.delete(id):OPEN.add(id);render();return}
+ if(t.dataset.selall){($('#list')._groups[t.dataset.selall]||[]).forEach(x=>SEL.add(x.k));selbar();render();return}
+ if(t.dataset.move){toast('Choisissez le dossier dans la fenêtre du Finder…');const r=await api('/api/deplacer',{k:t.dataset.move});
+  if(r.cancel)return toast('Déplacement annulé');if(r.err)return alert(r.err);toast('Déplacé dans '+r.dest);if(!r.suivi)alert('Le fichier a été déplacé hors des dossiers suivis par la plateforme : il n\'y apparaîtra plus.');return load(true)}
+ if(t.id==='b-rub'){const n=prompt('Nom de la nouvelle rubrique :');if(!n||!n.trim())return;await api('/api/rubrique',{action:'creer',nom:n.trim()});toast('Rubrique créée');return load()}
+ if(t.dataset.rubgo){VIEW='cat';document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.v==='cat'));$('#cat').value=t.dataset.rubgo;OPEN.add('cat:'+t.dataset.rubgo);render();rubs();return}
+ if(t.dataset.rubren){const n=prompt('Nouveau nom de la rubrique :',t.dataset.rubren);if(!n||!n.trim()||n.trim()===t.dataset.rubren)return;await api('/api/rubrique',{action:'renommer',nom:t.dataset.rubren,nouveau:n.trim()});toast('Rubrique renommée');return load()}
+ if(t.dataset.rubdel){if(!confirm(`Supprimer la rubrique « ${t.dataset.rubdel} » ? Ses documents reprennent leur classement automatique.`))return;await api('/api/rubrique',{action:'supprimer',nom:t.dataset.rubdel});toast('Rubrique supprimée');return load()}
+ if(t.dataset.keep){await api('/api/categorie',{k:t.dataset.keep,cat:t.dataset.kc});toast('Document rangé');return load()}
+ if(t.dataset.keepall){const arr=($('#list')._groups[t.dataset.keepall]||[]).filter(x=>x.in);const by={};arr.forEach(x=>(by[x.c]=by[x.c]||[]).push(x.k));for(const c in by)await api('/api/categorie',{k:by[c][0],keys:by[c],cat:c});toast(arr.length+' document(s) rangé(s)');return load()}
+ if(t.dataset.voir){voir(t.dataset.voir,t.dataset.ext);return}
+ if(t.dataset.livup){await api('/api/livrable',{k:t.dataset.livup,on:true});toast('Copie mise à jour dans mes livrables');return load()}
+ if(t.dataset.open){await api('/api/ouvrir',{k:t.dataset.open,ext:t.dataset.ext});toast('Ouverture du document…');return}
+ if(t.dataset.finder){await api('/api/finder',{k:t.dataset.finder});return}
+ if(t.dataset.val){await api('/api/statut',{keys:[t.dataset.val],statut:'Validé'});toast('Document validé');return load()}
+ if(t.dataset.undo){await api('/api/statut',{keys:[t.dataset.undo],statut:'À valider'});toast('Remis à valider');return load()}
+ if(t.dataset.cor){const obs=prompt('Observation (ce qu\'il faut corriger) :');if(obs===null)return;await api('/api/statut',{keys:[t.dataset.cor],statut:'À corriger',obs});toast('Marqué à corriger');return load()}
+ if(t.dataset.valall){const arr=($('#list')._groups[t.dataset.valall]||[]).filter(x=>x.s!=='Validé');if(!confirm(`Valider ${arr.length} document(s) ?`))return;await api('/api/statut',{keys:arr.map(x=>x.k),statut:'Validé'});toast(arr.length+' document(s) validé(s)');return load()}
+ }catch(err){toast('Action impossible : rechargez la page')}});
+document.addEventListener('change',async e=>{const m=e.target.closest('input[data-mod]');if(!m)return;
+ try{await api('/api/modele',{k:m.dataset.mod,on:m.checked});toast(m.checked?'Ajouté à mes modèles':'Retiré de mes modèles (copie archivée)');load()}catch(err){toast('Action impossible');m.checked=!m.checked}});
+document.addEventListener('change',async e=>{const c=e.target.closest('input[data-liv]');if(!c)return;
+ try{await api('/api/livrable',{k:c.dataset.liv,on:c.checked});toast(c.checked?'Ajouté à mes livrables':'Retiré de mes livrables (copie archivée)');load()}catch(err){toast('Action impossible : rechargez la page');c.checked=!c.checked}});
+let CUR=null;
+function voir(k,ext){const x=DOCS.find(d=>d.k===k);if(!x)return;CUR={k,ext};$('#vt').textContent=x.n;
+ $('#ved').style.display='none';
+ $('#vf').innerHTML=x.f.map(f=>`<button class="${f===ext?'on':''}" data-vext="${f}">${f.toUpperCase()}</button>`).join(' ');
+ $('#vi').src=(ext==='docx'?'/edit?k='+encodeURIComponent(k):'/voir?k='+encodeURIComponent(k)+'&ext='+ext)+'&t='+encodeURIComponent(TOKEN)+'&_='+Date.now();$('#viewer').classList.add('on')}
+$('#vf').addEventListener('click',e=>{const b=e.target.closest('[data-vext]');if(b&&CUR)voir(CUR.k,b.dataset.vext)});
+$('#vx').onclick=()=>{$('#viewer').classList.remove('on');$('#vi').src='about:blank'};
+$('#ved').onclick=()=>{if(!CUR)return;$('#vf').querySelectorAll('button').forEach(b=>b.classList.remove('on'));$('#vi').src='/edit?k='+encodeURIComponent(CUR.k)+'&t='+encodeURIComponent(TOKEN)+'&_='+Date.now()};
+$('#vo').onclick=()=>CUR&&api('/api/ouvrir',{k:CUR.k,ext:CUR.ext});$('#vfd').onclick=()=>CUR&&api('/api/finder',{k:CUR.k});
+$('#viewer').addEventListener('click',e=>{if(e.target.id==='viewer')$('#vx').click()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#viewer').classList.contains('on'))$('#vx').click()});
+async function accesUI(){const a=await api('/api/acces',{});$('#accbody').innerHTML=`
+ <p><b>1.</b> Connectez votre téléphone ou votre autre ordinateur <b>au même Wi-Fi</b> que ce Mac.</p>
+ <p><b>2.</b> <b>Le plus simple :</b> ouvrez l'appareil photo de l'iPhone et visez ce code, puis touchez le lien qui apparaît.</p>
+ <p style="text-align:center"><img src="/qr?u=${encodeURIComponent(a.urls[0]||'')}" alt="QR code de la plateforme" style="width:200px;height:200px;image-rendering:pixelated;background:#fff;padding:8px;border-radius:8px"></p>
+ <p>Ou tapez l'adresse dans Safari, sans espace, avec des points (pas de virgules) :</p>${a.urls.map(u=>`<p><code>${esc(u)}</code></p>`).join('')}
+ <p><b>3.</b> Saisissez votre mot de passe. ${a.actif?`<span style="color:var(--ok)">Accès activé depuis le ${fd(a.le)}${a.sessions?` · ${a.sessions} appareil(s) connecté(s)`:''}.</span>`:'<span style="color:var(--bad)">Accès pas encore activé : choisissez un mot de passe ci-dessous.</span>'}</p>
+ <p style="margin-top:14px"><b>${a.actif?'Changer le mot de passe':'Choisir le mot de passe'}</b> (8 caractères au minimum ; il déconnecte les autres appareils) :</p>
+ <p><input type="password" id="mdp1" placeholder="Nouveau mot de passe" autocomplete="new-password"> <input type="password" id="mdp2" placeholder="Confirmer" autocomplete="new-password"> <button class="prim" id="mdpok">Enregistrer</button></p>
+ <p style="color:var(--muted);font-size:12px">Accessible uniquement depuis votre réseau Wi-Fi, jamais depuis internet. Le Mac doit être allumé, réveillé et la plateforme ouverte. Sur un appareil distant, on peut consulter, valider, ranger et cocher les livrables ; ouvrir dans une application, montrer dans le Finder et déplacer restent réservés au Mac.</p>`;
+ $('#mdpok').onclick=async()=>{const m1=$('#mdp1').value,m2=$('#mdp2').value;if(m1.length<8)return alert('8 caractères au minimum');if(m1!==m2)return alert('Les deux saisies sont différentes');
+  try{await api('/api/acces',{mdp:m1});toast('Mot de passe enregistré : accès activé');accesUI()}catch(e){alert('Enregistrement impossible')}}}
+async function mailUI(r){const a=r||await api('/api/mail',{});$('#mailbody').innerHTML=`
+ ${a.actif?`<p style="color:var(--ok)"><b>Import activé</b> pour <b>${esc(a.adresse)}</b>, mails reçus depuis le ${fd(a.depuis)}. Relève automatique toutes les 2 minutes.</p>
+ <p>Dernière relève : ${esc(a.dernier||'en cours…')}${a.resultat?' — '+esc(a.resultat):''} · ${a.nb} pièce(s) importée(s) au total.</p>
+ ${a.erreur?`<p style="color:var(--bad)">Dernière erreur : ${esc(a.erreur)}</p>`:''}
+ <p><button class="prim" id="mnow">Relever maintenant</button> <button id="mpause">Mettre en pause</button></p>`:
+ a.adresse?`<p>Import en pause pour ${esc(a.adresse)}. <button class="prim" id="mpause">Reprendre</button></p>`:'<p style="color:var(--bad)">Import pas encore activé.</p>'}
+ ${a.env?`<p style="color:var(--muted);font-size:12px">Connexion lue dans le fichier <b>.env</b> du dossier de l'application. Pour la modifier, changez ce fichier puis relancez la plateforme.</p>`:` <p style="margin-top:14px"><b>${a.adresse?'Modifier la connexion':'Activer l\'import'}</b></p>
+ <p><b>1.</b> Sur le compte Google <b>lamaisondelaconformite@gmail.com</b>, la validation en deux étapes doit être activée.</p>
+ <p><b>2.</b> Ouvrez <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noopener">myaccount.google.com/apppasswords</a>, créez un mot de passe d'application nommé « Plateforme MDC » et copiez les 16 lettres.</p>
+ <p><b>3.</b> Collez-le ci-dessous. Il reste sur ce Mac, dans le trousseau sécurisé.</p>
+ <p><input id="madr" value="${esc(a.adresse||'lamaisondelaconformite@gmail.com')}" placeholder="Adresse Gmail" style="width:280px"></p>
+ <p><input type="password" id="mmdp" placeholder="Mot de passe d'application (16 lettres)" autocomplete="off" style="width:280px"></p>
+ <p>Importer les mails reçus depuis le : <input type="date" id="mdep" value="${esc(a.depuis||new Date(Date.now()-30*864e5).toISOString().slice(0,10))}" style="width:160px"></p>
+ <p><button class="prim" id="mok">Tester et activer</button></p>
+`}
+ <p style="color:var(--muted);font-size:12px">Lecture seule : les mails ne sont ni modifiés, ni marqués comme lus, ni supprimés. Seules les pièces jointes des mails reçus d'autres adresses sont enregistrées, dans Documents/DOCUMENTS_RECUS_PAR_MAIL, puis proposées dans « 📥 À ranger ». Les petites images (logos, signatures) sont ignorées.</p>`;
+ if($('#mnow'))$('#mnow').onclick=async()=>{toast('Relève en cours…');try{const r=await api('/api/mail',{action:'importer'});mailUI(r);load(true)}catch(e){alert('Relève impossible')}};
+ if($('#mpause'))$('#mpause').onclick=async()=>{mailUI(await api('/api/mail',{action:'pause'}))};
+ if($('#mok'))$('#mok').onclick=async()=>{toast('Test de la connexion à Gmail…');const r=await fetch('/api/mail',{method:'POST',headers:{'X-MDC-Token':TOKEN,'Content-Type':'application/json'},body:JSON.stringify({action:'configurer',adresse:$('#madr').value,mdp:$('#mmdp').value,depuis:$('#mdep').value})});
+  const d=await r.json();if(!r.ok)return alert(d.err||'Activation impossible');toast('Import activé : première relève en cours');mailUI(d);setTimeout(()=>load(true),8000)}}
+$('#b-mail').onclick=()=>{$('#mailp').classList.add('on');mailUI()};$('#mx').onclick=()=>$('#mailp').classList.remove('on');
+$('#b-acces').onclick=()=>{$('#acces').classList.add('on');accesUI()};$('#ax').onclick=()=>$('#acces').classList.remove('on');
+function selbar(){const sp=$('#b-selpr');if(sp&&sp.options.length<3)PROCS.forEach(p=>{const o=document.createElement('option');o.textContent=p;sp.appendChild(o)});$('#selcount').textContent=SEL.size+' document'+(SEL.size>1?'s':'')+' sélectionné'+(SEL.size>1?'s':'');$('#selbar').classList.toggle('on',SEL.size>0)}
+document.addEventListener('change',e=>{const c=e.target.closest('input[data-sel]');if(!c)return;c.checked?SEL.add(c.dataset.sel):SEL.delete(c.dataset.sel);selbar()});
+$('#b-selclr').onclick=()=>{SEL.clear();selbar();render()};
+$('#b-env').onclick=()=>{const L=[...SEL].map(k=>DOCS.find(d=>d.k===k)).filter(Boolean);const loc=!document.body.classList.contains('remote');
+ $('#envbody').innerHTML=`<p><b>${L.length} document(s)</b> :</p><p>Formats joints pour tous les documents : <label><input type="radio" name="pref" value="pdf" checked> PDF</label> &nbsp; <label><input type="radio" name="pref" value="word"> Word</label> &nbsp; <label><input type="radio" name="pref" value="pdf_word"> PDF et Word</label> &nbsp; <label><input type="radio" name="pref" value="tous"> tous les formats</label></p>
+ <ul style="margin:4px 0 12px 18px;font-size:13px">${L.map(x=>`<li>${esc(x.n)} <span style="color:var(--muted)">(${x.f.join(', ')})</span> <select class="efmt" data-efmt="${esc(x.k)}" title="Format de ce document"><option value="">Comme ci-dessus</option>${x.f.includes('pdf')?'<option value="pdf">PDF</option>':''}${x.f.includes('docx')?'<option value="word">Word</option>':''}${x.f.includes('pdf')&&x.f.includes('docx')?'<option value="pdf_word">PDF et Word</option>':''}<option value="tous">Tous ses formats</option></select></li>`).join('')}</ul>
+ <p style="color:var(--muted);font-size:12px;margin-top:-6px">Si le format choisi n'existe pas pour un document, c'est son autre format qui part.</p>
+ <p>Destinataire(s) :</p><div class="ac"><input id="eto" placeholder="Tapez un nom ou une adresse : les contacts connus s'affichent" style="width:100%" autocomplete="off"><div class="acl" id="acl"></div></div>
+ <div class="sugg" id="sugg"></div><p class="lab" id="habit" style="color:var(--muted);font-size:12px;margin:2px 0 8px"></p>
+ <p>Copie (Cc) :</p><input id="ecc" placeholder="Adresses en copie" style="width:100%" autocomplete="off"><div class="sugg" id="suggcc"></div>
+ <p>Objet : <input id="eobj" value="Transmission de documents — La Maison de la Conformité" style="width:100%"></p>
+ <p>Message :</p><textarea id="emsg">Madame, Monsieur,
+
+Veuillez trouver ci-joint les documents suivants :
+${L.map(x=>'- '+x.n.replace(/_/g,' ')).join('\n')}
+
+Nous restons à votre disposition pour tout échange.
+
+Veuillez agréer, Madame, Monsieur, l'expression de nos salutations distinguées.</textarea>
+ <p style="color:var(--muted);font-size:12px">La signature de l'Agence est ajoutée automatiquement. « Envoyer maintenant » envoie le mail depuis lamaisondelaconformite@gmail.com, après votre confirmation ; Gmail en garde une copie dans « Messages envoyés ». « Créer le brouillon » le dépose dans vos brouillons sans l'envoyer.</p>
+ <div id="eetat" class="eetat"></div>
+ <p><button class="prim" id="esend" style="background:#1d7a46;border-color:#1d7a46;color:#fff">✉️ Envoyer maintenant</button> <button id="egm">📝 Créer le brouillon Gmail</button> ${loc?'<button id="edos">📁 Préparer un dossier d\'envoi (.zip)</button>':''}</p>`;
+ const go=async mode=>{if(mode==='envoyer'){const to=$('#eto').value.split(/[,;]\s*/).filter(Boolean),cc=$('#ecc').value.split(/[,;]\s*/).filter(Boolean);
+  if(!to.length)return alert('Indiquez au moins un destinataire.');
+  if(!confirm(`Envoyer maintenant ce mail ?\n\nÀ : ${to.join(', ')}${cc.length?'\nCc : '+cc.join(', '):''}\nObjet : ${$('#eobj').value}\nPièces jointes : ${L.length} document(s)\n\nL'envoi est immédiat et ne peut pas être annulé.`))return}
+  const body={confirme:mode==='envoyer',keys:L.map(x=>x.k),pref:document.querySelector('input[name=pref]:checked').value,prefs:Object.fromEntries([...document.querySelectorAll('select[data-efmt]')].filter(e=>e.value).map(e=>[e.dataset.efmt,e.value])),a:$('#eto').value,cc:$('#ecc').value,objet:$('#eobj').value,message:$('#emsg').value,mode};
+  if(window._envEnCours)return;window._envEnCours=true;
+  const btns=[...document.querySelectorAll('#esend,#egm,#edos')];btns.forEach(b=>b.disabled=true);
+  const etat=$('#eetat');etat.className='eetat on';etat.innerHTML=mode==='envoyer'?'⏳ Envoi du mail en cours… Ne fermez pas cette fenêtre.':mode==='gmail'?'⏳ Création du brouillon dans Gmail…':'⏳ Préparation du dossier d\'envoi…';
+  let r,d;try{r=await fetch('/api/envoi',{method:'POST',headers:{'X-MDC-Token':TOKEN,'Content-Type':'application/json'},body:JSON.stringify(body)});d=await r.json()}catch(e){r={ok:false};d={err:'La plateforme n\'a pas répondu. Vérifiez dans Gmail, onglet « Messages envoyés », avant de recommencer.'}}
+  window._envEnCours=false;
+  if(!r.ok){btns.forEach(b=>b.disabled=false);etat.className='eetat on ko';etat.innerHTML='❌ '+esc(d.err||'Envoi impossible');return}
+  const h=new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  const msg=mode==='envoyer'?`✅ <b>Mail envoyé à ${h}</b> à ${esc(body.a.replace(/[,;\s]+$/,''))}${body.cc?' (copie : '+esc(body.cc)+')':''}, avec ${d.n} pièce(s) jointe(s) (${d.mo} Mo). Une copie est dans « Messages envoyés » de Gmail.`:mode==='gmail'?`✅ <b>Brouillon créé à ${h}</b> dans Gmail avec ${d.n} pièce(s) jointe(s) (${d.mo} Mo). Ouvrez Gmail, onglet Brouillons, relisez et envoyez.`:`✅ <b>Dossier d'envoi prêt</b> : ${esc(d.dossier)} (et son .zip), ouvert dans le Finder.`;
+  etat.className='eetat on ok';etat.innerHTML=msg+' <button id="efin">Fermer</button>';
+  toast(mode==='envoyer'?'Mail envoyé':mode==='gmail'?'Brouillon créé':'Dossier prêt');
+  $('#efin').onclick=()=>{$('#envp').classList.remove('on')};SEL.clear();selbar();load()};
+ (async()=>{let C=[];try{C=await api('/api/carnet',{})}catch(e){}
+  const dos=new Set(L.map(x=>x.d));const toks=()=>$('#eto').value.split(/[,;]\s*/).map(t=>t.trim()).filter(Boolean);
+  const add=em=>{const t=toks();const v=$('#eto').value;const last=/[,;]\s*$/.test(v)||!v.trim()?'':t.pop();if(!t.includes(em))t.push(em);$('#eto').value=t.join(', ')+', ';$('#acl').style.display='none';sugg();$('#eto').focus()};
+  const sugg=()=>{const t=toks().map(x=>x.toLowerCase());const S=C.filter(e=>e.dossiers.some(d=>dos.has(d))&&!t.includes(e.email)).sort((a,b)=>(a.type==='interne')-(b.type==='interne')||b.n-a.n).slice(0,8);
+   $('#sugg').innerHTML=S.length?'<span class="lab">Contacts du dossier :</span>'+S.map(e=>`<button type="button" data-add="${esc(e.email)}" title="${esc(e.email)}">+ ${esc(e.nom)}</button>`).join(''):''};
+  const H=C.filter(e=>e.type!=='interne'&&e.n>=2&&e.dossiers.length<=2&&e.dossiers.some(d=>dos.has(d))).sort((a,b)=>b.n-a.n).slice(0,4);   // contacts propres au dossier (un collaborateur apparaît dans beaucoup de dossiers)
+  if(H.length&&!$('#eto').value.trim()){$('#eto').value=H.map(e=>e.email).join(', ')+', ';$('#habit').textContent='Adresses habituelles du dossier ajoutées automatiquement : '+H.map(e=>e.nom).join(', ')+'. Vous pouvez en retirer ou en ajouter.'}
+  const ccs=()=>$('#ecc').value.split(/[,;]\s*/).map(t=>t.trim().toLowerCase()).filter(Boolean);
+  const suggcc=()=>{const I=C.filter(e=>e.type==='interne'&&!ccs().includes(e.email)&&!/filsseverinbile|monfiscaliste/.test(e.email)).sort((a,b)=>b.n-a.n);
+   const MOI=[['lamaisondelaconformite@gmail.com','Moi (adresse de l\'Agence)'],['filsseverinbile@gmail.com','Moi (adresse personnelle)']].filter(m=>!ccs().includes(m[0]));
+   $('#suggcc').innerHTML=(MOI.length?'<span class="lab">Moi :</span>'+MOI.map(m=>`<button type="button" data-cc="${m[0]}" title="${m[0]}">+ ${m[1]}</button>`).join(''):'')+(I.length?'<span class="lab" style="margin-left:6px">Équipe MDC :</span>'+I.map(e=>`<button type="button" data-cc="${esc(e.email)}" title="${esc(e.email)}">+ ${esc(e.nom.replace('MDC — ',''))}</button>`).join(''):'')};
+  suggcc();$('#suggcc').onclick=e=>{const b=e.target.closest('[data-cc]');if(!b)return;const t=ccs();t.push(b.dataset.cc);$('#ecc').value=t.join(', ')+', ';suggcc()};
+  sugg();$('#sugg').onclick=e=>{const b=e.target.closest('[data-add]');if(b)add(b.dataset.add)};
+  $('#eto').oninput=()=>{const v=$('#eto').value;const q=(/[,;]\s*$/.test(v)?'':v.split(/[,;]/).pop()).trim().toLowerCase();if(!q){$('#acl').style.display='none';return}
+   const M=C.filter(e=>(e.email+' '+e.nom).toLowerCase().includes(q)).sort((a,b)=>b.n-a.n).slice(0,8);
+   $('#acl').innerHTML=M.map(e=>`<div data-add="${esc(e.email)}"><b>${esc(e.nom)}</b><small>${esc(e.email)}${e.dossiers.length?' · '+esc(e.dossiers.slice(0,2).join(', ')):''}</small></div>`).join('');$('#acl').style.display=M.length?'block':'none'};
+  $('#acl').onclick=e=>{const d=e.target.closest('[data-add]');if(d)add(d.dataset.add)};
+  $('#eto').onkeydown=e=>{if(e.key==='Enter'){const f=$('#acl div');if(f&&$('#acl').style.display==='block'){e.preventDefault();add(f.dataset.add)}}};
+ })();
+ $('#esend').onclick=()=>go('envoyer');$('#egm').onclick=()=>go('gmail');if($('#edos'))$('#edos').onclick=()=>go('dossier');$('#envp').classList.add('on')};
+async function r2UI(r){const a=r||await api('/api/r2',{});$('#r2body').innerHTML=`
+ ${a.actif?`<p style="color:var(--ok)"><b>Mode cloud activé</b> : bucket <b>${esc(a.bucket)}</b>, dossier « ${esc(a.prefixe||'')} ». ${a.nb} document(s) envoyé(s).</p>
+ <p><label><input type="checkbox" id="r2auto"${a.auto?' checked':''}> Envoyer automatiquement vers R2 mes <b>livrables ★</b> (et les renvoyer s'ils sont modifiés), toutes les 15 minutes</label></p>
+ ${a.dernier_auto?`<p>Dernier envoi automatique : ${esc(a.dernier_auto)}</p>`:''}${a.erreur?`<p style="color:var(--bad)">Dernière erreur : ${esc(a.erreur)}</p>`:''}
+ <p><button id="r2pause">Mettre en pause</button></p>`:a.account?`<p>Mode cloud en pause. <button class="prim" id="r2pause">Reprendre</button></p>`:'<p style="color:var(--bad)">Mode cloud pas encore activé.</p>'}
+ ${a.env?`<p style="color:var(--muted);font-size:12px">Connexion lue dans le fichier <b>.env</b> du dossier de l'application. Pour la modifier, changez ce fichier puis relancez la plateforme.</p>`:` <p style="margin-top:14px"><b>${a.account?'Modifier la connexion':'Activer le mode cloud'}</b></p>
+ <p><b>1.</b> Dans votre tableau de bord Cloudflare, ouvrez <b>R2</b> et créez un bucket <b>privé</b> (par exemple « mdc-documents »).</p>
+ <p><b>2.</b> Dans R2, ouvrez « Gérer les jetons d'API R2 » et créez un jeton avec la permission <b>Lecture et écriture d'objets</b>, limité à ce bucket. Cloudflare affiche une <b>clé d'accès</b> et une <b>clé secrète</b> : copiez-les.</p>
+ <p><b>3.</b> Votre <b>numéro de compte</b> (Account ID) figure sur la page R2, à droite.</p>
+ <p><input id="r2acc" placeholder="Numéro de compte (Account ID)" value="${esc(a.account||'')}" style="width:100%"></p>
+ <p><input id="r2bk" placeholder="Nom du bucket" value="${esc(a.bucket||'')}" style="width:48%"> <input id="r2pre" placeholder="Dossier dans le bucket" value="${esc(a.prefixe||'MDC')}" style="width:48%"></p>
+ <p><input id="r2kid" placeholder="Clé d'accès (Access Key ID)" autocomplete="off" style="width:100%"></p>
+ <p><input type="password" id="r2sec" placeholder="Clé secrète (Secret Access Key)" autocomplete="off" style="width:100%"></p>
+ <p><button class="prim" id="r2ok">Tester et activer</button></p>
+ `}
+ <p style="color:var(--muted);font-size:12px">Les clés restent sur ce Mac. Les documents sont rangés dans le bucket par dossier client. Gardez le bucket privé : il contient des documents de vos clients.</p>`;
+ if($('#r2auto'))$('#r2auto').onchange=async()=>r2UI(await api('/api/r2',{action:'auto'}));
+ if($('#r2pause'))$('#r2pause').onclick=async()=>r2UI(await api('/api/r2',{action:'pause'}));
+ if($('#r2ok'))$('#r2ok').onclick=async()=>{toast('Test de la connexion à R2…');const r=await fetch('/api/r2',{method:'POST',headers:{'X-MDC-Token':TOKEN,'Content-Type':'application/json'},body:JSON.stringify({action:'configurer',account:$('#r2acc').value,bucket:$('#r2bk').value,prefixe:$('#r2pre').value,keyid:$('#r2kid').value,secret:$('#r2sec').value})});
+  const d=await r.json();if(!r.ok)return alert(d.err||'Activation impossible');toast('Mode cloud activé');r2UI(d)}}
+$('#b-r2').onclick=()=>{$('#r2p').classList.add('on');r2UI()};$('#rx').onclick=()=>$('#r2p').classList.remove('on');
+$('#b-selpr').onfocus=()=>{const s=$('#b-selpr');if(s.options.length<3)PROCS.forEach(p=>{const o=document.createElement('option');o.textContent=p;s.appendChild(o)})};
+$('#b-selpr').onchange=async()=>{const s=$('#b-selpr'),v=s.value;if(v==='__')return;const n=SEL.size;if(!n){s.value='__';return}
+ await api('/api/procedure',{keys:[...SEL],procedure:v});toast(v?`${n} document${n>1?'s':''} rangé${n>1?'s':''} dans « ${v} »`:`${n} document${n>1?'s':''} retiré${n>1?'s':''} des procédures`);SEL.clear();selbar();s.value='__';load()};
+$('#b-r2send').onclick=async()=>{const n=SEL.size;if(!confirm(`Envoyer vers votre bucket Cloudflare R2 les livrables parmi les ${n} document(s) cochés ? (les autres ne partent pas)`))return;toast('Envoi vers R2…');
+ const r=await fetch('/api/r2-envoi',{method:'POST',headers:{'X-MDC-Token':TOKEN,'Content-Type':'application/json'},body:JSON.stringify({keys:[...SEL]})});const d=await r.json();
+ if(!r.ok)return alert(d.err||'Envoi impossible');alert(`${d.n} fichier(s) envoyé(s) vers R2 (${d.mo} Mo).`+(d.erreurs&&d.erreurs.length?'\n\nNon envoyés :\n'+d.erreurs.join('\n'):''));SEL.clear();selbar();load()};
+$('#ex').onclick=()=>$('#envp').classList.remove('on');
+$('#b-mod').onclick=()=>api('/api/modeles-dossier',{});
+$('#b-liv').onclick=()=>api('/api/livrables-dossier',{});
+document.addEventListener('change',async e=>{const t=e.target.closest('select[data-pr]');if(t){await api('/api/procedure',{keys:[t.dataset.pr],procedure:t.value});toast(t.value?'Ajouté à la procédure « '+t.value+' »':'Retiré des procédures');load();}});
+document.addEventListener('change',async e=>{const t=e.target.closest('select[data-et]');if(t){await api('/api/etape',{keys:[t.dataset.et],etape:t.value});toast(t.value?'Étape modifiée':'Livrable retiré de son étape');load();return}});
+document.addEventListener('change',async e=>{const s=e.target.closest('select[data-cat]');if(!s)return;
+ if(s.value==='__new__'){const n=prompt('Nom de la nouvelle rubrique :');if(!n||!n.trim()){load();return}
+  try{await api('/api/rubrique',{action:'creer',nom:n.trim(),k:s.dataset.cat});toast('Rubrique « '+n.trim()+' » créée, document rangé');load()}catch(err){toast('Ce nom existe déjà');load()}return}
+ try{await api('/api/categorie',{k:s.dataset.cat,cat:s.value});toast('Document rangé dans « '+s.value+' »');load()}catch(err){toast('Action impossible : rechargez la page')}});
+['q','per','st','cat'].forEach(i=>$('#'+i).addEventListener('input',render));
+$('#b-refresh').onclick=async()=>{await api('/api/actualiser',{});await load(true);toast('Dossiers relus')};
+$('#b-export').onclick=async()=>{toast('Écriture du journal Excel…');await api('/api/export',{})};
+load().then(()=>{if(location.hash==='#acces'&&!document.body.classList.contains('remote')){$('#acces').classList.add('on');accesUI()}if(location.hash==='#mail'&&!document.body.classList.contains('remote')){$('#mailp').classList.add('on');mailUI()}});setInterval(()=>{if(!document.hidden)load()},30000);
+window.addEventListener('focus',()=>load());
+</script>
+</body>
+</html>
